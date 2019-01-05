@@ -8,22 +8,14 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
-
-import java.nio.file.attribute.PosixFileAttributeView;
-
-import frc.robot.Robot;
-import frc.robot.commands.ControlledRotate_Command;
-import frc.robot.commands.Drive_Command;
-import frc.robot.commands.Turn_Command;
+import frc.robot.commands.ControlledRotateCommand;
+import frc.robot.commands.RotateCommand;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.buttons.Trigger.ButtonScheduler;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -207,89 +199,18 @@ public class OI {
 	}
 	//----------------------------------------------------------------------------------------------------------
 	//constructor - put button commands here
-	/*
-	 * You can only bind via BUTTON_OBJECT.whenPressed/whenActive/whenReleased etc.
-	 * Binding via if(X) then.... is not possible for some weird reasons.
-	 */
-	
-	/**
-	 * 					KEY BINDINGS
-	 *  ------------------------------------------
-	 * 						XBOX
-	 * A => 
-	 * B => 
-	 * X => 
-	 * Y => 
-	 * LEFT BUMPER => 
-	 * RIGHT BUMPER => 
-	 * LEFT TRIGGER => 
-	 * RIGHT TRIGGER => 
-	 * LEFT STICK => 
-	 * RIGHT STICK =>  
-	 * POV => UP = ;  DOWN = ; RIGHT = ; LEFT = ;
-	 * -------------------------------------------
-	 * 					JOYSTICK
-	 * STICK => Robot Drive
-	 * POV => UP = ;  DOWN = ; RIGHT = ; LEFT = ;
-	 * SLIDER => 
-	 * BUTTONS:
-	 * 1 => 
-	 * 2 => 
-	 * 3 => 
-	 * 4 => 
-	 * 5 => 
-	 * 6 => 
-	 * 7 => 
-	 * 8 => Lift command (sets the position of the grabber to "upper" position)
-	 * 9 => 
-	 * 10 => Lift command (sets the position of the grabber to "bottom" position)
-	 * 11 => Stop all command (stops darts, stops arm and stops grabber wheels)
-	 * 12 => Lift command (currently set to stop motors)
-	 * 
-	 */
-	
 		
 	public OI() {
-		//new StartServo_Command();
-		
-		//				XBOX COMMANDS
-		//num3But.whileHeld(new MoveDart_Command(-0.5));
-		//num5But.whileHeld(new MoveDart_Command(0.5));
-		
-		//num4But.whileHeld(new MoveArm_Command(-0.25));
-		//num6But.whileHeld(new MoveArm_Command(0.25));
-		
-		//aBut.toggleWhenActive(new Grab_Command(-1));
-		//bBut.toggleWhenActive(new Grab_Command(1));
-		//rightBum.whenPressed(new Lift_Command(2));
-		//leftBum.whenPressed(new Lift_Command(1));
-		//backBut.whenPressed(new StopAll_Command());
-
-//		num8But.whenPressed(new Lift_Command(1));
-//		num10But.whenPressed(new Lift_Command(2));
-//		num12But.whenPressed(new Lift_Command(0));
-
-//		num5But.whenPressed(new Grab_Command(1));
-		//num2But.toggleWhenPressed(new Grab_Command(1));
-		//num1But.toggleWhenPressed(new Grab_Command(-1));
-		
-		
-		// 			JOYSTICK COMMANDS
 		//gyro commands
-		num7But.whenPressed(new Turn_Command(0.0f));
-		num8But.whenPressed(new Turn_Command(90.0f));
-		num10But.whenPressed(new Turn_Command(180.0f));		
-		num9But.whenPressed(new Turn_Command(-90.0f));
-
-		//startBut.whenPressed(new StartServo_Command());
-		
-		//invoking methods and commands from Smart Dashboard
-		//SmartDashboard.putData("Start Grabber", new Grab_Command(-1));
+		num7But.whenPressed(new RotateCommand(0.0f));
+		num8But.whenPressed(new RotateCommand(90.0f));
+		num10But.whenPressed(new RotateCommand(180.0f));		
+		num9But.whenPressed(new RotateCommand(-90.0f));
 		
 	}
 	
 
-	Command rotateCommand = new ControlledRotate_Command();
+	Command rotateCommand = new ControlledRotateCommand();
 	
 	public void periodic() {
 		if(getDriveRotation() != 0) {
