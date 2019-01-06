@@ -47,7 +47,7 @@ public class OI {
 	final static int rTriggerAxis = 3;
 	final static int rStickXAxis = 4;
 	final static int rStickYAxis = 5;
-	final static double deadzone = 0.1;
+	final static double deadzone = Robot.constants.controllerDeadzone;
 	
 	//values for joystick buttons 
 	final static int button1 = 1;
@@ -62,9 +62,6 @@ public class OI {
 	final static int button10 = 10;
 	final static int button11 = 11;
 	final static int button12 = 12;
-	//---------------------------------------------------------------------------------------------------
-	//public final double grabberSpeed = -1;
-	public final double lifterSpeed = 0.2;
 	//---------------------------------------------------------------------------------------------------
 	//defines and creates button objects for each xbox button
 	private final Button aBut = new JoystickButton(controller, aButton);
@@ -106,14 +103,8 @@ public class OI {
 	}
 	
 	public double getDriveRotation() {
-		double offset = 0.3; // Biger than normal, because the axis is smaller (I mean its easier to rotoate it to same value)
-		double input = joystick.getTwist();
-		if(Math.abs(input) < offset)
-			return 0.0;
-		else
-			return Math.signum(input) * (Math.abs(input) - offset);
-		
-//		return deadzone(joystick.getTwist());
+		return getTriggerAxis();
+		//return getJoystickRotation();
 	}
 	
 	//------------------------------------------------------------------------------------------------------------
@@ -154,6 +145,15 @@ public class OI {
 			return deadzone(controller.getTriggerAxis(Hand.kRight));
 		else
 			return 0.0;
+	}
+
+	public double getJoystickRotation() {
+		double joystickDeadzone = Robot.constants.joystickDeadzone; // Biger than normal, because the axis is smaller (I mean its easier to rotoate it to same value)
+		double input = joystick.getTwist();
+		if(Math.abs(input) < joystickDeadzone)
+			return 0.0;
+		else
+			return Math.signum(input) * (Math.abs(input) - joystickDeadzone);
 	}
 	
 	public double getBumper()
@@ -202,10 +202,10 @@ public class OI {
 		
 	public OI() {
 		//gyro commands
-		num7But.whenPressed(new RotateCommand(0.0f));
-		num8But.whenPressed(new RotateCommand(90.0f));
-		num10But.whenPressed(new RotateCommand(180.0f));		
-		num9But.whenPressed(new RotateCommand(-90.0f));
+		aBut.whenPressed(new RotateCommand(0.0f));
+		bBut.whenPressed(new RotateCommand(90.0f));
+		yBut.whenPressed(new RotateCommand(180.0f));		
+		xBut.whenPressed(new RotateCommand(-90.0f));
 		
 	}
 	
