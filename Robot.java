@@ -33,6 +33,7 @@ public class Robot extends TimedRobot {
   public static RotateSubsystem rotate = new RotateSubsystem();
   public static UltrasonicSensor ultrasonic = new UltrasonicSensor();
   public static DriveExecutor driveExecutor = new DriveExecutor();
+  public static Constants constants = new Constants();
   public static OI m_oi;
 
   Command m_autonomousCommand;
@@ -50,8 +51,8 @@ public class Robot extends TimedRobot {
     //SmartDashboard.putData("Auto mode", m_chooser);
     new Thread( () -> {
       UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-      camera.setResolution(640, 480);
-      camera.setFPS(30);
+      camera.setResolution(constants.imageWidth, constants.imageHeight);
+      camera.setFPS(constants.imageFps);
       camera.setExposureAuto();
     }).start();
     rotate.gyroInit();

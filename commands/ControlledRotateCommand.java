@@ -23,7 +23,7 @@ public class ControlledRotateCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.rotate.setRotateSpeed(Robot.m_oi.getTriggerAxis());
+    Robot.rotate.setRotateSpeed(Robot.m_oi.getDriveRotation());
   }
 
   // Make this return true when this Command no longer needs to run execute()
