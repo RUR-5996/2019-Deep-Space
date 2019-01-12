@@ -9,7 +9,6 @@ package frc.robot.subsystems;
 
 import frc.robot.Robot;
 import frc.robot.commands.ControlledRotateCommand;
-
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.PIDController;
