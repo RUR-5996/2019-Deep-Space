@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 //imports needed for camera
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -20,6 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //Commands and subsystems
 import frc.robot.subsystems.*;
 import frc.robot.sensors.UltrasonicSensor;
+import frc.robot.Constants;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -33,7 +36,6 @@ public class Robot extends TimedRobot {
   public static RotateSubsystem rotate = new RotateSubsystem();
   public static UltrasonicSensor ultrasonic = new UltrasonicSensor();
   public static DriveExecutor driveExecutor = new DriveExecutor();
-  public static Constants constants = new Constants();
   public static OI m_oi;
 
   Command m_autonomousCommand;
@@ -51,13 +53,38 @@ public class Robot extends TimedRobot {
     //SmartDashboard.putData("Auto mode", m_chooser);
     new Thread( () -> {
       UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-      camera.setResolution(constants.imageWidth, constants.imageHeight);
-      camera.setFPS(constants.imageFps);
+      camera.setResolution(Constants.imageWidth, Constants.imageHeight);
+      camera.setFPS(Constants.imageFPS);
       camera.setExposureAuto();
     }).start();
     rotate.gyroInit();
+    configureTalon(RobotMap.leftBack);
+    configureTalon(RobotMap.leftFront);
+    configureTalon(RobotMap.rightBack);
+    configureTalon(RobotMap.rightFront);
   }
 
+  private void configureTalon(WPI_TalonSRX talon) {
+    talon.configFactoryDefault();
+		talon.configNominalOutputForward(0, Constants.timeOutMs);
+		talon.configNominalOutputReverse(0, Constants.timeOutMs);
+		talon.configPeakOutputForward(1, Constants.timeOutMs);
+		talon.configPeakOutputReverse(-1, Constants.timeOutMs);
+		talon.configAllowableClosedloopError(0, 0, Constants.timeOutMs);
+		talon.configNeutralDeadband(0.05, Constants.timeOutMs); 
+		talon.setNeutralMode(com.ctre.phoenix.motorcontrol.NeutralMode.Brake);
+		talon.setInverted(false);
+
+		// Peak current and duration must be exceeded before corrent limit is activated.
+		// When activated, current will be limited to continuous current.
+		// Set peak current params to 0 if desired behavior is to immediately
+		// current-limit.
+		talon.enableCurrentLimit(true);
+		talon.configContinuousCurrentLimit(30, Constants.timeOutMs); // Must be 5 amps or more
+		talon.configPeakCurrentLimit(30, Constants.timeOutMs); // 100 A
+		talon.configPeakCurrentDuration(200, Constants.timeOutMs); // 200 ms
+  }
+  
   /**
    * This function is called every robot packet, no matter the mode. Use
    * this for items like diagnostics that you want ran during disabled,

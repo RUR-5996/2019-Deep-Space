@@ -47,7 +47,7 @@ public class OI {
 	final static int rTriggerAxis = 3;
 	final static int rStickXAxis = 4;
 	final static int rStickYAxis = 5;
-	final static double deadzone = Robot.constants.controllerDeadzone;
+	final static double deadzone = Constants.controllerDeadzone;
 	
 	//values for joystick buttons 
 	final static int button1 = 1;
@@ -148,7 +148,7 @@ public class OI {
 	}
 
 	public double getJoystickRotation() {
-		double joystickDeadzone = Robot.constants.joystickDeadzone; // Biger than normal, because the axis is smaller (I mean its easier to rotoate it to same value)
+		double joystickDeadzone = Constants.joystickDeadzone; // Biger than normal, because the axis is smaller (I mean its easier to rotoate it to same value)
 		double input = joystick.getTwist();
 		if(Math.abs(input) < joystickDeadzone)
 			return 0.0;

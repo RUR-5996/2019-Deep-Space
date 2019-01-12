@@ -11,15 +11,17 @@ package frc.robot;
  * Add your docs here.
  */
 public class Constants {
-    public final int imageWidth = 320;
-    public final int imageHeight = 240;
-    public final int imageFPS = 30;
+    public static final int imageWidth = 320;
+    public static final int imageHeight = 240;
+    public static final int imageFPS = 30;
     
-    public final int frontLeftMotor = 0;
-    public final int backLeftMotor = 1;
-    public final int frontRightMotor = 2;
-    public final int backRightMotor = 3;
+    public static final int frontLeftMotor = 0;
+    public static final int backLeftMotor = 1;
+    public static final int frontRightMotor = 2;
+    public static final int backRightMotor = 3;
 
-    public final double controllerDeadzone = 0.1;
-    public final double joystickDeadzone = 0.3;
+    public static final double controllerDeadzone = 0.1;
+    public static final double joystickDeadzone = 0.3;
+
+    public static final int timeOutMs = 10;
 }
