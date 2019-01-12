@@ -68,7 +68,7 @@ public class OI {
 	private final Button bBut = new JoystickButton(controller, bButton);
 	private final Button xBut = new JoystickButton(controller, xButton);
 	private final Button yBut = new JoystickButton(controller, yButton);
-	private final Button leftBum = new JoystickButton(controller, leftBumper);
+	public final Button leftBum = new JoystickButton(controller, leftBumper);
 	private final Button rightBum = new JoystickButton(controller, rightBumper);
 	private final Button startBut = new JoystickButton(controller, startButton);
 	private final Button backBut = new JoystickButton(controller, backButton);
@@ -206,7 +206,7 @@ public class OI {
 		bBut.whenPressed(new RotateCommand(90.0f));
 		yBut.whenPressed(new RotateCommand(180.0f));		
 		xBut.whenPressed(new RotateCommand(-90.0f));
-		
+
 	}
 	
 

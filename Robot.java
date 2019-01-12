@@ -9,16 +9,20 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import org.opencv.core.Rect;
+import org.opencv.imgproc.Imgproc;
+
 //imports needed for camera
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-
 //required dependencies
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.vision.VisionThread;
 //Commands and subsystems
 import frc.robot.subsystems.*;
 import frc.robot.sensors.UltrasonicSensor;
@@ -38,6 +42,12 @@ public class Robot extends TimedRobot {
   public static DriveExecutor driveExecutor = new DriveExecutor();
   public static OI m_oi;
 
+  private VisionThread visionThread;
+  private UsbCamera camera;
+  public double[] centerX, centerY, size, height, width;
+  public int contours;
+
+
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -52,7 +62,7 @@ public class Robot extends TimedRobot {
     // chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);
     new Thread( () -> {
-      UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+      camera = CameraServer.getInstance().startAutomaticCapture();
       camera.setResolution(Constants.imageWidth, Constants.imageHeight);
       camera.setFPS(Constants.imageFPS);
       camera.setExposureAuto();
@@ -62,6 +72,7 @@ public class Robot extends TimedRobot {
     configureTalon(RobotMap.leftFront);
     configureTalon(RobotMap.rightBack);
     configureTalon(RobotMap.rightFront);
+    visionInit();
   }
 
   private void configureTalon(WPI_TalonSRX talon) {
@@ -84,6 +95,40 @@ public class Robot extends TimedRobot {
 		talon.configPeakCurrentLimit(30, Constants.timeOutMs); // 100 A
 		talon.configPeakCurrentDuration(200, Constants.timeOutMs); // 200 ms
   }
+
+  public void visionInit() {
+    visionThread = new VisionThread(camera, new MyVisionPipeline(), pipeline -> {
+      if(m_oi.leftBum.get())
+      {
+        contours = pipeline.filterContoursOutput().size();
+        centerX = new double[contours];
+        centerY = new double[contours];
+        size = new double[contours];
+        height = new double[contours];
+        width = new double[contours];
+        System.out.println("xx");
+        if(!pipeline.filterContoursOutput().isEmpty()) {
+          for(int i = 0; i < contours; i++){
+            Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(i));
+            centerX[i] = r.x+(r.width/2);
+            centerY[i] = r.y+(r.height/2);
+						size[i] = r.area();
+						height[i] = r.height;
+						width[i] = r.width;
+          }
+          //Shuffleboard.getTab("Video").add(camera);
+          SmartDashboard.putNumber("Contours", contours);
+          System.out.println(contours);
+          SmartDashboard.putNumberArray("centerX", centerX);
+          SmartDashboard.putNumberArray("centerY", centerY);
+          SmartDashboard.putNumberArray("size", size);
+          SmartDashboard.putNumberArray("height", height);
+          SmartDashboard.putNumberArray("width", width);
+        }
+      }
+    });
+    visionThread.start();
+  } 
   
   /**
    * This function is called every robot packet, no matter the mode. Use
