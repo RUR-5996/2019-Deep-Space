@@ -8,9 +8,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.CloseBoschCommand;
 import frc.robot.commands.ControlledRotateCommand;
+import frc.robot.commands.OpenBoschCommand;
 import frc.robot.commands.RotateCommand;
-
+import frc.robot.commands.UltrasonicWallCommand;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -68,14 +70,12 @@ public class OI {
 	private final Button bBut = new JoystickButton(controller, bButton);
 	private final Button xBut = new JoystickButton(controller, xButton);
 	private final Button yBut = new JoystickButton(controller, yButton);
-	private final Button leftBum = new JoystickButton(controller, leftBumper);
+	public final Button leftBum = new JoystickButton(controller, leftBumper);
 	private final Button rightBum = new JoystickButton(controller, rightBumper);
 	private final Button startBut = new JoystickButton(controller, startButton);
 	private final Button backBut = new JoystickButton(controller, backButton);
 	private final Button lStickBut = new JoystickButton(controller, lStickButton);
 	private final Button rStickBut = new JoystickButton(controller, rStickButton);
-	
-	
 	
 	//defines and creates button objects for each joystick button
 	private final Button num1But = new JoystickButton(joystick, button1);
@@ -90,6 +90,7 @@ public class OI {
 	private final Button num10But = new JoystickButton(joystick, button10);
 	private final Button num11But = new JoystickButton(joystick, button11);
 	private final Button num12But = new JoystickButton(joystick, button12);
+	
 	//------------------------------------------------------------------------------------------------------
 	//methods for driving
 	public double getDriveForward() {
@@ -98,6 +99,7 @@ public class OI {
 	}
 	
 	public double getDriveSideways() {
+		//return getRStickXAxis();
 		return getLStickYAxis();				//uncomment for controller drive
 		//return getJoystickYAxis();				//uncomment for joystick drive
 	}
@@ -146,7 +148,7 @@ public class OI {
 		else
 			return 0.0;
 	}
-
+	
 	public double getJoystickRotation() {
 		double joystickDeadzone = Constants.joystickDeadzone; // Biger than normal, because the axis is smaller (I mean its easier to rotoate it to same value)
 		double input = joystick.getTwist();
@@ -202,11 +204,11 @@ public class OI {
 		
 	public OI() {
 		//gyro commands
-		aBut.whenPressed(new RotateCommand(0.0f));
-		bBut.whenPressed(new RotateCommand(90.0f));
-		yBut.whenPressed(new RotateCommand(180.0f));		
-		xBut.whenPressed(new RotateCommand(-90.0f));
-		
+	//	aBut.whenPressed(new RotateCommand(0.0f));
+		//bBut.whenPressed(new RotateCommand(90.0f));
+		yBut.whenPressed(new CloseBoschCommand());		
+		xBut.whenPressed(new OpenBoschCommand());
+		aBut.whenPressed(new UltrasonicWallCommand(30));
 	}
 	
 

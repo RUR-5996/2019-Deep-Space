@@ -25,7 +25,9 @@ public class DriveSubsystem extends Subsystem
 	//method used during teleop drive - xAxis for x coordinate input, yAxis for y coordinate input, zAxis for turning, ahrs for gyro
 	public void TeleopDrive(double xAxis, double yAxis) {
 		//drive method, uses cartesian drive for mecanumDrive type robotDrive object - driveCartesian automatically processes the values fed
-		Robot.driveExecutor.setX(xAxis);
+		if(!Robot.ultrasonic.isEnabled()){
+			Robot.driveExecutor.setX(xAxis);
+		}
 		Robot.driveExecutor.setY(yAxis);
 	}	
 }
