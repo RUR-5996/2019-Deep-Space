@@ -24,8 +24,7 @@ public class DriveExecutor {
 	}
 	
 	private MecanumDrive robotDrive = new MecanumDrive(RobotMap.leftFront, RobotMap.leftBack, RobotMap.rightFront, RobotMap.rightBack);
-	
-	public void execute() {
+		public void execute() {
 		robotDrive.driveCartesian(x, -y, z);
-	}
+		}
 }

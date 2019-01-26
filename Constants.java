@@ -19,9 +19,26 @@ public class Constants {
     public static final int backLeftMotor = 1;
     public static final int frontRightMotor = 2;
     public static final int backRightMotor = 3;
+    public static final int boschMotor = 4;
 
     public static final double controllerDeadzone = 0.1;
     public static final double joystickDeadzone = 0.3;
 
     public static final int timeOutMs = 10;
+
+    public static final int boschPulsesPerRevolution = 490;
+    public static final double boschDistancePerRevolution = 2 * Math.PI * 3.5;
+    public static double boschDistancePerPulse = boschDistancePerRevolution / boschPulsesPerRevolution;
+    public static final double boschMinRate = 8;
+    public static final double boschMaxPeriod = 0.1;
+    public static final int boschLowerBound = 0;
+    public static final int boschUpperBound = 100;
+    public static final double boschMotorSpeed = 0.4;
+
+    public static final double ultrasonicSpeed = 0.4;
+
+    public static final double ultrasonicKp = 0.03;
+    public static final double ultrasonicKi = 0.00;
+    public static final double ultrasonicKd = 0.00;
+    public static final int ultrasonicTolerance = 2;
 }
