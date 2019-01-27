@@ -9,24 +9,23 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import org.opencv.core.Rect;
-import org.opencv.imgproc.Imgproc;
-
 //imports needed for camera
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.DriverStation;
+
+//imports needed for network tables -> vision processing on DS
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+
 //required dependencies
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.vision.VisionThread;
-import edu.wpi.first.vision.VisionRunner;
-//Commands and subsystems
+
+//Constants and subsystems
 import frc.robot.subsystems.*;
 import frc.robot.Constants;
 
@@ -38,16 +37,17 @@ import frc.robot.Constants;
  * project.
  */
 public class Robot extends TimedRobot {
+  public static NetworkTableInstance inst = NetworkTableInstance.getDefault();
+  public static NetworkTable table = inst.getTable("GRIP/contours");
+
   public static DriveSubsystem drive = new DriveSubsystem();
   public static RotateSubsystem rotate = new RotateSubsystem();
   public static UltrasonicSubsystem ultrasonic = new UltrasonicSubsystem();
   public static DriveExecutor driveExecutor = new DriveExecutor();
-  private static MyVisionPipeline pipeline = new MyVisionPipeline();
   public static BoschSeatMotorSubsystem bosch = new BoschSeatMotorSubsystem();
   private final Object imgLock = new Object();
   public static OI m_oi;
 
-  private VisionThread visionThread;
   private UsbCamera camera;
   public double[] centerX, centerY, size, height, width;
   public int contours;
@@ -75,13 +75,10 @@ public class Robot extends TimedRobot {
     rotate.gyroInit();
     bosch.counterInit();
     /*
-    
     configureTalon(RobotMap.leftBack);
     configureTalon(RobotMap.leftFront);
     configureTalon(RobotMap.rightBack);
-    configureTalon(RobotMap.rightFront);
-    visionInit();*/
-    //bosch.encoder.reset();
+    configureTalon(RobotMap.rightFront);*/
   }
 /*
   private void configureTalon(WPI_TalonSRX talon) {
@@ -103,61 +100,8 @@ public class Robot extends TimedRobot {
 		talon.configContinuousCurrentLimit(30, Constants.timeOutMs); // Must be 5 amps or more
 		talon.configPeakCurrentLimit(30, Constants.timeOutMs); // 100 A
 		talon.configPeakCurrentDuration(200, Constants.timeOutMs); // 200 ms
-  }
-
-  public void visionInit() {
-    visionThread = new VisionThread(camera, new MyVisionPipeline(), pipeline ->  {
-      if(false)
-      {
-        synchronized (imgLock) {
-          contours = pipeline.filterContoursOutput().size();
-          centerX = new double[contours];
-          centerY = new double[contours];
-          size = new double[contours];
-          height = new double[contours];
-          width = new double[contours];
-
-          if(!pipeline.filterContoursOutput().isEmpty()) {
-            for(int i = 0; i < contours; i++){
-              Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(i));
-              centerX[i] = r.x+(r.width/2);
-              centerY[i] = r.y+(r.height/2);
-              size[i] = r.area();
-              height[i] = r.height;
-              width[i] = r.width;
-            }
-          }
-        }
-      }
-    });
-    visionThread.start();
-  } 
-  
-  public void visionLogic() {
-    synchronized (imgLock) {
-      if(contours == 2) {
-        System.out.println("READY!!!");
-        double[] ratio = new double[contours];
-        for(int i = 0; i < contours; i++) {
-          ratio[i] = width[i] / height[i];
-          System.out.println("Width: " + width[i] + " Height: " + height[i] + " Ratio: " + ratio[i] + " Size: " + size[i]);
-        }
-  
-        double ratioLowerBound = ratio[0] * 0.9;
-        double ratioUpperBound = ratio[0] * 1.1;
-        try{
-          if(ratioLowerBound < ratio[1] && ratio[1] < ratioUpperBound) {
-            System.out.println("Detected successfully!");
-          }
-        } catch(Exception e) {
-          System.out.println("Something went wrong with Image recognition. Exception log:" + e.toString());
-        }
-        
-      } else {
-        System.out.println(contours + " Contours detected!");
-      } 
-    }
   }*/
+
   /**
    * This function is called every robot packet, no matter the mode. Use
    * this for items like diagnostics that you want ran during disabled,
@@ -241,7 +185,6 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     driveExecutor.execute();
     m_oi.periodic();
-    //visionLogic();
     System.out.println(Robot.ultrasonic.isEnabled() + "Distance: " + ultrasonic.getDistanceCM());
   }
 
