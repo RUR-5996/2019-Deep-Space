@@ -99,7 +99,6 @@ public class OI {
 	}
 	
 	public double getDriveSideways() {
-		//return getRStickXAxis();
 		return getLStickYAxis();				//uncomment for controller drive
 		//return getJoystickYAxis();				//uncomment for joystick drive
 	}
@@ -139,8 +138,7 @@ public class OI {
 		return deadzone(joystick.getY());
 	}
 	
-	public double getTriggerAxis()
-	{
+	public double getTriggerAxis() {
 		if(controller.getTriggerAxis(Hand.kLeft) > 0)
 			return -deadzone(controller.getTriggerAxis(Hand.kLeft));
 		else if (controller.getTriggerAxis(Hand.kRight) > 0)
@@ -172,22 +170,6 @@ public class OI {
 	//specific methods for manipulators
 	public int getPOV() {
 		return controller.getPOV();
-	}
-	
-	public double getJawsSpeed() {
-		return getTriggerAxis();
-	}
-	
-	public double getLifterSpeed() {
-		return deadzone(getBumper());
-	}
-
-	public double getArmSpeed() {
-		return getRStickYAxis();
-	}
-	
-	public double getDartSpeed() {
-		return getLStickYAxis();
 	}
 
 	//--------------------------------------------------------------------------------------------------------
