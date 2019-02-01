@@ -17,16 +17,15 @@ public class CloseBoschCommand extends Command {
 
   DigitalInput closedLimitSwitch = new DigitalInput(5);
 
-  // Boolean for checking whether the command is finished -> terminating the
-  // command
+  //Boolean for checking whether the command is finished -> terminating the command
   private boolean isFinished;
 
-  // declaration of dependencies
+  //declaration of dependencies
   public CloseBoschCommand() {
     requires(Robot.bosch);
   }
 
-  // Called just before this Command runs the first time
+  //Called just before this Command runs the first time
   @Override
   protected void initialize() {
     isFinished = false;
@@ -45,17 +44,19 @@ public class CloseBoschCommand extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return isFinished;
+    return !closedLimitSwitch.get();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    RobotMap.boschMotor.set(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    RobotMap.boschMotor.set(0);
   }
 }
