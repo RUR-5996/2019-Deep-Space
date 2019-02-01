@@ -20,12 +20,12 @@ public class CloseBoschCommand extends Command {
   //Boolean for checking whether the command is finished -> terminating the command
   private boolean isFinished;
 
-  //declaration of dependencies
+  // declaration of dependencies
   public CloseBoschCommand() {
     requires(Robot.bosch);
   }
 
-  //Called just before this Command runs the first time
+  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     isFinished = false;

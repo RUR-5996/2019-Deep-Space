@@ -47,4 +47,10 @@ public class Constants {
     public static final double ultrasonicKi = 0.00;
     public static final double ultrasonicKd = 0.00;
     public static final int ultrasonicTolerance = 2;
+
+    //Gyro PID constants
+    public static final double gyroKp = 0.03;
+    public static final double gyroKi = 0.00;
+    public static final double gyroKd = 0.00;
+    public static final int gyroTolerance = 2;
 }

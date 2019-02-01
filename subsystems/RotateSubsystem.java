@@ -7,66 +7,50 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.Constants;
 import frc.robot.Robot;
-import frc.robot.commands.ControlledRotateCommand;
+
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
-public class RotateSubsystem extends Subsystem implements PIDOutput {
+/**
+ * Add your docs here.
+ */
+public class RotateSubsystem extends PIDSubsystem {
 
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+  private AHRS ahrs;
 
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        setDefaultCommand(new ControlledRotateCommand());
-    }
-    
-    public void setRotateSpeed(double speed) {
-    	rotateToAngle = false;
-    	Robot.driveExecutor.setZ(speed);
-    }
-    
-	//predefined constants which have to be tweaked depending on each robot. Most likely kP will have to be tweaked.
-	private static final double kP = 0.03;
-	private static final double kI = 0.00;
-	private static final double kD = 0.00;
-	private static final double kF = 0.00;
-	
-	private static final double kToleranceDegrees = 2.0f; //constant which defines the degree tolerance e.g. if target is 180 and tolerance is 2 then range of 178 - 182 is acceptable 
-	private static boolean rotateToAngle; //boolean for whether turning via gyro is enabled
-	private static AHRS ahrs; //defines the ahrs object
-	private PIDController turnController; // PID turn controller
+  // Constructor, creates the PID controller, sets properties
+  public RotateSubsystem() {
+    super("Gyroscope", Constants.gyroKp, Constants.gyroKi, Constants.gyroKd);
+    setAbsoluteTolerance(Constants.gyroTolerance);
+    setInputRange(-180.0f, 180.0f);
+    setOutputRange(-1, 1);
+    getPIDController().setContinuous(true);
+    ahrs = new AHRS(SPI.Port.kMXP);
+  }
 
-	//gyroscope initiation code
-	public void gyroInit() {
-		ahrs = new AHRS(SPI.Port.kMXP); //maps the AHRS to SPI port on RoboRIO - other ports can be used as well - SPI recommended
-		turnController = new PIDController(kP, kI, kD, kF, ahrs, this); //Controller which defines how the robot behaves when turning via gyro
-		turnController.setInputRange(-180.0f, 180.0f); //sets the rotation range (degrees)
-		turnController.setOutputRange(-1.0, 1.0); //sets the output of the turn controller - -1 to 1 is used - negative values for turning to the left and positive for turning to the right
-		turnController.setAbsoluteTolerance(kToleranceDegrees); //sets the tolerance
-		turnController.setContinuous(true); //idk though has to be here
-		turnController.enable();
-		addChild(ahrs);
-	}
-	
-	//method for turning via turn controller - accepts input as the degree which the robot will rotate to
-	public void turnToAngle(double setPoint) {
-		turnController.setSetpoint(setPoint); //sets the degree for the robot to rotate to - this is given as param
-		rotateToAngle = true; //sets the boolean rotateToAngle to true - this means that trigger input will be disregarded until it is switched to false. It starts the turnController.
-	}
-	
-	//method which must be included when using PIDOutput interface - the proccessed information from the PIDController is given to the double rotateToAngleRate
-	@Override
-	public void pidWrite(double output) {
-		if(rotateToAngle) {
-			Robot.driveExecutor.setZ(output * 0.4);
-		}
-	}
+  // Boolean for checking whether the PID controller is enabled
+  public boolean isEnabled() {
+    return getPIDController().isEnabled();
+  }
 
-    
+  // Method which is passed to the PID controller and used by it
+  @Override
+  protected double returnPIDInput() {
+    return ahrs.getAngle();
+  }
+
+  // Method for using the PID values
+  @Override
+  protected void usePIDOutput(double output) {
+    Robot.driveExecutor.setZ(output * 0.5);
+  }
+
+  @Override
+  public void initDefaultCommand() {
+    // setDefaultCommand(new MySpecialCommand());
+  }
 }

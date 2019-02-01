@@ -20,7 +20,7 @@ public class OpenBoschCommand extends Command {
   //Boolean for checking whether the command is finished -> terminating the command
   private boolean isFinished;
 
-  //declaration of dependencies
+  // declaration of dependencies
   public OpenBoschCommand() {
     requires(Robot.bosch);
   }

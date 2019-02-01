@@ -17,14 +17,17 @@ public class UltrasonicWallCommand extends Command {
 
   /**
    * Declares dependencies and local variables
-   * @param distance - Distance to which we want the PID controller to move the robot
+   * 
+   * @param distance - Distance to which we want the PID controller to move the
+   *                 robot
    */
   public UltrasonicWallCommand(double distance) {
     requires(Robot.ultrasonic);
     this.distance = distance;
   }
 
-  // Called just before this Command runs the first time, sets the setpoint for the PID controller and enables it
+  // Called just before this Command runs the first time, sets the setpoint for
+  // the PID controller and enables it
   @Override
   protected void initialize() {
     Robot.ultrasonic.setSetpoint(distance);
@@ -38,14 +41,15 @@ public class UltrasonicWallCommand extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    //checks whether robot is close to the setpoint within tollerance, then terminates this command
+    // checks whether robot is close to the setpoint within tollerance, then
+    // terminates this command
     return (Math.abs(Robot.ultrasonic.getSetpoint() - Robot.ultrasonic.getPosition()) < Constants.ultrasonicTolerance);
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    //disables the PID controller after it has reached its setpoint
+    // disables the PID controller after it has reached its setpoint
     Robot.ultrasonic.disable();
   }
 

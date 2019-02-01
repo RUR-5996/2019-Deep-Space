@@ -9,15 +9,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.CloseBoschCommand;
-import frc.robot.commands.ControlledRotateCommand;
 import frc.robot.commands.OpenBoschCommand;
 import frc.robot.commands.RotateCommand;
 import frc.robot.commands.UltrasonicWallCommand;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -26,8 +23,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class OI {
 	
 	public XboxController controller = new XboxController(0); //creates a new controller object for XboXController and assigns its port value to 0
-	public Joystick joystick = new Joystick(1);
-	public Joystick secondJoystick = new Joystick(2);
 	//-----------------------------------------------------------------------------------------------
 	//					XBOX
 	//values for controller buttons
@@ -76,36 +71,18 @@ public class OI {
 	private final Button backBut = new JoystickButton(controller, backButton);
 	private final Button lStickBut = new JoystickButton(controller, lStickButton);
 	private final Button rStickBut = new JoystickButton(controller, rStickButton);
-	
-	//defines and creates button objects for each joystick button
-	private final Button num1But = new JoystickButton(joystick, button1);
-	private final Button num2But = new JoystickButton(joystick, button2);
-	private final Button num3But = new JoystickButton(joystick, button3);
-	private final Button num4But = new JoystickButton(joystick, button4);
-	private final Button num5But = new JoystickButton(joystick, button5);
-	private final Button num6But = new JoystickButton(joystick, button6);
-	private final Button num7But = new JoystickButton(joystick, button7);
-	private final Button num8But = new JoystickButton(joystick, button8);
-	private final Button num9But = new JoystickButton(joystick, button9);
-	private final Button num10But = new JoystickButton(joystick, button10);
-	private final Button num11But = new JoystickButton(joystick, button11);
-	private final Button num12But = new JoystickButton(joystick, button12);
-	
 	//------------------------------------------------------------------------------------------------------
 	//methods for driving
 	public double getDriveForward() {
-		return getLStickXAxis();				//uncomment for controller drive
-		//return getJoystickXAxis();				//uncomment for joystick drive
+		return getLStickXAxis();			
 	}
 	
 	public double getDriveSideways() {
-		return getLStickYAxis();				//uncomment for controller drive
-		//return getJoystickYAxis();				//uncomment for joystick drive
+		return getLStickYAxis();				
 	}
 	
 	public double getDriveRotation() {
 		return getTriggerAxis();
-		//return getJoystickRotation();
 	}
 	
 	//------------------------------------------------------------------------------------------------------------
@@ -130,14 +107,6 @@ public class OI {
 		return deadzone(controller.getY(Hand.kRight));
 	}
 	
-	public double getJoystickXAxis() {
-		return deadzone(joystick.getX());
-	}
-	
-	public double getJoystickYAxis() {
-		return deadzone(joystick.getY());
-	}
-	
 	public double getTriggerAxis() {
 		if(controller.getTriggerAxis(Hand.kLeft) > 0)
 			return -deadzone(controller.getTriggerAxis(Hand.kLeft));
@@ -145,15 +114,6 @@ public class OI {
 			return deadzone(controller.getTriggerAxis(Hand.kRight));
 		else
 			return 0.0;
-	}
-	
-	public double getJoystickRotation() {
-		double joystickDeadzone = Constants.joystickDeadzone; // Biger than normal, because the axis is smaller (I mean its easier to rotoate it to same value)
-		double input = joystick.getTwist();
-		if(Math.abs(input) < joystickDeadzone)
-			return 0.0;
-		else
-			return Math.signum(input) * (Math.abs(input) - joystickDeadzone);
 	}
 	
 	public double getBumper()
@@ -192,14 +152,4 @@ public class OI {
 		xBut.whenPressed(new OpenBoschCommand());
 		aBut.whenPressed(new UltrasonicWallCommand(30));
 	}
-	
-
-	Command rotateCommand = new ControlledRotateCommand();
-	
-	public void periodic() {
-		if(getDriveRotation() != 0) {
-			rotateCommand.start();
-		}		
-	}
-	
 }
