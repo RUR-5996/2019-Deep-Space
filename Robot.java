@@ -72,7 +72,6 @@ public class Robot extends TimedRobot {
       camera.setFPS(Constants.imageFPS);
       camera.setExposureAuto();
     }).start();
-    rotate.gyroInit();
     bosch.counterInit();
     /*
     configureTalon(RobotMap.leftBack);
@@ -163,7 +162,6 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
     driveExecutor.execute();
-    m_oi.periodic();
   }
 
   @Override
@@ -184,7 +182,6 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     driveExecutor.execute();
-    m_oi.periodic();
     System.out.println(Robot.ultrasonic.isEnabled() + "Distance: " + ultrasonic.getDistanceCM());
   }
 

@@ -14,15 +14,16 @@ import frc.robot.RobotMap;
 
 public class CloseBoschCommand extends Command {
 
-  //Boolean for checking whether the command is finished -> terminating the command
+  // Boolean for checking whether the command is finished -> terminating the
+  // command
   private boolean isFinished;
 
-  //declaration of dependencies
+  // declaration of dependencies
   public CloseBoschCommand() {
     requires(Robot.bosch);
   }
 
-  //Called just before this Command runs the first time
+  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     isFinished = false;
@@ -31,8 +32,8 @@ public class CloseBoschCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.bosch.getPosition() >= Constants.boschUpperBound) {
-      while(Robot.bosch.getPosition() > Constants.boschLowerBound) {
+    if (Robot.bosch.getPosition() >= Constants.boschUpperBound) {
+      while (Robot.bosch.getPosition() > Constants.boschLowerBound) {
         Robot.bosch.setPosition(Robot.bosch.getPosition() - Robot.bosch.counter.get() / 10000);
         RobotMap.boschMotor.set(-0.5);
       }

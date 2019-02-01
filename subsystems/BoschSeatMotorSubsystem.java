@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-
 /**
  * Add your docs here.
  */
@@ -28,7 +27,7 @@ public class BoschSeatMotorSubsystem extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    //setDefaultCommand(new BoschC);
+    // setDefaultCommand(new BoschC);
   }
 
   public int getPosition() {
