@@ -36,8 +36,8 @@ public class Robot extends TimedRobot {
   public static RotateSubsystem rotate = new RotateSubsystem();
   public static UltrasonicSubsystem ultrasonic = new UltrasonicSubsystem();
   public static DriveExecutor driveExecutor = new DriveExecutor();
-  public static BoschSeatMotorSubsystem bosch = new BoschSeatMotorSubsystem();
   public static VisionSubsystem vision = new VisionSubsystem();
+  public static BoschSeatMotorSubsystem hatchManipulator = new BoschSeatMotorSubsystem();
   public static OI m_oi;
 
   private UsbCamera camera;
@@ -64,8 +64,7 @@ public class Robot extends TimedRobot {
       camera.setFPS(Constants.imageFPS);
       camera.setExposureAuto();
     }).start();
-    bosch.counterInit();
-    
+
     configureTalon(RobotMap.leftBack);
     configureTalon(RobotMap.leftFront);
     configureTalon(RobotMap.rightBack);
