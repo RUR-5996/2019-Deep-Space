@@ -8,27 +8,20 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class OpenBoschCommand extends Command {
-
-  private DigitalInput openedLimitSwitch = new DigitalInput(6);
-
-  //Boolean for checking whether the command is finished -> terminating the command
-  private boolean isFinished;
+public class OpenHatchCommand extends Command {
 
   // declaration of dependencies
-  public OpenBoschCommand() {
-    requires(Robot.hatchManipulator);
+  public OpenHatchCommand() {
+    requires(Robot.hatch);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    isFinished = false;
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -44,7 +37,7 @@ public class OpenBoschCommand extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return !Robot.hatchManipulator.getOpenedSwitchValue();
+    return !Robot.hatch.getOpenedSwitchValue();
   }
 
   // Called once after isFinished returns true
