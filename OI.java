@@ -9,8 +9,11 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.CloseHatchCommand;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.LineupCommand;
 import frc.robot.commands.OpenHatchCommand;
 import frc.robot.commands.RotateCommand;
+import frc.robot.commands.ShootCommand;
 import frc.robot.commands.UltrasonicWallCommand;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -146,10 +149,18 @@ public class OI {
 		
 	public OI() {
 		//gyro commands
-	//	aBut.whenPressed(new RotateCommand(0.0f));
-		//bBut.whenPressed(new RotateCommand(90.0f));
-		yBut.whenPressed(new CloseHatchCommand());		
-		xBut.whenPressed(new OpenHatchCommand());
-		aBut.whenPressed(new UltrasonicWallCommand(30));
+		yBut.whenPressed(new RotateCommand(0.0f));
+		bBut.whenPressed(new RotateCommand(90.0f));
+		aBut.whenPressed(new RotateCommand(180.0f));
+		xBut.whenPressed(new RotateCommand(-90.0f));
+
+		//leftBum.whenPressed(new UltrasonicWallCommand(30));
+		leftBum.whenPressed(new LineupCommand());
+		//aBut.whenPressed(new LineupCommand());
+		//yBut.whenPressed(new CloseHatchCommand());		
+		//xBut.whenPressed(new OpenHatchCommand());
+		//aBut.whenPressed(new UltrasonicWallCommand(30));
+		//aBut.whenPressed(new IntakeCommand());
+		//bBut.whenPressed(new ShootCommand());
 	}
 }

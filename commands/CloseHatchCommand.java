@@ -38,9 +38,9 @@ public class CloseHatchCommand extends Command {
   @Override
   protected void execute() {
     if (Robot.hatch.getClosedSwitchValue()) {
-      RobotMap.boschMotor.set(Constants.boschMotorSpeed);
+      RobotMap.hatchMotor.set(Constants.boschMotorSpeed);
     } else {
-      RobotMap.boschMotor.set(0);
+      RobotMap.hatchMotor.set(0);
     }
   }
 
@@ -60,7 +60,7 @@ public class CloseHatchCommand extends Command {
    */
   @Override
   protected void end() {
-    RobotMap.boschMotor.set(0);
+    RobotMap.hatchMotor.set(0);
   }
 
   /**
@@ -69,6 +69,6 @@ public class CloseHatchCommand extends Command {
    */
   @Override
   protected void interrupted() {
-    RobotMap.boschMotor.set(0);
+    RobotMap.hatchMotor.set(0);
   }
 }

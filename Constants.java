@@ -17,10 +17,16 @@ public class Constants {
     public static final int imageFPS = 30;
     
     //TalonSRX CAN ports
-    public static final int frontLeftMotor = 0;
-    public static final int backLeftMotor = 1;
-    public static final int frontRightMotor = 2;
-    public static final int backRightMotor = 3;
+    public static final int frontLeftMotor = 2;
+    public static final int backLeftMotor = 3;
+    public static final int frontRightMotor = 1;
+    public static final int backRightMotor = 0;
+
+    //VictorSPX CAN ports
+    public static final int shooter1 = 6;
+    public static final int shooter2 = 7;
+    public static final int shooter3 = 8;
+    public static final int shooter4 = 9;
 
     //Talon and Victor PWM ports
     public static final int boschMotor = 4;
@@ -31,10 +37,6 @@ public class Constants {
 
     //
     public static final int timeOutMs = 10;
-
-    //Counter limits
-    public static final int boschLowerBound = 0;
-    public static final int boschUpperBound = 240000;
 
     //Bosch motor speed
     public static final double boschMotorSpeed = 0.4;

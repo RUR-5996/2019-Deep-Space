@@ -8,6 +8,9 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
+import edu.wpi.first.wpilibj.VictorSP;
 
 /**
  * Instantiation and binding of motors. 
@@ -17,5 +20,11 @@ public class RobotMap {
 	public static WPI_TalonSRX leftBack = new WPI_TalonSRX(Constants.backLeftMotor);
 	public static WPI_TalonSRX rightFront = new WPI_TalonSRX(Constants.frontRightMotor);
 	public static WPI_TalonSRX rightBack= new WPI_TalonSRX(Constants.backRightMotor);
-	public static WPI_TalonSRX boschMotor = new WPI_TalonSRX(Constants.boschMotor);
+
+	public static WPI_VictorSPX shooter1 = new WPI_VictorSPX(Constants.shooter1);
+	public static WPI_VictorSPX shooter2 = new WPI_VictorSPX(Constants.shooter2);
+	public static WPI_VictorSPX shooter3 = new WPI_VictorSPX(Constants.shooter3);
+	public static WPI_VictorSPX shooter4 = new WPI_VictorSPX(Constants.shooter4);
+
+	public static VictorSP hatchMotor = new VictorSP(0);
 }

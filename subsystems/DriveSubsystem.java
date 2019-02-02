@@ -34,11 +34,13 @@ public class DriveSubsystem extends Subsystem {
 	 */
 	public void TeleopDrive(double xAxis, double yAxis, double zAxis) {
 		//Checks whether ultrasonic PID is running
-		if (!Robot.ultrasonic.isEnabled()) {
+		if(!Robot.vision.isEnabled()){
 			Robot.driveExecutor.setX(xAxis);
 		}
 
-		Robot.driveExecutor.setY(yAxis);
+		if (!Robot.ultrasonic.isEnabled()) {
+			Robot.driveExecutor.setY(yAxis);
+		}
 
 		//Checks whether gyro PID is running
 		if (!Robot.rotate.isEnabled()) {

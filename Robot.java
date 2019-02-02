@@ -8,6 +8,7 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 //imports needed for camera
 import edu.wpi.cscore.UsbCamera;
@@ -38,6 +39,7 @@ public class Robot extends TimedRobot {
   public static DriveExecutor driveExecutor = new DriveExecutor();
   public static VisionSubsystem vision = new VisionSubsystem();
   public static HatchSubsystem hatch = new HatchSubsystem();
+  public static ShooterSubsystem shooter = new ShooterSubsystem();
   public static OI m_oi;
 
   private UsbCamera camera;
@@ -64,11 +66,17 @@ public class Robot extends TimedRobot {
       camera.setFPS(Constants.imageFPS);
       camera.setExposureAuto();
     }).start();
+    shooter.shooterInit();
 
     configureTalon(RobotMap.leftBack);
     configureTalon(RobotMap.leftFront);
     configureTalon(RobotMap.rightBack);
     configureTalon(RobotMap.rightFront);
+
+    configureVictor(RobotMap.shooter1);
+    configureVictor(RobotMap.shooter2);
+    configureVictor(RobotMap.shooter3);
+    configureVictor(RobotMap.shooter4);
   }
 
   private void configureTalon(WPI_TalonSRX talon) {
@@ -90,6 +98,18 @@ public class Robot extends TimedRobot {
 		talon.configContinuousCurrentLimit(30, Constants.timeOutMs); // Must be 5 amps or more
 		talon.configPeakCurrentLimit(30, Constants.timeOutMs); // 100 A
 		talon.configPeakCurrentDuration(200, Constants.timeOutMs); // 200 ms
+  }
+
+  private void configureVictor(WPI_VictorSPX victor) {
+    victor.configFactoryDefault();
+		victor.configNominalOutputForward(0, Constants.timeOutMs);
+		victor.configNominalOutputReverse(0, Constants.timeOutMs);
+		victor.configPeakOutputForward(1, Constants.timeOutMs);
+		victor.configPeakOutputReverse(-1, Constants.timeOutMs);
+		victor.configAllowableClosedloopError(0, 0, Constants.timeOutMs);
+		victor.configNeutralDeadband(0.05, Constants.timeOutMs); 
+		victor.setNeutralMode(com.ctre.phoenix.motorcontrol.NeutralMode.Brake);
+		victor.setInverted(false);
   }
 
   /**
@@ -175,6 +195,7 @@ public class Robot extends TimedRobot {
     driveExecutor.execute();
    // System.out.println(Robot.ultrasonic.isEnabled() + "Distance: " + ultrasonic.getDistanceCM());
    vision.visionLogic();
+   System.out.println("Is enabled: " + vision.isEnabled() + " Offset: " + vision.getOffset());
   }
 
   /**
