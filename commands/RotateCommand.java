@@ -11,6 +11,9 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * Command for rotating via gyroscope.
+ */
 public class RotateCommand extends Command {
 
 	private double angle;
@@ -24,31 +27,44 @@ public class RotateCommand extends Command {
 		this.angle = angle;
 	}
 
-	// Called just before this Command runs the first time, sets the setpoint for
- 	// the PID controller and enables it
+	/**
+	 * Method which is called before execute - at start up.
+	 * Sets the setpoint for the controller and enables it.
+	 */
 	protected void initialize() {
 		Robot.rotate.setSetpoint(angle);
 		Robot.rotate.enable();
 	}
 
+	/**
+	 * Not used. PID controller is set up and runs in the meantime.
+	 */
 	protected void execute() {
 	}
 
-	// Make this return true when this Command no longer needs to run execute()
+	/**
+   	 * Method which checks whether to command is finished, then terminates the command.
+   	 * @return boolean, if returns true, command is terminated
+   	 * Checks whether the robot is rotated within tolerance to the given setpoint.
+   	 */
 	@Override
 	protected boolean isFinished() {
 		return Math.abs(Robot.rotate.getPosition() - Robot.rotate.getSetpoint()) < Constants.gyroTolerance;
 	}
 
-	// Called once after isFinished returns true
+	/**
+   	 * Method which is called when isFinished is true.
+   	 * Disabled the PID controller after if has reached its setpoint.
+   	 */
 	@Override
 	protected void end() {
-		// disables the PID controller after it has reached its setpoint
 		Robot.rotate.disable();
 	}
 
-	// Called when another command which requires one or more of the same
-	// subsystems is scheduled to run
+	/**
+     * Called when the command would be interrupted by another command,
+   	 * which would use the same subsystem. Disables the turn controller.
+   	 */
 	@Override
 	protected void interrupted() {
 		Robot.rotate.disable();
