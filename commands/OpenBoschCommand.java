@@ -8,16 +8,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class OpenBoschCommand extends Command {
 
+  private DigitalInput openedLimitSwitch = new DigitalInput(6);
+
   //Boolean for checking whether the command is finished -> terminating the command
   private boolean isFinished;
 
-  //declaration of dependencies
+  // declaration of dependencies
   public OpenBoschCommand() {
     requires(Robot.hatchManipulator);
   }

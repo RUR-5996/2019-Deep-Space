@@ -8,21 +8,24 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class CloseBoschCommand extends Command {
 
+  DigitalInput closedLimitSwitch = new DigitalInput(5);
+
   //Boolean for checking whether the command is finished -> terminating the command
   private boolean isFinished;
 
-  //declaration of dependencies
+  // declaration of dependencies
   public CloseBoschCommand() {
     requires(Robot.hatchManipulator);
   }
 
-  //Called just before this Command runs the first time
+  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     isFinished = false;
