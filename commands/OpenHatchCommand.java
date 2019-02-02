@@ -11,43 +11,61 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-
+/**
+ * Command for opening the hatch manipulator
+ */
 public class OpenHatchCommand extends Command {
 
-  // declaration of dependencies
+  /**
+   * Constructor, declares dependecy on subsystem
+   */
   public OpenHatchCommand() {
     requires(Robot.hatch);
   }
 
-  // Called just before this Command runs the first time
+  /**
+   * Method, which runs when the command is initialized
+   */
   @Override
   protected void initialize() {
   }
 
-  // Called repeatedly when this Command is scheduled to run
+  /**
+   * Method which is called repeatedly when its instantiated.
+   * Opens the manipulator until the limit switch is triggered. 
+   */
   @Override
   protected void execute() {
-    if (Robot.hatchManipulator.getOpenedSwitchValue() == true) {
+    if (Robot.hatch.getOpenedSwitchValue()) {
       RobotMap.boschMotor.set(-Constants.boschMotorSpeed);
     } else {
       RobotMap.boschMotor.set(0);
     }
   }
 
-  // Make this return true when this Command no longer needs to run execute()
+  /**
+   * Method which checks whether to command is finished, then terminates the command.
+   * @return boolean, if returns true, command is terminated
+   * Checks whether the limit switch is pressed.
+   */
   @Override
   protected boolean isFinished() {
     return !Robot.hatch.getOpenedSwitchValue();
   }
 
-  // Called once after isFinished returns true
+  /**
+   * Method which is called when isFinished is true.
+   * Shuts down the motor.
+   */
   @Override
   protected void end() {
     RobotMap.boschMotor.set(0);
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
+  /**
+   * Called when the command would be interrupted by another command,
+   * which would use the same subsystem.
+   */
   @Override
   protected void interrupted() {
     RobotMap.boschMotor.set(0);

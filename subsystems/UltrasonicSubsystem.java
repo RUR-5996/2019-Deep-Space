@@ -12,12 +12,16 @@ import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-
+/**
+ * Class for ultrasonic 
+ */
 public class UltrasonicSubsystem extends PIDSubsystem {
 
 	private Ultrasonic ultrasonic = new Ultrasonic(0, 1);
 
-	// Constructor, creates the PID controller, sets properties
+	/**
+   	 * Constructor, creates the PID controller, sets properties
+   	 */
 	public UltrasonicSubsystem() {
 		super("Ultrasonic", Constants.ultrasonicKp, Constants.ultrasonicKi, Constants.ultrasonicKp);
 		setAbsoluteTolerance(Constants.ultrasonicTolerance);
@@ -27,26 +31,42 @@ public class UltrasonicSubsystem extends PIDSubsystem {
 		ultrasonic.setAutomaticMode(true);
 	}
 
-	// Boolean for checking whether the PID controller is enabled
+	/**
+   	 * Method for checking whether the PID controller is enabled
+   	 * @return boolean - true for enabled, false for disabled
+   	 */
 	public boolean isEnabled() {
 		return getPIDController().isEnabled();
 	}
 
-	// Getter method for the ultrasonic sensor
+	/**
+	 * Method for getting ultrasonic distance in cm
+	 * @return distance in cm as a double
+	 */
 	public double getDistanceCM() {
 		return (ultrasonic.getRangeMM() / 10);
 	}
 
-	// Method which is passed to the PID controller and used by it
+	/**
+	 * Method for passing info to the PID controller
+	 * @return distance from ultrasonic in cm
+	 */
 	protected double returnPIDInput() {
 		return getDistanceCM();
 	}
 
-	// Method for using the PID values
+	/**
+	 * Method for using the output of the PID controller
+	 * @param output method for driving forward/backwards
+	 * In range of -1 to 1
+	 */
 	protected void usePIDOutput(double output) {
 		Robot.driveExecutor.setX(output * 0.5);
 	}
 
+	/**
+	 * Default command needed by subsystem
+	 */
 	public void initDefaultCommand() {
 		// setDefaultCommand(new DriveCommand());
 	}

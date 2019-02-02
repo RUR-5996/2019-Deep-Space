@@ -16,13 +16,15 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 /**
- * Add your docs here.
+ * Class for gyro
  */
 public class RotateSubsystem extends PIDSubsystem {
 
   private AHRS ahrs;
 
-  // Constructor, creates the PID controller, sets properties
+  /**
+   * Constructor, creates the PID controller, sets properties
+   */
   public RotateSubsystem() {
     super("Gyroscope", Constants.gyroKp, Constants.gyroKi, Constants.gyroKd);
     setAbsoluteTolerance(Constants.gyroTolerance);
@@ -32,23 +34,35 @@ public class RotateSubsystem extends PIDSubsystem {
     ahrs = new AHRS(SPI.Port.kMXP);
   }
 
-  // Boolean for checking whether the PID controller is enabled
+  /**
+   * Method for checking whether the PID controller is enabled
+   * @return boolean - true for enabled, false for disabled
+   */
   public boolean isEnabled() {
     return getPIDController().isEnabled();
   }
 
-  // Method which is passed to the PID controller and used by it
+  /**
+   * Method for passing info to the PID controller
+   * @return angle from gyro
+   */
   @Override
   protected double returnPIDInput() {
     return ahrs.getAngle();
   }
 
-  // Method for using the PID values
+  /**
+   * Method for using the output of the PID controller
+   * @param output double between -1 and 1 used for turning speed
+   */
   @Override
   protected void usePIDOutput(double output) {
     Robot.driveExecutor.setZ(output * 0.5);
   }
 
+  /**
+   * Defaut needed command. 
+   */
   @Override
   public void initDefaultCommand() {
     // setDefaultCommand(new MySpecialCommand());
