@@ -22,7 +22,7 @@ public class CloseBoschCommand extends Command {
 
   // declaration of dependencies
   public CloseBoschCommand() {
-    requires(Robot.bosch);
+    requires(Robot.hatchManipulator);
   }
 
   // Called just before this Command runs the first time
@@ -34,7 +34,7 @@ public class CloseBoschCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (closedLimitSwitch.get() == true) {
+    if (Robot.hatchManipulator.getClosedSwitchValue() == true) {
       RobotMap.boschMotor.set(Constants.boschMotorSpeed);
     } else {
       RobotMap.boschMotor.set(0);
@@ -44,7 +44,7 @@ public class CloseBoschCommand extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return !closedLimitSwitch.get();
+    return !Robot.hatchManipulator.getClosedSwitchValue();
   }
 
   // Called once after isFinished returns true
