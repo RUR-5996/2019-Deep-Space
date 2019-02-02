@@ -8,21 +8,18 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class CloseBoschCommand extends Command {
 
-  DigitalInput closedLimitSwitch = new DigitalInput(5);
-
   //Boolean for checking whether the command is finished -> terminating the command
   private boolean isFinished;
 
   //declaration of dependencies
   public CloseBoschCommand() {
-    requires(Robot.bosch);
+    requires(Robot.hatchManipulator);
   }
 
   //Called just before this Command runs the first time
@@ -34,7 +31,7 @@ public class CloseBoschCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (closedLimitSwitch.get() == true) {
+    if (Robot.hatchManipulator.getClosedSwitchValue() == true) {
       RobotMap.boschMotor.set(Constants.boschMotorSpeed);
     } else {
       RobotMap.boschMotor.set(0);
@@ -44,7 +41,7 @@ public class CloseBoschCommand extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return !closedLimitSwitch.get();
+    return !Robot.hatchManipulator.getClosedSwitchValue();
   }
 
   // Called once after isFinished returns true

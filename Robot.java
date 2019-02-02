@@ -44,7 +44,7 @@ public class Robot extends TimedRobot {
   public static RotateSubsystem rotate = new RotateSubsystem();
   public static UltrasonicSubsystem ultrasonic = new UltrasonicSubsystem();
   public static DriveExecutor driveExecutor = new DriveExecutor();
-  public static BoschSeatMotorSubsystem bosch = new BoschSeatMotorSubsystem();
+  public static BoschSeatMotorSubsystem hatchManipulator = new BoschSeatMotorSubsystem();
   private final Object imgLock = new Object();
   public static OI m_oi;
 
@@ -73,7 +73,6 @@ public class Robot extends TimedRobot {
       camera.setExposureAuto();
     }).start();
     rotate.gyroInit();
-    bosch.counterInit();
     /*
     configureTalon(RobotMap.leftBack);
     configureTalon(RobotMap.leftFront);

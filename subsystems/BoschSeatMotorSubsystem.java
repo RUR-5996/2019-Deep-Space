@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -16,31 +15,21 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Add your docs here.
  */
 public class BoschSeatMotorSubsystem extends Subsystem {
-  public Counter counter;
-  private int position;
 
-  public void counterInit() {
-    counter = new Counter(new DigitalInput(2));
-    position = 0;
-    counter.setMaxPeriod(4);
-    counter.setReverseDirection(true);
-  }
+  private DigitalInput openedLimitSwitch = new DigitalInput(6);
+  private DigitalInput closedLimitSwitch = new DigitalInput(5);
 
   @Override
   public void initDefaultCommand() {
     //setDefaultCommand(new BoschC);
   }
 
-  public int getPosition() {
-    return this.position;
-  }
+  public boolean getOpenedSwitchValue() {
+    return openedLimitSwitch.get();
+  } 
 
-  public void setPosition(int position) {
-    this.position = position;
-  }
-
-  public int getCounter() {
-    return this.counter.get();
+  public boolean getClosedSwitchValue() {
+    return closedLimitSwitch.get();
   }
 
 }
