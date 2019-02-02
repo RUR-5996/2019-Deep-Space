@@ -13,28 +13,24 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class CloseBoschCommand extends Command {
+public class CloseHatchCommand extends Command {
 
   DigitalInput closedLimitSwitch = new DigitalInput(5);
 
-  //Boolean for checking whether the command is finished -> terminating the command
-  private boolean isFinished;
-
   // declaration of dependencies
-  public CloseBoschCommand() {
-    requires(Robot.hatchManipulator);
+  public CloseHatchCommand() {
+    requires(Robot.hatch);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    isFinished = false;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (Robot.hatchManipulator.getClosedSwitchValue() == true) {
+    if (Robot.hatch.getClosedSwitchValue() == true) {
       RobotMap.boschMotor.set(Constants.boschMotorSpeed);
     } else {
       RobotMap.boschMotor.set(0);
@@ -44,7 +40,7 @@ public class CloseBoschCommand extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return !Robot.hatchManipulator.getClosedSwitchValue();
+    return !Robot.hatch.getClosedSwitchValue();
   }
 
   // Called once after isFinished returns true

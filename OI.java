@@ -8,8 +8,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.CloseBoschCommand;
-import frc.robot.commands.OpenBoschCommand;
+import frc.robot.commands.CloseHatchCommand;
+import frc.robot.commands.OpenHatchCommand;
 import frc.robot.commands.RotateCommand;
 import frc.robot.commands.UltrasonicWallCommand;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -148,8 +148,8 @@ public class OI {
 		//gyro commands
 	//	aBut.whenPressed(new RotateCommand(0.0f));
 		//bBut.whenPressed(new RotateCommand(90.0f));
-		yBut.whenPressed(new CloseBoschCommand());		
-		xBut.whenPressed(new OpenBoschCommand());
+		yBut.whenPressed(new CloseHatchCommand());		
+		xBut.whenPressed(new OpenHatchCommand());
 		aBut.whenPressed(new UltrasonicWallCommand(30));
 	}
 }

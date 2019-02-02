@@ -37,7 +37,7 @@ public class Robot extends TimedRobot {
   public static UltrasonicSubsystem ultrasonic = new UltrasonicSubsystem();
   public static DriveExecutor driveExecutor = new DriveExecutor();
   public static VisionSubsystem vision = new VisionSubsystem();
-  public static BoschSeatMotorSubsystem hatchManipulator = new BoschSeatMotorSubsystem();
+  public static HatchSubsystem hatch = new HatchSubsystem();
   public static OI m_oi;
 
   private UsbCamera camera;
