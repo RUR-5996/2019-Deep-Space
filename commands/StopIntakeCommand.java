@@ -10,8 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class IntakeCommand extends Command {
-  public IntakeCommand() {
+public class StopIntakeCommand extends Command {
+  public StopIntakeCommand() {
     requires(Robot.shooter);
   }
 
@@ -23,7 +23,7 @@ public class IntakeCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.shooter.intake(0.3);
+    Robot.shooter.stop();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -35,13 +35,11 @@ public class IntakeCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.shooter.stop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.shooter.stop();
   }
 }

@@ -31,6 +31,7 @@ public class RotateCommand extends Command {
 	 * Method which is called before execute - at start up.
 	 * Sets the setpoint for the controller and enables it.
 	 */
+	@Override
 	protected void initialize() {
 		Robot.rotate.setSetpoint(angle);
 		Robot.rotate.enable();
@@ -39,6 +40,7 @@ public class RotateCommand extends Command {
 	/**
 	 * Not used. PID controller is set up and runs in the meantime.
 	 */
+	@Override
 	protected void execute() {
 	}
 

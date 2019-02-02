@@ -33,11 +33,12 @@ public class DriveSubsystem extends Subsystem {
 	 * @param zAxis - param for turning
 	 */
 	public void TeleopDrive(double xAxis, double yAxis, double zAxis) {
-		//Checks whether ultrasonic PID is running
+		//Checks whether vision PID is running
 		if(!Robot.vision.isEnabled()){
 			Robot.driveExecutor.setX(xAxis);
 		}
 
+		//Checks whether ultrasonic PID is running
 		if (!Robot.ultrasonic.isEnabled()) {
 			Robot.driveExecutor.setY(yAxis);
 		}

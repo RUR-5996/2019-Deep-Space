@@ -57,7 +57,7 @@ public class RotateSubsystem extends PIDSubsystem {
    */
   @Override
   protected void usePIDOutput(double output) {
-    Robot.driveExecutor.setZ(output * 0.5);
+    Robot.driveExecutor.setZ(output * Constants.gyroScalingFactor);
   }
 
   /**

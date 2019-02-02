@@ -11,6 +11,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants;
 import frc.robot.Robot;
 
 /**
@@ -26,9 +27,12 @@ public class VisionSubsystem extends PIDSubsystem {
   private double[] centerY;
   private double offset;
 
+  /**
+   * Constructor, creates and sets properties for the PID controller
+   */
   public VisionSubsystem() {
-    super("Vision", 0.03, 0.00, 0.00);
-    setAbsoluteTolerance(2);
+    super("Vision", Constants.visionKp, Constants.visionKi, Constants.visionKd);
+    setAbsoluteTolerance(Constants.visionTolerance);
     setInputRange(-160, 160);
     setOutputRange(-1, 1);
     getPIDController().setContinuous(true);
@@ -36,16 +40,25 @@ public class VisionSubsystem extends PIDSubsystem {
 
   /**
 	 * Method for passing info to the PID controller
-	 * @return distance from ultrasonic in cm
+	 * @return X-axis offset processed from camera
 	 */
 	protected double returnPIDInput() {
 		return offset;
   }
   
+  /**
+   * Method for getting the X-axis offset from the center
+   * @return double offset in px - depends on resolution
+   * Should be between -160 and 160
+   */
   public double getOffset(){
     return offset;
   }
 
+  /**
+   * Method for checking whether the controller is enabled.
+   * @return boolean true = enabled, false = disabled.
+   */
   public boolean isEnabled() {
     return getPIDController().isEnabled();
   }
@@ -59,27 +72,26 @@ public class VisionSubsystem extends PIDSubsystem {
 		Robot.driveExecutor.setX(output * 0.5);
 	}
 
-  @Override
+  /**
+   * Default required method by subsystem.
+   */
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
   }
 
-/**
- * Method for getting vision data from network tables
- */
+  /**
+   * Method for getting vision data from network tables
+   */
   private void setVars() {
     centerX = table.getEntry("centerX").getDoubleArray(defaultValue);
     centerY = table.getEntry("centerY").getDoubleArray(defaultValue);
   }
 
-/**
- * Method for processing vision data
- */
+  /**
+   * Method for processing vision data
+   */
   public void visionLogic() {
     //getting data from network tables
     setVars();
-
     //check for validity of data
     if(centerX.length == 2) {
       SmartDashboard.putBoolean("Vision Ready", true); //puts data into dashboard for driver
@@ -90,17 +102,15 @@ public class VisionSubsystem extends PIDSubsystem {
     }
   }
 
-/**
- * Method for returning the vision offset from center
- * @param centerX Array of the centers of contours
- * @return visionOfset in values from -160 to 160 -> depends on camera resolution
- * Positive = to the right
- * Negative = to the left
- */
+  /**
+   * Method for returning the vision offset from center
+   * @param centerX Array of the centers of contours
+   * @return visionOfset in values from -160 to 160 -> depends on camera resolution
+   * Positive = to the right
+   * Negative = to the left
+   */
   private double getVisionOffset(double[] centerX) {
     double center = (centerX[0] + centerX[1]) / 2;
     return center - 160;
   }
-
-
 }

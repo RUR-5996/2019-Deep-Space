@@ -30,8 +30,8 @@ public class ShooterSubsystem extends Subsystem {
   }
 
   public void intake(double speed) {
-    //RobotMap.shooter1.set(speed);
-    //RobotMap.shooter3.set(speed);
+    RobotMap.shooter1.set(speed);
+    RobotMap.shooter3.set(speed);
   }
 
   public void stop(){
@@ -39,7 +39,6 @@ public class ShooterSubsystem extends Subsystem {
     RobotMap.shooter3.set(0);
   }
 
-  @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     //setDefaultCommand(new ShootCommand());

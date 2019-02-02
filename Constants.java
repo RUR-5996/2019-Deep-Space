@@ -27,6 +27,7 @@ public class Constants {
     public static final int shooter2 = 7;
     public static final int shooter3 = 8;
     public static final int shooter4 = 9;
+    public static final double shootingTime = 0.5;
 
     //Talon and Victor PWM ports
     public static final int boschMotor = 4;
@@ -41,18 +42,24 @@ public class Constants {
     //Bosch motor speed
     public static final double boschMotorSpeed = 0.4;
 
-    //Speed for PID driving with ultrasonic
-    public static final double ultrasonicSpeed = 0.4;
-
     //Ultrasonic PID constants
     public static final double ultrasonicKp = 0.03;
     public static final double ultrasonicKi = 0.00;
     public static final double ultrasonicKd = 0.00;
     public static final int ultrasonicTolerance = 2;
+    public static final double ultrasonicScalingFactor = 0.5;
 
     //Gyro PID constants
     public static final double gyroKp = 0.03;
     public static final double gyroKi = 0.00;
     public static final double gyroKd = 0.00;
     public static final int gyroTolerance = 2;
+    public static final double gyroScalingFactor = 0.5;
+
+    //Vision PID constants
+    public static final double visionKp = 0.03;
+    public static final double visionKi = 0.00;
+    public static final double visionKd = 0.00;
+    public static final int visionTolerance = 2;
+    public static final double visionScalingFactor = 0.5;
 }
