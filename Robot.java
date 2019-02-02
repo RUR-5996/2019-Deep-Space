@@ -13,16 +13,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 
-//imports needed for network tables -> vision processing on DS
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
-
 //required dependencies
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 //Constants and subsystems
@@ -37,15 +31,13 @@ import frc.robot.Constants;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static NetworkTableInstance inst = NetworkTableInstance.getDefault();
-  public static NetworkTable table = inst.getTable("GRIP/contours");
 
   public static DriveSubsystem drive = new DriveSubsystem();
   public static RotateSubsystem rotate = new RotateSubsystem();
   public static UltrasonicSubsystem ultrasonic = new UltrasonicSubsystem();
   public static DriveExecutor driveExecutor = new DriveExecutor();
+  public static VisionSubsystem vision = new VisionSubsystem();
   public static BoschSeatMotorSubsystem hatchManipulator = new BoschSeatMotorSubsystem();
-  private final Object imgLock = new Object();
   public static OI m_oi;
 
   private UsbCamera camera;
@@ -72,14 +64,13 @@ public class Robot extends TimedRobot {
       camera.setFPS(Constants.imageFPS);
       camera.setExposureAuto();
     }).start();
-    rotate.gyroInit();
-    /*
+
     configureTalon(RobotMap.leftBack);
     configureTalon(RobotMap.leftFront);
     configureTalon(RobotMap.rightBack);
-    configureTalon(RobotMap.rightFront);*/
+    configureTalon(RobotMap.rightFront);
   }
-/*
+
   private void configureTalon(WPI_TalonSRX talon) {
     talon.configFactoryDefault();
 		talon.configNominalOutputForward(0, Constants.timeOutMs);
@@ -99,7 +90,7 @@ public class Robot extends TimedRobot {
 		talon.configContinuousCurrentLimit(30, Constants.timeOutMs); // Must be 5 amps or more
 		talon.configPeakCurrentLimit(30, Constants.timeOutMs); // 100 A
 		talon.configPeakCurrentDuration(200, Constants.timeOutMs); // 200 ms
-  }*/
+  }
 
   /**
    * This function is called every robot packet, no matter the mode. Use
@@ -182,7 +173,8 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     driveExecutor.execute();
-    System.out.println(Robot.ultrasonic.isEnabled() + "Distance: " + ultrasonic.getDistanceCM());
+   // System.out.println(Robot.ultrasonic.isEnabled() + "Distance: " + ultrasonic.getDistanceCM());
+   vision.visionLogic();
   }
 
   /**

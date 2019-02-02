@@ -65,7 +65,7 @@ public class OI {
 	private final Button bBut = new JoystickButton(controller, bButton);
 	private final Button xBut = new JoystickButton(controller, xButton);
 	private final Button yBut = new JoystickButton(controller, yButton);
-	public final Button leftBum = new JoystickButton(controller, leftBumper);
+	private final Button leftBum = new JoystickButton(controller, leftBumper);
 	private final Button rightBum = new JoystickButton(controller, rightBumper);
 	private final Button startBut = new JoystickButton(controller, startButton);
 	private final Button backBut = new JoystickButton(controller, backButton);

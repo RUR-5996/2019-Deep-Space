@@ -12,26 +12,35 @@ import frc.robot.Robot;
 import frc.robot.commands.DriveCommand;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-//declares class - Drive_Subsystem - extends Subsystem REQUIRED!!! Cannot run otherwise. Since this is a subsystem call methods using commands.
+/**
+ * Subsystem for driving
+ */
 public class DriveSubsystem extends Subsystem {
 
-	// sets default command for the subsystem - required for this subsystem.
+	/**
+	 * Sets default command for the subsystem - required.
+	 * setDefaultCommand runs always when possible.
+	 */
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new DriveCommand()); // sets Drive_Command as default command
+		setDefaultCommand(new DriveCommand());
 	}
 
-	// method used during teleop drive - xAxis for x coordinate input, yAxis for y
-	// coordinate input, zAxis for turning, ahrs for gyro
+	/**
+	 * Method for teleop drive, runs checks so it doesn't itervene with PIDs.
+	 * @param xAxis - param for driving forwards/backwards
+	 * @param yAxis - param for driving sideways
+	 * @param zAxis - param for turning
+	 */
 	public void TeleopDrive(double xAxis, double yAxis, double zAxis) {
-		// drive method, uses cartesian drive for mecanumDrive type robotDrive object -
-		// driveCartesian automatically processes the values fed
+		//Checks whether ultrasonic PID is running
 		if (!Robot.ultrasonic.isEnabled()) {
 			Robot.driveExecutor.setX(xAxis);
 		}
 
 		Robot.driveExecutor.setY(yAxis);
 
+		//Checks whether gyro PID is running
 		if (!Robot.rotate.isEnabled()) {
 			Robot.driveExecutor.setZ(zAxis);
 		}
