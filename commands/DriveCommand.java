@@ -27,7 +27,6 @@ public class DriveCommand extends Command {
 	 */
 	@Override
 	protected void initialize() {
-
 	}
 
 	/**
@@ -37,15 +36,15 @@ public class DriveCommand extends Command {
 	@Override
 	protected void execute() {
 		Robot.drive.TeleopDrive(Robot.m_oi.getDriveForward(), 
-								Robot.m_oi.getDriveSideways(),
-								Robot.m_oi.getDriveRotation()); // Used for driving with joystick
+								Robot.m_oi.getDriveSideways()/*,
+								Robot.m_oi.getDriveRotation()*/); // Used for driving with joystick
 	}
 
 	/**
-   * Method which checks whether to command is finished, then terminates the command.
-   * @return boolean, if returns true, command is terminated.
-   * The command never returns true, we want it to always run.
-   */
+	 * Method which checks whether to command is finished, then terminates the command.
+	 * @return boolean, if returns true, command is terminated.
+	 * The command never returns true, we want it to always run.
+	 */
 	@Override
 	protected boolean isFinished() {
 		return false;
@@ -66,6 +65,5 @@ public class DriveCommand extends Command {
    	 */
 	@Override
 	protected void interrupted() {
-
 	}
 }

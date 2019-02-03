@@ -8,9 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Constants;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
 /**
  * Command for closing the hatch manipulator
@@ -37,11 +35,7 @@ public class CloseHatchCommand extends Command {
    */
   @Override
   protected void execute() {
-    if (Robot.hatch.getClosedSwitchValue()) {
-      RobotMap.hatchMotor.set(Constants.boschMotorSpeed);
-    } else {
-      RobotMap.hatchMotor.set(0);
-    }
+    Robot.hatch.closeHatch();
   }
 
   /**
@@ -60,7 +54,7 @@ public class CloseHatchCommand extends Command {
    */
   @Override
   protected void end() {
-    RobotMap.hatchMotor.set(0);
+    Robot.hatch.stop();
   }
 
   /**
@@ -69,6 +63,6 @@ public class CloseHatchCommand extends Command {
    */
   @Override
   protected void interrupted() {
-    RobotMap.hatchMotor.set(0);
+    Robot.hatch.stop();
   }
 }

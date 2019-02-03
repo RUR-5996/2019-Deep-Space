@@ -17,28 +17,51 @@ import edu.wpi.first.wpilibj.command.Command;
 public class RotateCommand extends Command {
 
 	private double angle;
+	private int position;
+	private int rotate;
 
 	/**
 	 * Declares dependencies and local variables
 	 * @param angle - angle to which we want to turn
 	 */
-	public RotateCommand(double angle) {
+	public RotateCommand(/*double angle*/int rotate) {
 		requires(Robot.rotate);
-		this.angle = angle;
+		this.rotate = rotate;
+		//this.angle = angle;
 	}
 
 	/**
 	 * Method which is called before execute - at start up.
 	 * Sets the setpoint for the controller and enables it.
 	 */
+	@Override
 	protected void initialize() {
-		Robot.rotate.setSetpoint(angle);
+		position = Robot.rotate.rotateRobot(rotate);
+		switch(position) {
+			case 0: Robot.rotate.setSetpoint(0f);
+				break;
+			case 1: Robot.rotate.setSetpoint(45f);
+				break;
+			case 2: Robot.rotate.setSetpoint(90f);
+				break;
+			case 3: Robot.rotate.setSetpoint(135f);
+				break;
+			case 4: Robot.rotate.setSetpoint(180f);
+				break;
+			case 5: Robot.rotate.setSetpoint(-135f);
+				break;
+			case 6: Robot.rotate.setSetpoint(-90f);
+				break;
+			case 7: Robot.rotate.setSetpoint(-45f);
+				break;
+		}
 		Robot.rotate.enable();
 	}
 
 	/**
 	 * Not used. PID controller is set up and runs in the meantime.
 	 */
+	@Override
 	protected void execute() {
 	}
 

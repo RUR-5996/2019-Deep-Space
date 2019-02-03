@@ -41,6 +41,12 @@ public class Robot extends TimedRobot {
   public static HatchSubsystem hatch = new HatchSubsystem();
   public static ShooterSubsystem shooter = new ShooterSubsystem();
   public static OI m_oi;
+  public enum DrivingType {
+    NORMAL,
+    FIELD_ORIENTED
+  }
+
+  public static DrivingType drivingType;
 
   private UsbCamera camera;
   public double[] centerX, centerY, size, height, width;
@@ -56,6 +62,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+
+    drivingType = DrivingType.FIELD_ORIENTED;
+    //drivingType = DrivingType.NORMAL;
+
     m_oi = new OI();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
@@ -67,6 +77,7 @@ public class Robot extends TimedRobot {
       camera.setExposureAuto();
     }).start();
     shooter.shooterInit();
+    rotate.resetGyro();
 
     configureTalon(RobotMap.leftBack);
     configureTalon(RobotMap.leftFront);
@@ -95,8 +106,8 @@ public class Robot extends TimedRobot {
 		// Set peak current params to 0 if desired behavior is to immediately
 		// current-limit.
 		talon.enableCurrentLimit(true);
-		talon.configContinuousCurrentLimit(30, Constants.timeOutMs); // Must be 5 amps or more
-		talon.configPeakCurrentLimit(30, Constants.timeOutMs); // 100 A
+		talon.configContinuousCurrentLimit(40, Constants.timeOutMs); // Must be 5 amps or more
+		talon.configPeakCurrentLimit(40, Constants.timeOutMs); // 100 A
 		talon.configPeakCurrentDuration(200, Constants.timeOutMs); // 200 ms
   }
 
@@ -195,7 +206,9 @@ public class Robot extends TimedRobot {
     driveExecutor.execute();
    // System.out.println(Robot.ultrasonic.isEnabled() + "Distance: " + ultrasonic.getDistanceCM());
    vision.visionLogic();
-   System.out.println("Is enabled: " + vision.isEnabled() + " Offset: " + vision.getOffset());
+   //System.out.println("Is enabled: " + vision.isEnabled() + " Offset: " + vision.getOffset());
+   System.out.println(rotate.isEnabled() + " Position: " + rotate.getPosition() + " Setpoint: " + rotate.getSetpoint());
+   //System.out.println(rotate.currentPosition);
   }
 
   /**

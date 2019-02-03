@@ -32,19 +32,20 @@ public class DriveSubsystem extends Subsystem {
 	 * @param yAxis - param for driving sideways
 	 * @param zAxis - param for turning
 	 */
-	public void TeleopDrive(double xAxis, double yAxis, double zAxis) {
-		//Checks whether ultrasonic PID is running
+	public void TeleopDrive(double xAxis, double yAxis/*, double zAxis*/) {
+		//Checks whether vision PID is running
 		if(!Robot.vision.isEnabled()){
 			Robot.driveExecutor.setX(xAxis);
 		}
 
+		//Checks whether ultrasonic PID is running
 		if (!Robot.ultrasonic.isEnabled()) {
 			Robot.driveExecutor.setY(yAxis);
 		}
-
+		/*   CURRENTLY NOT USED MANUALLY, leave it here tho
 		//Checks whether gyro PID is running
 		if (!Robot.rotate.isEnabled()) {
 			Robot.driveExecutor.setZ(zAxis);
-		}
+		}*/
 	}
 }

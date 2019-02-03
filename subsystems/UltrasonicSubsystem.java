@@ -61,7 +61,7 @@ public class UltrasonicSubsystem extends PIDSubsystem {
 	 * In range of -1 to 1
 	 */
 	protected void usePIDOutput(double output) {
-		Robot.driveExecutor.setY(output * 0.5);
+		Robot.driveExecutor.setY(output * Constants.ultrasonicScalingFactor);
 	}
 
 	/**
