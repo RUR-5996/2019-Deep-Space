@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.Constants;
+import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -42,6 +44,37 @@ public class HatchSubsystem extends Subsystem {
    */
   public boolean getClosedSwitchValue() {
     return closedLimitSwitch.get();
+  }
+
+  /**
+   * Method for opening the hatch manipulator.
+   * Opens the manipulator until limit switch is pressed, then stops.
+   */
+  public void openHatch() {
+    if (getOpenedSwitchValue()) {
+      RobotMap.hatchMotor.set(-Constants.boschMotorSpeed);
+    } else {
+      stop();
+    }
+  }
+
+  /**
+   * Method for closing the hatch manipulator.
+   * Closes the manipulator until limit switch is pressed, then stops.
+   */
+  public void closeHatch() {
+    if (getClosedSwitchValue()) {
+      RobotMap.hatchMotor.set(Constants.boschMotorSpeed);
+    } else {
+      stop();
+    }
+  }
+
+  /**
+   * Method for stopping the motor on the hatch manipulator.
+   */
+  public void stop() {
+    RobotMap.hatchMotor.set(0);
   }
 
 }

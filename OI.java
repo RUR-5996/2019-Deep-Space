@@ -14,10 +14,12 @@ import frc.robot.commands.LineupCommand;
 import frc.robot.commands.OpenHatchCommand;
 import frc.robot.commands.RotateCommand;
 import frc.robot.commands.ShootCommand;
+import frc.robot.commands.StopIntakeCommand;
 import frc.robot.commands.UltrasonicWallCommand;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -39,6 +41,8 @@ public class OI {
 	final static int startButton = 8; 
 	final static int lStickButton = 9;
 	final static int rStickButton = 10;
+	final static int leftTriggerButton = 0;
+	final static int rightTriggerButton = 1;
 															//Change these to re-bind
 	//values for controller axis
 	final static int lStickXAxis = 0;
@@ -47,21 +51,7 @@ public class OI {
 	final static int rTriggerAxis = 3;
 	final static int rStickXAxis = 4;
 	final static int rStickYAxis = 5;
-	final static double deadzone = Constants.controllerDeadzone;
 	
-	//values for joystick buttons 
-	final static int button1 = 1;
-	final static int button2 = 2;
-	final static int button3 = 3;
-	final static int button4 = 4;
-	final static int button5 = 5;
-	final static int button6 = 6;
-	final static int button7 = 7;
-	final static int button8 = 8;
-	final static int button9 = 9;
-	final static int button10 = 10;
-	final static int button11 = 11;
-	final static int button12 = 12;
 	//---------------------------------------------------------------------------------------------------
 	//defines and creates button objects for each xbox button
 	private final Button aBut = new JoystickButton(controller, aButton);
@@ -74,39 +64,52 @@ public class OI {
 	private final Button backBut = new JoystickButton(controller, backButton);
 	private final Button lStickBut = new JoystickButton(controller, lStickButton);
 	private final Button rStickBut = new JoystickButton(controller, rStickButton);
+	private final TriggerButton lTriggerButton = new TriggerButton(controller, leftTriggerButton);
+	private final TriggerButton rTriggerButton = new TriggerButton(controller, rightTriggerButton);
 	//------------------------------------------------------------------------------------------------------
 	//methods for driving
+	/**
+	 * Method for driving. Used for X axis.
+	 * @return X axis value of the left stick on the controller.
+	 */
 	public double getDriveForward() {
 		return getLStickXAxis();			
 	}
 	
+	/**
+	 * Method for driving. Used for Y axis.
+	 * @return Y axis value of the left stick on the controller.
+	 */
 	public double getDriveSideways() {
 		return getLStickYAxis();				
 	}
 	
+	/**
+	 * Method for driving. Used for Z axis.
+	 * @return Z axis value, got from the triggers on the controller.
+	 * Value < 0 = to the left
+	 * Value > 0 = to the right
+	 * Range from -1 to 1
+	 */
 	public double getDriveRotation() {
 		return getTriggerAxis();
 	}
 	
 	//------------------------------------------------------------------------------------------------------------
 	//specific methods for driving
-	public double getLStickXAxis()
-	{
+	public double getLStickXAxis() {
 		return deadzone(controller.getX(Hand.kLeft));
 	}
 	
-	public double getLStickYAxis()
-	{
+	public double getLStickYAxis() {
 		return deadzone(controller.getY(Hand.kLeft));
 	}
 	
-	public double getRStickXAxis()
-	{
+	public double getRStickXAxis() {
 		return deadzone(controller.getX(Hand.kRight));
 	}
 	
-	public double getRStickYAxis() 
-	{
+	public double getRStickYAxis() {
 		return deadzone(controller.getY(Hand.kRight));
 	}
 	
@@ -119,8 +122,7 @@ public class OI {
 			return 0.0;
 	}
 	
-	public double getBumper()
-	{
+	public double getBumper() {
 		if(controller.getBumper(Hand.kLeft))
 			return -1;
 		else if (controller.getBumper(Hand.kRight))
@@ -129,38 +131,52 @@ public class OI {
 			return 0.0;
 	}
 	
-	//-----------------------------------------------------------------------------------
 	//specific methods for manipulators
 	public int getPOV() {
 		return controller.getPOV();
 	}
 
-	//--------------------------------------------------------------------------------------------------------
-	//negates micro-movements smaller than int deadzone. 
-	public double deadzone(double input)
-	{
-		if(Math.abs(input) >= deadzone)
+	/**
+	 * Method for negating micro movements, which occur on the xbox controller
+	 * without any driver input.
+	 * @param input passed value from -1 to 1.
+	 * @return 0 or value.
+	 * Returns 0 if value is under the deadzone threshold.
+	 */
+	public double deadzone(double input) {
+		if(Math.abs(input) >= Constants.controllerDeadzone)
 			return input;
 		else
 			return 0.0;
 	}
-	//----------------------------------------------------------------------------------------------------------
-	//constructor - put button commands here
-		
+
+	/*
+
+				ADD METHODS FOR MANIPULATORS HERE
+
+	*/
+
+	/**
+	 * Constructor. Used for calling commands on button press.
+	 * Bind commands here.
+	 */
 	public OI() {
 		//gyro commands
-		yBut.whenPressed(new RotateCommand(0.0f));
+		/*yBut.whenPressed(new RotateCommand(0.0f));
 		bBut.whenPressed(new RotateCommand(90.0f));
 		aBut.whenPressed(new RotateCommand(180.0f));
-		xBut.whenPressed(new RotateCommand(-90.0f));
+		xBut.whenPressed(new RotateCommand(-90.0f));*/
 
-		//leftBum.whenPressed(new UltrasonicWallCommand(30));
-		leftBum.whenPressed(new LineupCommand());
+		leftBum.whenPressed(new RotateCommand(-1));
+		rightBum.whenPressed(new RotateCommand(1));
+		lTriggerButton.whenPressed(new RotateCommand(-2));
+		rTriggerButton.whenPressed(new RotateCommand(2));
 		//aBut.whenPressed(new LineupCommand());
 		//yBut.whenPressed(new CloseHatchCommand());		
 		//xBut.whenPressed(new OpenHatchCommand());
 		//aBut.whenPressed(new UltrasonicWallCommand(30));
-		//aBut.whenPressed(new IntakeCommand());
-		//bBut.whenPressed(new ShootCommand());
+		aBut.whenPressed(new IntakeCommand());
+		bBut.whenPressed(new ShootCommand());
+		xBut.whenPressed(new StopIntakeCommand());
 	}
 }
