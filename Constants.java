@@ -37,12 +37,13 @@ public class Constants {
     //Driver controller deadzones
     public static final double controllerDeadzone = 0.1;
     public static final double joystickDeadzone = 0.3;
+    public static final double triggerThreshold = 0.9;
 
     //
     public static final int timeOutMs = 10;
 
     //Bosch motor speed
-    public static final double boschMotorSpeed = 0.4;
+    public static final double boschMotorSpeed = 1;
 
     //Ultrasonic PID constants
     public static final double ultrasonicKp = 0.03;
@@ -50,6 +51,7 @@ public class Constants {
     public static final double ultrasonicKd = 0.00;
     public static final int ultrasonicTolerance = 2;
     public static final double ultrasonicScalingFactor = 0.5;
+    public static final double hatchToWallDistance = 13;
 
     //Gyro PID constants
     public static final double gyroKp = 0.1;//0.1;
@@ -64,4 +66,6 @@ public class Constants {
     public static final double visionKd = 0.00;
     public static final int visionTolerance = 2;
     public static final double visionScalingFactor = 0.5;
+
+    public static final double moveBackTime = 0.5;
 }

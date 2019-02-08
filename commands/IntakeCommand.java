@@ -10,36 +10,58 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
+/**
+ * Command for picking up balls into the shooter.
+ */
 public class IntakeCommand extends Command {
+
+  /**
+   * Constructor, declares dependencies.
+   */
   public IntakeCommand() {
     requires(Robot.shooter);
   }
 
-  // Called just before this Command runs the first time
+  /**
+   * Called just before this Command runs the first time.
+   */
   @Override
   protected void initialize() {
   }
 
-  // Called repeatedly when this Command is scheduled to run
+  /**
+   * Called repeatedly when this Command is scheduled to run.
+   * Calls the intake method.
+   */
   @Override
   protected void execute() {
     Robot.shooter.intake();
   }
 
-  // Make this return true when this Command no longer needs to run execute()
+  /**
+   * Determines whether to terminate the command.
+   * Terminated when switch is triggered.
+   * Unpressed = true.
+   * Pressed = false.
+   */
   @Override
   protected boolean isFinished() {
     return !Robot.shooter.getSwitch();
   }
 
-  // Called once after isFinished returns true
+  /**
+   * Method, which is called at end.
+   * Stops the manipulator.
+   */
   @Override
   protected void end() {
     Robot.shooter.stop();
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
+  /**
+   * Method, which is called when the command is interrupted.
+   * Stops the manipulator.
+   */
   @Override
   protected void interrupted() {
     Robot.shooter.stop();

@@ -40,19 +40,19 @@ public class RotateCommand extends Command {
 		switch(position) {
 			case 0: Robot.rotate.setSetpoint(0f);
 				break;
-			case 1: Robot.rotate.setSetpoint(45f);
+			case 1: Robot.rotate.setSetpoint(29f);
 				break;
 			case 2: Robot.rotate.setSetpoint(90f);
 				break;
-			case 3: Robot.rotate.setSetpoint(135f);
+			case 3: Robot.rotate.setSetpoint(119f);
 				break;
 			case 4: Robot.rotate.setSetpoint(180f);
 				break;
-			case 5: Robot.rotate.setSetpoint(-135f);
+			case 5: Robot.rotate.setSetpoint(-119f);
 				break;
 			case 6: Robot.rotate.setSetpoint(-90f);
 				break;
-			case 7: Robot.rotate.setSetpoint(-45f);
+			case 7: Robot.rotate.setSetpoint(-29f);
 				break;
 		}
 		Robot.rotate.enable();

@@ -26,5 +26,5 @@ public class RobotMap {
 	public static WPI_VictorSPX shooter3 = new WPI_VictorSPX(Constants.shooter3);
 	public static WPI_VictorSPX shooter4 = new WPI_VictorSPX(Constants.shooter4);
 
-	public static VictorSP hatchMotor = new VictorSP(0);
+	public static VictorSP hatchMotor = new VictorSP(Constants.boschMotor);
 }
