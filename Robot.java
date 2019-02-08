@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //Constants and subsystems
 import frc.robot.subsystems.*;
 import frc.robot.Constants;
@@ -204,11 +204,15 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     driveExecutor.execute();
-   // System.out.println(Robot.ultrasonic.isEnabled() + "Distance: " + ultrasonic.getDistanceCM());
+    //System.out.println(Robot.ultrasonic.isEnabled() + "Distance: " + ultrasonic.getDistanceCM());
    vision.visionLogic();
    //System.out.println("Is enabled: " + vision.isEnabled() + " Offset: " + vision.getOffset());
-   System.out.println(rotate.isEnabled() + " Position: " + rotate.getPosition() + " Setpoint: " + rotate.getSetpoint());
+   //System.out.println(rotate.isEnabled() + " Position: " + rotate.getPosition() + " Setpoint: " + rotate.getSetpoint());
    //System.out.println(rotate.currentPosition);
+   SmartDashboard.putNumber("Current angle", rotate.ahrs.getYaw());
+   SmartDashboard.putNumber("Current position", rotate.getPosition());
+   SmartDashboard.putNumber("Gyro setpoint", rotate.getSetpoint());
+   SmartDashboard.putBoolean("Gyro enabled", rotate.isEnabled());
   }
 
   /**
