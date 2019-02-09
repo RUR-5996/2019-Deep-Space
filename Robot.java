@@ -205,14 +205,15 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     driveExecutor.execute();
     //System.out.println(Robot.ultrasonic.isEnabled() + "Distance: " + ultrasonic.getDistanceCM());
-   vision.visionLogic();
-   //System.out.println("Is enabled: " + vision.isEnabled() + " Offset: " + vision.getOffset());
-   //System.out.println(rotate.isEnabled() + " Position: " + rotate.getPosition() + " Setpoint: " + rotate.getSetpoint());
-   //System.out.println(rotate.currentPosition);
-   SmartDashboard.putNumber("Current angle", rotate.ahrs.getYaw());
-   SmartDashboard.putNumber("Current position", rotate.getPosition());
-   SmartDashboard.putNumber("Gyro setpoint", rotate.getSetpoint());
-   SmartDashboard.putBoolean("Gyro enabled", rotate.isEnabled());
+    vision.visionLogic();
+    //System.out.println("Is enabled: " + vision.isEnabled() + " Offset: " + vision.getOffset());
+    //System.out.println(rotate.isEnabled() + " Position: " + rotate.getPosition() + " Setpoint: " + rotate.getSetpoint());
+    //System.out.println(rotate.currentPosition);
+    SmartDashboard.putNumber("Current angle", rotate.ahrs.getYaw());
+    SmartDashboard.putNumber("Current position", rotate.getPosition());
+    SmartDashboard.putNumber("Gyro setpoint", rotate.getSetpoint());
+    SmartDashboard.putBoolean("Gyro enabled", rotate.isEnabled());
+    System.out.println(Robot.hatch.getHatchSwitch());
   }
 
   /**

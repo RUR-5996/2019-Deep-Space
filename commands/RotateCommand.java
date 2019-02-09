@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class RotateCommand extends Command {
 
-	private double angle;
 	private int position;
 	private int rotate;
 
@@ -24,15 +23,15 @@ public class RotateCommand extends Command {
 	 * Declares dependencies and local variables
 	 * @param angle - angle to which we want to turn
 	 */
-	public RotateCommand(/*double angle*/int rotate) {
+	public RotateCommand(int rotate) {
 		requires(Robot.rotate);
 		this.rotate = rotate;
-		//this.angle = angle;
 	}
 
 	/**
 	 * Method which is called before execute - at start up.
 	 * Sets the setpoint for the controller and enables it.
+	 * 8 predetermined positions for rocket and cargoship.
 	 */
 	@Override
 	protected void initialize() {

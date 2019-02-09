@@ -15,7 +15,7 @@ import frc.robot.Constants;
 import frc.robot.RobotMap;
 
 /**
- * Add your docs here.
+ * Subsystem for the shooter.
  */
 public class ShooterSubsystem extends Subsystem {
   // Put methods for controlling this subsystem

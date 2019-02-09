@@ -27,10 +27,10 @@ public class WallCommand extends Command {
     if(Robot.ultrasonic.getDistanceCM() > 70) {
       Robot.driveExecutor.setY(-0.3);
     } else if(Robot.ultrasonic.getDistanceCM() < 70) {
-      Robot.driveExecutor.setY(-0.17);
+      Robot.driveExecutor.setY(-0.15);
     } else if(Robot.ultrasonic.getDistanceCM() < 50) {
-      Robot.driveExecutor.setY(-0.08);
-    } else if(Robot.ultrasonic.getDistanceCM() < 13) {
+      Robot.driveExecutor.setY(-0.06);
+    } else if(Robot.ultrasonic.getDistanceCM() < Constants.hatchToWallDistance) {
       Robot.driveExecutor.setY(0);
     }
   }

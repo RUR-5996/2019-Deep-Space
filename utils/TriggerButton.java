@@ -1,8 +1,9 @@
-package frc.robot;
+package frc.robot.utils;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.Button;
+import frc.robot.Constants;
 
 /**
  * Class for treating triggers on an XboxController as a button.

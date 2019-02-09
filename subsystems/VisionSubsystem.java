@@ -33,7 +33,7 @@ public class VisionSubsystem extends PIDSubsystem {
     super("Vision", Constants.visionKp, Constants.visionKi, Constants.visionKd);
     setAbsoluteTolerance(Constants.visionTolerance);
     setInputRange(-160, 160);
-    setOutputRange(-1, 1);
+    setOutputRange(-0.25, 0.25);
     getPIDController().setContinuous(true);
   }
 
@@ -103,7 +103,7 @@ public class VisionSubsystem extends PIDSubsystem {
       SmartDashboard.putBoolean("Vision Ready", true); //puts data into dashboard for driver
       offset = getVisionOffset(centerX);
     } else {
-      System.err.println("Targets not found!"); //debug line
+      //System.err.println("Targets not found!"); //debug line
       SmartDashboard.putBoolean("Vision Ready", false); //puts data into dashboard for driver
     }
   }
