@@ -9,13 +9,15 @@ package frc.robot.subsystems;
 
 import frc.robot.Constants;
 import frc.robot.RobotMap;
+import frc.robot.utils.ReportingInterface;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Subsystem for the hatch manipulator
  */
-public class HatchSubsystem extends Subsystem {
+public class HatchSubsystem extends Subsystem implements ReportingInterface {
 
   /**
    * Limit switches
@@ -85,6 +87,12 @@ public class HatchSubsystem extends Subsystem {
    */
   public void stop() {
     RobotMap.hatchMotor.set(0);
+  }
+
+  public void report() {
+    SmartDashboard.putBoolean("Opened Hatch Switch", getOpenedSwitchValue());
+    SmartDashboard.putBoolean("Closed Hatch Switch", getClosedSwitchValue());
+    SmartDashboard.putBoolean("Hatch Loaded Switch", getHatchSwitch());
   }
 
 }
