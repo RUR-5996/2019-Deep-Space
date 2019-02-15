@@ -22,8 +22,10 @@ public class HatchSubsystem extends Subsystem {
    * True = unpressed
    * False = pressed
    */
-  private DigitalInput openedLimitSwitch = new DigitalInput(6);
-  private DigitalInput closedLimitSwitch = new DigitalInput(5);
+  private DigitalInput openedLimitSwitch = new DigitalInput(Constants.openHatchSwitch);
+  private DigitalInput closedLimitSwitch = new DigitalInput(Constants.closeHatchSwitch);
+
+  private DigitalInput hatchSwitch = new DigitalInput(Constants.hatchSwitch);
 
   @Override
   public void initDefaultCommand() {
@@ -44,6 +46,14 @@ public class HatchSubsystem extends Subsystem {
    */
   public boolean getClosedSwitchValue() {
     return closedLimitSwitch.get();
+  }
+
+  /**
+   * Method for figuring out if we have a switch loaded.
+   * @return boolean true if not loaded, false if loaded.
+   */
+  public boolean getHatchSwitch() {
+    return hatchSwitch.get();
   }
 
   /**

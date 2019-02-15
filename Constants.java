@@ -11,10 +11,6 @@ package frc.robot;
  * Add your docs here.
  */
 public class Constants {
-    //Camera settings
-    public static final int imageWidth = 320;
-    public static final int imageHeight = 240;
-    public static final int imageFPS = 30;
     
     //TalonSRX CAN ports
     public static final int frontLeftMotor = 2;
@@ -28,11 +24,23 @@ public class Constants {
     public static final int shooter3 = 8;
     public static final int shooter4 = 9;
 
-    public static final double shootingTime = 0.5;
-    public static final double intakeSpeed = 0.2;
-
     //Talon and Victor PWM ports
     public static final int boschMotor = 4;
+
+    //Limit switches
+    public static final int openHatchSwitch = 6;
+    public static final int closeHatchSwitch = 5;
+    public static final int hatchSwitch = 7;
+
+    //shooter
+    public static final double shootingSpeed = 0.85;
+    public static final double intakeSpeed = 0.2;
+    public static final double shootingTime = 0.5;
+
+    //Camera settings
+    public static final int imageWidth = 320;
+    public static final int imageHeight = 240;
+    public static final int imageFPS = 30;
 
     //Driver controller deadzones
     public static final double controllerDeadzone = 0.1;
@@ -51,7 +59,7 @@ public class Constants {
     public static final double ultrasonicKd = 0.00;
     public static final int ultrasonicTolerance = 2;
     public static final double ultrasonicScalingFactor = 0.5;
-    public static final double hatchToWallDistance = 13;
+    public static final double hatchToWallDistance = 15;
 
     //Gyro PID constants
     public static final double gyroKp = 0.1;//0.1;
@@ -67,5 +75,7 @@ public class Constants {
     public static final int visionTolerance = 2;
     public static final double visionScalingFactor = 0.5;
 
+    //Move back
     public static final double moveBackTime = 0.5;
+    public static final double moveBackSpeed = 0.3;
 }

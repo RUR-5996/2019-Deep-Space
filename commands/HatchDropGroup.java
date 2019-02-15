@@ -10,15 +10,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
-   * Command group for picking up hatch.
+   * Command group for dropping off hatch.
    */
-public class HatchPickupGroup extends CommandGroup {
+public class HatchDropGroup extends CommandGroup {
   /**
    * Constructor, sets commands and their order.
    */
-  public HatchPickupGroup() {
+  public HatchDropGroup() {
     addSequential(new WallCommand());
-    addSequential(new OpenHatchCommand());
+    addSequential(new CloseHatchCommand());
     addSequential(new MoveBackCommand());
   }
 }

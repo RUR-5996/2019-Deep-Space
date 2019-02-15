@@ -12,11 +12,12 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 
 /**
- * Add your docs here.
+ * Command for moving back. Used when dropping off / loading hatch
+ * for driver convenience.
  */
 public class MoveBackCommand extends TimedCommand {
   /**
-   * Add your docs here.
+   * Constructor. Sets command timeout and dependency.
    */
   public MoveBackCommand() {
     super(Constants.moveBackTime);
@@ -31,7 +32,7 @@ public class MoveBackCommand extends TimedCommand {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveExecutor.setY(0.5);
+    Robot.driveExecutor.setY(Constants.moveBackSpeed);
   }
 
   // Called once after timeout

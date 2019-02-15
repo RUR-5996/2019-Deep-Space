@@ -9,7 +9,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.CloseHatchCommand;
-import frc.robot.commands.HatchPickupGroup;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.LineupCommand;
 import frc.robot.commands.OpenHatchCommand;
@@ -18,10 +17,11 @@ import frc.robot.commands.ShootCommand;
 import frc.robot.commands.StopIntakeCommand;
 import frc.robot.commands.UltrasonicWallCommand;
 import frc.robot.commands.WallCommand;
+import frc.robot.utils.HatchSelector;
+import frc.robot.utils.TriggerButton;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.buttons.Trigger;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -180,6 +180,7 @@ public class OI {
 		//aBut.whenPressed(new IntakeCommand());
 		//bBut.whenPressed(new ShootCommand());
 		//xBut.whenPressed(new StopIntakeCommand());
-		aBut.whenPressed(new HatchPickupGroup());
+		aBut.whenPressed(new LineupCommand());
+		//bBut.whenPressed(new HatchSelector());
 	}
 }

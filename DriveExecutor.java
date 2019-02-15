@@ -48,7 +48,7 @@ public class DriveExecutor {
 	 * DrivingType is set in robotInit() 
 	 */
 	public void execute() {
-		System.out.println("x: " + x + " y: " + y + " z: " + z);
+		//System.out.println("x: " + x + " y: " + y + " z: " + z);
 		if(Robot.drivingType == DrivingType.NORMAL) {
 			robotDrive.driveCartesian(x, -y, z);
 		} else if(Robot.drivingType == DrivingType.FIELD_ORIENTED) {

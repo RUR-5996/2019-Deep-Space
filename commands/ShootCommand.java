@@ -37,7 +37,7 @@ public class ShootCommand extends TimedCommand {
    */
   @Override
   protected void execute() {
-    Robot.shooter.shoot(-0.95);
+    Robot.shooter.shoot(-Constants.shootingSpeed);
   }
 
   /**
