@@ -7,16 +7,29 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.Constants;
 //imports
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.commands.DriveCommand;
-import edu.wpi.first.wpilibj.command.Subsystem;
+
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 /**
  * Subsystem for driving
  */
-public class DriveSubsystem extends Subsystem {
+public class DriveSubsystem extends PIDSubsystem {
 
+	private final double unreliabityFactor = 1;
+	private double encoderPulses;
+
+	public DriveSubsystem() {
+		super("Drive", 0.0013, 0, 0.003);
+		setAbsoluteTolerance(250);
+		setInputRange(-32000, 32000);
+		setOutputRange(-0.3, 0.3);
+		getPIDController().setContinuous(true);
+	}
 	/**
 	 * Sets default command for the subsystem - required.
 	 * setDefaultCommand runs always when possible.
@@ -48,4 +61,36 @@ public class DriveSubsystem extends Subsystem {
 			Robot.driveExecutor.setZ(zAxis);
 		}*/
 	}
+
+	public double getEncoderPosition(double distance) {
+		Robot.robotMap.resetEncoders();
+		this.encoderPulses = Constants.pulsesPerCm * distance * unreliabityFactor;
+		return encoderPulses;
+	}
+
+	public double getEncoderValue() {
+		return -RobotMap.leftBack.getSelectedSensorPosition();
+	}
+
+	public double getEndocerPulses() {
+		return encoderPulses;
+	}
+
+	public boolean isEncoderTargetReached() {
+		if(encoderPulses > 0) {
+			return getEncoderValue() >= encoderPulses;
+		} else if(encoderPulses < 0) {
+			return getEncoderValue() <= -encoderPulses;
+		}
+		return false;
+	}
+
+	protected double returnPIDInput() {
+		return getEncoderValue();
+	}
+
+	protected void usePIDOutput(double output) {
+		Robot.driveExecutor.setY(-output);
+	}
+
 }

@@ -9,8 +9,7 @@ package frc.robot.utils;
 
 import edu.wpi.first.wpilibj.command.ConditionalCommand;
 import frc.robot.Robot;
-import frc.robot.commands.HatchDropGroup;
-import frc.robot.commands.HatchPickupGroup;
+import frc.robot.routines.*;
 
 /**
  * Conditional command. Figures out whether we have a hatch loaded or not.

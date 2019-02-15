@@ -26,7 +26,7 @@ public class UltrasonicSubsystem extends PIDSubsystem {
 		super("Ultrasonic", Constants.ultrasonicKp, Constants.ultrasonicKi, Constants.ultrasonicKp);
 		setAbsoluteTolerance(Constants.ultrasonicTolerance);
 		setInputRange(0, 700);
-		setOutputRange(-1, 1);
+		setOutputRange(-0.3, 0.3);
 		getPIDController().setContinuous(true);
 		ultrasonic.setAutomaticMode(true);
 	}
@@ -61,7 +61,7 @@ public class UltrasonicSubsystem extends PIDSubsystem {
 	 * In range of -1 to 1
 	 */
 	protected void usePIDOutput(double output) {
-		Robot.driveExecutor.setY(output * Constants.ultrasonicScalingFactor);
+		Robot.driveExecutor.setY(output);
 	}
 
 	/**

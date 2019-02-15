@@ -7,18 +7,26 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.InstantCommand;
+import frc.robot.Robot;
+import frc.robot.Robot.CameraSettings;
 
 /**
-   * Command group for picking up hatch.
-   */
-public class HatchPickupGroup extends CommandGroup {
+ * Add your docs here.
+ */
+public class NormalCameraCommand extends InstantCommand {
   /**
-   * Constructor, sets commands and their order.
+   * Add your docs here.
    */
-  public HatchPickupGroup() {
-    addSequential(new WallCommand());
-    addSequential(new OpenHatchCommand());
-    addSequential(new MoveBackCommand());
+  public NormalCameraCommand() {
+    super();
+    requires(Robot.camera);
   }
+
+  // Called once when the command executes
+  @Override
+  protected void initialize() {
+    Robot.camera.setCamera(CameraSettings.NORMAL);
+  }
+
 }

@@ -8,47 +8,38 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.TimedCommand;
-import frc.robot.Constants;
-import frc.robot.Robot;
-import frc.robot.Robot.DrivingType;
 
 /**
- * Command for moving back. Used when dropping off / loading hatch
- * for driver convenience.
+ * Add your docs here.
  */
-public class MoveBackCommand extends TimedCommand {
+public class DoNothingCommand extends TimedCommand {
   /**
-   * Constructor. Sets command timeout and dependency.
+   * Add your docs here.
    */
-  public MoveBackCommand() {
-    super(Constants.moveBackTime);
-    requires(Robot.drive);
+  public DoNothingCommand(double timeout) {
+    super(timeout);
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.drivingType = DrivingType.NORMAL;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveExecutor.setY(Constants.moveBackSpeed);
   }
 
   // Called once after timeout
   @Override
   protected void end() {
-    Robot.driveExecutor.setY(0);
-    Robot.drivingType = DrivingType.FIELD_ORIENTED;
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.driveExecutor.setY(0);
-    Robot.drivingType = DrivingType.FIELD_ORIENTED;
   }
 }

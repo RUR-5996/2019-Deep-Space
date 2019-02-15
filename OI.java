@@ -9,15 +9,21 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.CloseHatchCommand;
+import frc.robot.commands.EncoderDriveCommand;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.IntakePosCommand;
 import frc.robot.commands.LineupCommand;
 import frc.robot.commands.OpenHatchCommand;
 import frc.robot.commands.RotateCommand;
 import frc.robot.commands.ShootCommand;
+import frc.robot.commands.StartPosCommand;
 import frc.robot.commands.StopIntakeCommand;
-import frc.robot.commands.UltrasonicWallCommand;
+import frc.robot.commands.UltrasonicCommand;
 import frc.robot.commands.WallCommand;
+import frc.robot.routines.*;
 import frc.robot.utils.HatchSelector;
+import frc.robot.utils.LineupSelector;
+import frc.robot.utils.ShootingSelector;
 import frc.robot.utils.TriggerButton;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -174,13 +180,20 @@ public class OI {
 		lTriggerButton.whenPressed(new RotateCommand(-2));
 		rTriggerButton.whenPressed(new RotateCommand(2));
 		//aBut.whenPressed(new LineupCommand());
-		yBut.whenPressed(new CloseHatchCommand());		
-		xBut.whenPressed(new OpenHatchCommand());
+		//yBut.whenPressed(new CloseHatchCommand());		
+		//xBut.whenPressed(new OpenHatchCommand());
 		//aBut.whenPressed(new UltrasonicWallCommand(30));
-		//aBut.whenPressed(new IntakeCommand());
-		//bBut.whenPressed(new ShootCommand());
+		//xBut.whenPressed(new IntakeCommand());
+		//
+		//yBut.whenPressed(new ShootCommand());
 		//xBut.whenPressed(new StopIntakeCommand());
-		aBut.whenPressed(new LineupCommand());
+		//aBut.whenPressed(new LineupSelector());
 		//bBut.whenPressed(new HatchSelector());
+		//xBut.whenPressed(new StartPosCommand());
+		//yBut.whenPressed(new IntakePosCommand());
+		//xBut.whenPressed(new UltrasonicCommand(80));
+		//bBut.whenPressed(new EncoderDriveCommand(100));
+		aBut.whenPressed(new HatchRoutine());
+		//xBut.whenPressed(new RotateCommand(0));
 	}
 }

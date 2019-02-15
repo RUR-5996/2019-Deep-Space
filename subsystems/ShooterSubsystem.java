@@ -20,26 +20,28 @@ import frc.robot.RobotMap;
 public class ShooterSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private DigitalInput ballLimitSwitch = new DigitalInput(2);
+  private DigitalInput ballLimitSwitch = new DigitalInput(Constants.shooterSwitch);
 
   public void shooterInit() {
     RobotMap.shooter2.follow(RobotMap.shooter1, FollowerType.PercentOutput);
     RobotMap.shooter4.follow(RobotMap.shooter3, FollowerType.PercentOutput);
+    RobotMap.shooter3.follow(RobotMap.shooter1, FollowerType.PercentOutput);
+    RobotMap.shooter3.setInverted(true);
   }
 
   public void shoot(double speed) {
     RobotMap.shooter1.set(speed);
-    RobotMap.shooter3.set(speed);
+    //RobotMap.shooter3.set(speed);
   }
 
   public void intake() {
     RobotMap.shooter1.set(Constants.intakeSpeed);
-    RobotMap.shooter3.set(Constants.intakeSpeed);
+    //RobotMap.shooter3.set(Constants.intakeSpeed);
   }
 
   public void stop(){
     RobotMap.shooter1.set(0);
-    RobotMap.shooter3.set(0);
+    //RobotMap.shooter3.set(0);
   }
 
   public boolean getSwitch() {
