@@ -9,16 +9,18 @@ package frc.robot.subsystems;
 
 import frc.robot.Constants;
 import frc.robot.Robot;
+import frc.robot.utils.ReportingInterface;
 
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Class for gyro and PID for rotating
  */
-public class RotateSubsystem extends PIDSubsystem {
+public class RotateSubsystem extends PIDSubsystem implements ReportingInterface {
 
   public AHRS ahrs;
   private int[] position = {0, 1, 2, 3, 4, 5 , 6, 7};
@@ -151,5 +153,12 @@ public class RotateSubsystem extends PIDSubsystem {
     }
     angleDifference = currentAngle - angle;
     return angleDifference;
+  }
+
+  public void report() {
+    SmartDashboard.putBoolean("Gyro enabled", isEnabled());
+    SmartDashboard.putNumber("Angle", ahrs.getYaw());
+    SmartDashboard.putNumber("Current position", currentPosition);
+    SmartDashboard.putNumber("Gyro Setpoint", getSetpoint());
   }
 }

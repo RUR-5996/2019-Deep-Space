@@ -9,13 +9,15 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
+import frc.robot.utils.ReportingInterface;
 
 /**
  * Add your docs here.
  */
-public class ShooterTiltSubsystem extends Subsystem {
+public class ShooterTiltSubsystem extends Subsystem implements ReportingInterface {
   AnalogPotentiometer pot = new AnalogPotentiometer(0, 270, -135);
 
   @Override
@@ -50,5 +52,9 @@ public class ShooterTiltSubsystem extends Subsystem {
     } else {
       stop();
     }
+  }
+
+  public void report() {
+    SmartDashboard.putNumber("Potentiometer", getPot());
   }
 }

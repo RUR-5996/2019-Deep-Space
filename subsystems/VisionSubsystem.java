@@ -13,12 +13,13 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.Robot;
+import frc.robot.utils.ReportingInterface;
 
 /**
  * Subsystem for getting and working with vision data
  * Data is sent from DS, where it is processed, via network tables
  */
-public class VisionSubsystem extends PIDSubsystem {
+public class VisionSubsystem extends PIDSubsystem implements ReportingInterface {
   
   private static NetworkTableInstance inst = NetworkTableInstance.getDefault();
   private static NetworkTable contoursTable = inst.getTable("GRIP/contours");
@@ -127,5 +128,11 @@ public class VisionSubsystem extends PIDSubsystem {
   private double getVisionOffset(double[] centerX) {
     double center = (centerX[0] + centerX[1]) / 2;
     return center - 160;
+  }
+
+  public void report() {
+    SmartDashboard.putNumber("Vision Offset", offset);
+    SmartDashboard.putNumber("Targets", getTargets());
+    SmartDashboard.putBoolean("Vision PID enabled", isEnabled());
   }
 }

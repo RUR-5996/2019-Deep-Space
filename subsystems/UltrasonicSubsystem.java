@@ -8,14 +8,16 @@
 package frc.robot.subsystems;
 
 import frc.robot.Robot;
+import frc.robot.utils.ReportingInterface;
 import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * Class for ultrasonic 
  */
-public class UltrasonicSubsystem extends PIDSubsystem {
+public class UltrasonicSubsystem extends PIDSubsystem implements ReportingInterface {
 
 	private Ultrasonic ultrasonic = new Ultrasonic(0, 1);
 
@@ -69,5 +71,11 @@ public class UltrasonicSubsystem extends PIDSubsystem {
 	 */
 	public void initDefaultCommand() {
 		// setDefaultCommand(new DriveCommand());
+	}
+
+	public void report() {
+		SmartDashboard.putBoolean("Ultrasonic PID enabled", isEnabled());
+		SmartDashboard.putNumber("Distance", getDistanceCM());
+		SmartDashboard.putNumber("Setpoint", getSetpoint());
 	}
 }
