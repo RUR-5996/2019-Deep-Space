@@ -21,6 +21,5 @@ public class HatchDropGroup extends CommandGroup {
     addSequential(new WallCommand());
     addSequential(new CloseHatchCommand());
     addSequential(new MoveBackCommand());
-    addSequential(new NormalCameraCommand());
   }
 }

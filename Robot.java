@@ -8,12 +8,9 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.cscore.HttpCamera;
-import edu.wpi.cscore.MjpegServer;
 //imports needed for camera
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -27,7 +24,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //Constants and subsystems
 import frc.robot.subsystems.*;
 import frc.robot.Constants;
-import frc.robot.commands.CloseHatchCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -47,20 +43,15 @@ public class Robot extends TimedRobot {
   public static ShooterSubsystem shooter = new ShooterSubsystem();
   public static ShooterTiltSubsystem tilt = new ShooterTiltSubsystem();
   public static RobotMap robotMap = new RobotMap();
-  public static CameraSubsystem camera = new CameraSubsystem();
   public static OI m_oi;
   public enum DrivingType {
     NORMAL,
     FIELD_ORIENTED
   }
 
-  public enum CameraSettings {
-    NORMAL,
-    VISION
-  }
-
   public static DrivingType drivingType;
 
+  private UsbCamera camera;
   public double[] centerX, centerY, size, height, width;
   public int contours;
 
@@ -82,8 +73,13 @@ public class Robot extends TimedRobot {
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);
-    camera.cameraInit();
-    camera.setCamera(CameraSettings.NORMAL);
+    new Thread( () -> {
+      camera = CameraServer.getInstance().startAutomaticCapture();
+      camera.setResolution(Constants.imageWidth, Constants.imageHeight);
+      camera.setFPS(Constants.imageFPS);
+      camera.setExposureManual(0);
+      camera.setBrightness(0);
+    }).start();
     shooter.shooterInit();
     rotate.resetGyro();
 
@@ -221,14 +217,11 @@ public class Robot extends TimedRobot {
     System.out.println("Is enabled: " + vision.isEnabled() + " Offset: " + vision.getOffset());
     //System.out.println(rotate.isEnabled() + " Position: " + rotate.getPosition() + " Setpoint: " + rotate.getSetpoint());
     System.out.println("Rotate: " + rotate.isEnabled() + " Vision: " + vision.isEnabled() + " Driving Type: " + drivingType);
-    //System.out.println(rotate.currentPosition);
-    //System.out.println(vision.getOffset());
-    //System.out.println(ultrasonic.getDistanceCM());
+
     SmartDashboard.putNumber("Current angle", rotate.ahrs.getYaw());
     SmartDashboard.putNumber("Current position", rotate.getPosition());
     SmartDashboard.putNumber("Gyro setpoint", rotate.getSetpoint());
     SmartDashboard.putBoolean("Gyro enabled", rotate.isEnabled());
-    //System.out.println(Robot.hatch.getHatchSwitch());
 
     int frontLeftEnc = RobotMap.leftFront.getSelectedSensorPosition();
     int backLeftEnc = RobotMap.leftBack.getSelectedSensorPosition();

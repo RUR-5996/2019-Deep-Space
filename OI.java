@@ -28,6 +28,7 @@ import frc.robot.utils.TriggerButton;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.POVButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -74,6 +75,10 @@ public class OI {
 	private final Button rStickBut = new JoystickButton(controller, rStickButton);
 	private final TriggerButton lTriggerButton = new TriggerButton(controller, leftTriggerButton);
 	private final TriggerButton rTriggerButton = new TriggerButton(controller, rightTriggerButton);
+	private final POVButton povUp = new POVButton(controller, 0);
+	private final POVButton povRight = new POVButton(controller, 90);
+	private final POVButton povDown = new POVButton(controller, 180);
+	private final POVButton povLeft = new POVButton(controller, 270);
 	//------------------------------------------------------------------------------------------------------
 	//methods for driving
 	/**

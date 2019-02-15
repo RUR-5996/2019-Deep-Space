@@ -10,14 +10,12 @@ package frc.robot.routines;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.DoNothingCommand;
 import frc.robot.commands.StopDriveCommand;
-import frc.robot.commands.VisionCameraCommand;
 
 public class HatchRoutine extends CommandGroup {
   /**
    * Add your docs here.
    */
   public HatchRoutine() {
-    addSequential(new VisionCameraCommand());
     addSequential(new StopDriveCommand());
     addSequential(new DoNothingCommand(0.1));
     addSequential(new PositionChecker());

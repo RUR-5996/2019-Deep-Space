@@ -22,9 +22,8 @@ public class VisionSubsystem extends PIDSubsystem {
   
   private static NetworkTableInstance inst = NetworkTableInstance.getDefault();
   private static NetworkTable contoursTable = inst.getTable("GRIP/contours");
-  private static NetworkTable linesTable = inst.getTable("GRIP/lines");
   private double[] defaultValue = new double[0];
-  private double[] centerX, centerY, x1, x2, y1, y2, angle;
+  private double[] centerX;
   private double offset;
 
   /**
@@ -54,39 +53,7 @@ public class VisionSubsystem extends PIDSubsystem {
   public double getOffset(){
     return offset;
   }
-/*
-  public void lineup() {
-    if(offset < 0) {
-      if(offset < -100) {
-        Robot.driveExecutor.setX(-0.16);
-      } else if(offset < -50) {
-        Robot.driveExecutor.setX(-0.14);
-      } else if(offset < -30) {
-        Robot.driveExecutor.setX(-0.12);
-      } else if(offset < -10) {
-        Robot.driveExecutor.setX(-0.1);
-      } else if(offset > -10) {
-        Robot.driveExecutor.setX(-0.11);
-      } else if(offset > -Constants.visionTolerance){
-        Robot.driveExecutor.setX(0);
-      }
-    } else {
-      if(offset > 100) {
-        Robot.driveExecutor.setX(0.16);
-      } else if(offset > 50) {
-        Robot.driveExecutor.setX(0.14);
-      } else if(offset > 30) {
-        Robot.driveExecutor.setX(0.12);
-      } else if(offset > 10) {
-        Robot.driveExecutor.setX(0.10);
-      } else if(offset < 10) {
-        Robot.driveExecutor.setX(0.11);
-      } else if(offset < Constants.visionTolerance) {
-        Robot.driveExecutor.setX(0);
-      }
-    }
-  }
-*/
+
   /**
    * Method for checking whether the controller is enabled.
    * @return boolean true = enabled, false = disabled.
@@ -132,53 +99,6 @@ public class VisionSubsystem extends PIDSubsystem {
    */
   private void setVars() {
     centerX = contoursTable.getEntry("centerX").getDoubleArray(defaultValue);
-    x1 = linesTable.getEntry("x1").getDoubleArray(defaultValue);
-    x2 = linesTable.getEntry("x2").getDoubleArray(defaultValue);
-    y1 = linesTable.getEntry("y1").getDoubleArray(defaultValue);
-    y2 = linesTable.getEntry("y2").getDoubleArray(defaultValue);
-    angle = linesTable.getEntry("angle").getDoubleArray(defaultValue);    
-    //Lines line = new Lines(x1, x2, y1, y2, angle);
-    //Contours contour = new Contours(centerX);
-  }
-
-  private void sortData() {
-    double temp;
-    for(int i = 0; i < x1.length; i++) {
-      for(int j = 1; j < (x1.length - i); j++) {
-        if(x1[j-1] > x1[j]) {
-          temp = x1[j-1];
-          x1[j-1] = x1[j];
-          x1[j] = temp;
-
-          temp = x2[j-1];
-          x2[j-1] = x2[j];
-          x2[j] = temp;
-
-          temp = y1[j-1];
-          y1[j-1] = y1[j];
-          y1[j] = temp;
-
-          temp = y2[j-1];
-          y2[j-1] = y2[j];
-          y2[j] = temp;
-
-          temp = angle[j-1];
-          angle[j-1] = angle[j];
-          angle[j] = temp;
-        }
-      }
-    }
-  }
-
-  public void vision() {
-    System.out.println(x1.length + " + "  + centerX.length);
-    double[] lineCenterX;
-    if((centerX.length * 2) == x1.length) {
-      System.out.println("LINE 0: " + x1[0] + " X0: " + x2[0]);
-        System.out.println("LINE 1: " + x1[1] + "  X1: " + x2[1]);
-        System.out.println("LINE 2: " + x1[2] + "  X2: " + x2[2]);
-        System.out.println("LINE 3: " + x1[3] + " X3: " + x2[3]);
-    }
   }
 
   /**
@@ -195,8 +115,6 @@ public class VisionSubsystem extends PIDSubsystem {
       //System.err.println("Targets not found!"); //debug line
       SmartDashboard.putBoolean("Vision Ready", false); //puts data into dashboard for driver
     }
-    //sortData();
-    //vision();
   }
 
   /**
