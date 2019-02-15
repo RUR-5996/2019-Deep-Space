@@ -8,14 +8,16 @@
 package frc.robot.subsystems;
 
 import frc.robot.Robot;
+import frc.robot.utils.ReportingInterface;
 import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * Class for ultrasonic 
  */
-public class UltrasonicSubsystem extends PIDSubsystem {
+public class UltrasonicSubsystem extends PIDSubsystem implements ReportingInterface {
 
 	private Ultrasonic ultrasonic = new Ultrasonic(0, 1);
 
@@ -26,7 +28,7 @@ public class UltrasonicSubsystem extends PIDSubsystem {
 		super("Ultrasonic", Constants.ultrasonicKp, Constants.ultrasonicKi, Constants.ultrasonicKp);
 		setAbsoluteTolerance(Constants.ultrasonicTolerance);
 		setInputRange(0, 700);
-		setOutputRange(-1, 1);
+		setOutputRange(-0.3, 0.3);
 		getPIDController().setContinuous(true);
 		ultrasonic.setAutomaticMode(true);
 	}
@@ -61,7 +63,7 @@ public class UltrasonicSubsystem extends PIDSubsystem {
 	 * In range of -1 to 1
 	 */
 	protected void usePIDOutput(double output) {
-		Robot.driveExecutor.setY(output * Constants.ultrasonicScalingFactor);
+		Robot.driveExecutor.setY(output);
 	}
 
 	/**
@@ -69,5 +71,11 @@ public class UltrasonicSubsystem extends PIDSubsystem {
 	 */
 	public void initDefaultCommand() {
 		// setDefaultCommand(new DriveCommand());
+	}
+
+	public void report() {
+		SmartDashboard.putBoolean("Ultrasonic PID enabled", isEnabled());
+		SmartDashboard.putNumber("Distance", getDistanceCM());
+		SmartDashboard.putNumber("Setpoint", getSetpoint());
 	}
 }

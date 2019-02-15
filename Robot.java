@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -40,6 +41,8 @@ public class Robot extends TimedRobot {
   public static VisionSubsystem vision = new VisionSubsystem();
   public static HatchSubsystem hatch = new HatchSubsystem();
   public static ShooterSubsystem shooter = new ShooterSubsystem();
+  public static ShooterTiltSubsystem tilt = new ShooterTiltSubsystem();
+  public static RobotMap robotMap = new RobotMap();
   public static OI m_oi;
   public enum DrivingType {
     NORMAL,
@@ -74,7 +77,8 @@ public class Robot extends TimedRobot {
       camera = CameraServer.getInstance().startAutomaticCapture();
       camera.setResolution(Constants.imageWidth, Constants.imageHeight);
       camera.setFPS(Constants.imageFPS);
-      camera.setExposureAuto();
+      camera.setExposureManual(0);
+      camera.setBrightness(0);
     }).start();
     shooter.shooterInit();
     rotate.resetGyro();
@@ -88,6 +92,8 @@ public class Robot extends TimedRobot {
     configureVictor(RobotMap.shooter2);
     configureVictor(RobotMap.shooter3);
     configureVictor(RobotMap.shooter4);
+
+    robotMap.resetEncoders();
   }
 
   private void configureTalon(WPI_TalonSRX talon) {
@@ -99,7 +105,8 @@ public class Robot extends TimedRobot {
 		talon.configAllowableClosedloopError(0, 0, Constants.timeOutMs);
 		talon.configNeutralDeadband(0.05, Constants.timeOutMs); 
 		talon.setNeutralMode(com.ctre.phoenix.motorcontrol.NeutralMode.Brake);
-		talon.setInverted(false);
+    talon.setInverted(false);
+    talon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
 		// Peak current and duration must be exceeded before corrent limit is activated.
 		// When activated, current will be limited to continuous current.
@@ -204,16 +211,46 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     driveExecutor.execute();
+<<<<<<< HEAD
+    periodicHatch();
+    //System.out.println(Robot.ultrasonic.isEnabled() + " Distance: " + ultrasonic.getDistanceCM());
+    vision.visionLogic(); 
+    System.out.println("Is enabled: " + vision.isEnabled() + " Offset: " + vision.getOffset());
+    //System.out.println(rotate.isEnabled() + " Position: " + rotate.getPosition() + " Setpoint: " + rotate.getSetpoint());
+    System.out.println("Rotate: " + rotate.isEnabled() + " Vision: " + vision.isEnabled() + " Driving Type: " + drivingType);
+
+=======
     //System.out.println(Robot.ultrasonic.isEnabled() + "Distance: " + ultrasonic.getDistanceCM());
     vision.visionLogic();
     //System.out.println("Is enabled: " + vision.isEnabled() + " Offset: " + vision.getOffset());
     //System.out.println(rotate.isEnabled() + " Position: " + rotate.getPosition() + " Setpoint: " + rotate.getSetpoint());
     //System.out.println(rotate.currentPosition);
+>>>>>>> origin/develop
     SmartDashboard.putNumber("Current angle", rotate.ahrs.getYaw());
     SmartDashboard.putNumber("Current position", rotate.getPosition());
     SmartDashboard.putNumber("Gyro setpoint", rotate.getSetpoint());
     SmartDashboard.putBoolean("Gyro enabled", rotate.isEnabled());
+<<<<<<< HEAD
+
+    int frontLeftEnc = RobotMap.leftFront.getSelectedSensorPosition();
+    int backLeftEnc = RobotMap.leftBack.getSelectedSensorPosition();
+    int rightBackEnc = RobotMap.rightBack.getSelectedSensorPosition();
+    int rightFrontEnc = RobotMap.rightFront.getSelectedSensorPosition();
+
+    //System.out.println(Robot.tilt.getPot());
+    //-131.4 intake
+    //-105.5 start
+
+    //System.out.println(Robot.drive.getPIDController().isEnabled() + " BL: " + backLeftEnc + " RB: " + rightBackEnc + " Enc ticks: " + Robot.drive.getEndocerPulses() + " Setpoint: " + Robot.drive.getSetpoint() + " Current: " + Robot.drive.getPosition());
+  }
+
+  public void periodicHatch() {
+    if(hatch.getHatchSwitch()) {
+      hatch.closeHatch();
+    }
+=======
     System.out.println(Robot.hatch.getHatchSwitch());
+>>>>>>> origin/develop
   }
 
   /**

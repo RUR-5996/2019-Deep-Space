@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Constants;
 import frc.robot.Robot;
+import frc.robot.Robot.DrivingType;
 
 /**
  * Command for lining up with the vision targets.
@@ -33,6 +34,7 @@ public class LineupCommand extends Command {
   protected void initialize() {
     Robot.vision.setSetpoint(0);
     Robot.vision.enable();
+    Robot.drivingType = DrivingType.FIELD_ORIENTED;
   }
 
   /**
@@ -40,6 +42,7 @@ public class LineupCommand extends Command {
 	 */
   @Override
   protected void execute() {
+    //Robot.vision.lineup();
   }
 
   /**
@@ -50,8 +53,9 @@ public class LineupCommand extends Command {
   @Override
   protected boolean isFinished() {
     if(Robot.vision.getTargets() == 2) {
-      return Math.abs(Robot.vision.getPosition()) < Constants.visionTolerance;
+      return Math.abs(Robot.vision.getOffset()) < Constants.visionTolerance;
     } else {
+      Robot.driveExecutor.setX(0);
       return true;
     } 
     
@@ -63,7 +67,9 @@ public class LineupCommand extends Command {
    */
   @Override
   protected void end() {
+    Robot.driveExecutor.setX(0);
     Robot.vision.disable();
+    Robot.drivingType = DrivingType.FIELD_ORIENTED;
   }
 
   /**
@@ -72,6 +78,8 @@ public class LineupCommand extends Command {
    */
   @Override
   protected void interrupted() {
+    Robot.driveExecutor.setX(0);
     Robot.vision.disable();
+    Robot.drivingType = DrivingType.FIELD_ORIENTED;
   }
 }

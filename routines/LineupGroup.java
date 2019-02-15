@@ -5,20 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.routines;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.DoNothingCommand;
+import frc.robot.commands.LineupCommand;
+import frc.robot.utils.HatchSelector;
 
-/**
-   * Command group for picking up hatch.
-   */
-public class HatchPickupGroup extends CommandGroup {
+public class LineupGroup extends CommandGroup {
   /**
-   * Constructor, sets commands and their order.
+   * Add your docs here.
    */
-  public HatchPickupGroup() {
-    addSequential(new WallCommand());
-    addSequential(new OpenHatchCommand());
-    addSequential(new MoveBackCommand());
+  public LineupGroup() {
+    addSequential(new LineupCommand());
+    addSequential(new DoNothingCommand(0.25));
+    addSequential(new HatchSelector());
   }
 }

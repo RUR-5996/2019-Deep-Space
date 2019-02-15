@@ -7,48 +7,48 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.TimedCommand;
-import frc.robot.Constants;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.Robot.DrivingType;
 
-/**
- * Command for moving back. Used when dropping off / loading hatch
- * for driver convenience.
- */
-public class MoveBackCommand extends TimedCommand {
-  /**
-   * Constructor. Sets command timeout and dependency.
-   */
-  public MoveBackCommand() {
-    super(Constants.moveBackTime);
+public class EncoderDriveCommand extends Command {
+
+  private double distance; 
+
+  public EncoderDriveCommand(double distance) {
     requires(Robot.drive);
+    this.distance = distance;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.drivingType = DrivingType.NORMAL;
+    Robot.drive.setSetpoint(Robot.drive.getEncoderPosition(distance));
+    Robot.drive.enable();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveExecutor.setY(Constants.moveBackSpeed);
   }
 
-  // Called once after timeout
+  // Make this return true when this Command no longer needs to run execute()
+  @Override
+  protected boolean isFinished() {
+    return Robot.drive.isEncoderTargetReached();
+  }
+
+  // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.driveExecutor.setY(0);
-    Robot.drivingType = DrivingType.FIELD_ORIENTED;
+    Robot.drive.disable();
+    Robot.robotMap.resetEncoders();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.driveExecutor.setY(0);
-    Robot.drivingType = DrivingType.FIELD_ORIENTED;
+    Robot.drive.disable();
+    Robot.robotMap.resetEncoders();
   }
 }
