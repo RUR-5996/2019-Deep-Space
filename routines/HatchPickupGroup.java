@@ -21,6 +21,5 @@ public class HatchPickupGroup extends CommandGroup {
     addSequential(new WallCommand());
     addSequential(new OpenHatchCommand());
     addSequential(new MoveBackCommand());
-    addSequential(new NormalCameraCommand());
   }
 }
