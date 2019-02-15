@@ -33,8 +33,13 @@ public class VisionSubsystem extends PIDSubsystem implements ReportingInterface 
   public VisionSubsystem() {
     super("Vision", Constants.visionKp, Constants.visionKi, Constants.visionKd);
     setAbsoluteTolerance(Constants.visionTolerance);
+<<<<<<< HEAD
     setInputRange(-60, 60);
     setOutputRange(-0.4, 0.4);
+=======
+    setInputRange(-160, 160);
+    setOutputRange(-0.25, 0.25);
+>>>>>>> origin/develop
     getPIDController().setContinuous(true);
   }
 
