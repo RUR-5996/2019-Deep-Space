@@ -24,6 +24,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //Constants and subsystems
 import frc.robot.subsystems.*;
 import frc.robot.Constants;
+import frc.robot.enumeration.DrivingType;
+import frc.robot.enumeration.StartingPosition;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -44,12 +46,9 @@ public class Robot extends TimedRobot {
   public static ShooterTiltSubsystem tilt = new ShooterTiltSubsystem();
   public static RobotMap robotMap = new RobotMap();
   public static OI m_oi;
-  public enum DrivingType {
-    NORMAL,
-    FIELD_ORIENTED
-  }
 
   public static DrivingType drivingType;
+  public static StartingPosition startingPosition;
 
   private UsbCamera camera;
   public double[] centerX, centerY, size, height, width;

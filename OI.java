@@ -9,7 +9,7 @@ package frc.robot;
 
 import frc.robot.autonomous.*;
 import frc.robot.commands.*;
-import frc.robot.routines.*;
+import frc.robot.enumeration.StartingPosition;
 
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.utils.ShootingSelector;
@@ -168,7 +168,7 @@ public class OI {
 		rightBum.whenPressed(new RotateCommand(1));
 		lTriggerButton.whenPressed(new RotateCommand(-2));
 		rTriggerButton.whenPressed(new RotateCommand(2));
-		aBut.whenPressed(new HatchRoutine());
+		aBut.whenPressed(new AutonomousHatch());
 
 
 		xBut.whenPressed(new ShootingSelector());
@@ -177,7 +177,7 @@ public class OI {
 		//yBut.whenPressed(new UltrasonicCommand(160));
 		//xBut.whenPressed(new UltrasonicCommand(80));
 		//bBut.whenPressed(new EncoderDriveCommand(100));
-		bBut.whenPressed(new LeftTwoHatchAuto());
+		bBut.whenPressed(new TwoHatchAuto(StartingPosition.LEFT));
 		//xBut.whenPressed(new RotateCommand(0));
 	}
 }

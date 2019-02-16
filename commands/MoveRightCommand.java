@@ -9,7 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
-import frc.robot.Robot.DrivingType;
+import frc.robot.enumeration.DrivingType;
 
 /**
  * Add your docs here.
