@@ -7,10 +7,12 @@
 
 package frc.robot;
 
+import frc.robot.autonomous.*;
 import frc.robot.commands.*;
 import frc.robot.routines.*;
 
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.utils.ShootingSelector;
 import frc.robot.utils.TriggerButton;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -161,32 +163,20 @@ public class OI {
 	 * Bind commands here.
 	 */
 	public OI() {
-		//gyro commands
-		/*yBut.whenPressed(new RotateCommand(0.0f));
-		bBut.whenPressed(new RotateCommand(90.0f));
-		aBut.whenPressed(new RotateCommand(180.0f));
-		xBut.whenPressed(new RotateCommand(-90.0f));*/
-
+		//Final bindings
 		leftBum.whenPressed(new RotateCommand(-1));
 		rightBum.whenPressed(new RotateCommand(1));
 		lTriggerButton.whenPressed(new RotateCommand(-2));
 		rTriggerButton.whenPressed(new RotateCommand(2));
-		//aBut.whenPressed(new LineupCommand());
-		//yBut.whenPressed(new CloseHatchCommand());		
-		//xBut.whenPressed(new OpenHatchCommand());
-		//aBut.whenPressed(new UltrasonicWallCommand(30));
-		//xBut.whenPressed(new IntakeCommand());
-		//
-		//yBut.whenPressed(new ShootCommand());
-		//xBut.whenPressed(new StopIntakeCommand());
-		//aBut.whenPressed(new LineupSelector());
-		//bBut.whenPressed(new HatchSelector());
+		aBut.whenPressed(new HatchRoutine());
+
+
+		xBut.whenPressed(new ShootingSelector());
 		//xBut.whenPressed(new StartPosCommand());
 		//yBut.whenPressed(new IntakePosCommand());
 		//yBut.whenPressed(new UltrasonicCommand(160));
 		//xBut.whenPressed(new UltrasonicCommand(80));
 		//bBut.whenPressed(new EncoderDriveCommand(100));
-		aBut.whenPressed(new HatchRoutine());
 		bBut.whenPressed(new LeftTwoHatchAuto());
 		//xBut.whenPressed(new RotateCommand(0));
 	}

@@ -5,24 +5,27 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.autonomous;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.DoNothingCommand;
+import frc.robot.commands.MoveRightCommand;
+import frc.robot.commands.OpenHatchCommand;
 import frc.robot.routines.HatchRoutine;
 
-public class LeftTwoHatchAuto extends CommandGroup {
+public class RightTwoHatchAuto extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public LeftTwoHatchAuto() {
+  public RightTwoHatchAuto() {
     addSequential(new OpenHatchCommand());
     addSequential(new HatchRoutine());
     addSequential(new DoNothingCommand(0.25));
-    addSequential(new MoveLeftCommand(0.75));
+    addSequential(new MoveRightCommand(0.75));
     addSequential(new DoNothingCommand(0.25));
     addSequential(new HatchRoutine());
     addSequential(new DoNothingCommand(0.25));
-    addSequential(new MoveLeftCommand(0.75));
+    addSequential(new MoveRightCommand(0.75));
     addSequential(new DoNothingCommand(0.25));
     addSequential(new HatchRoutine());
   }
