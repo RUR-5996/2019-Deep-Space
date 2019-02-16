@@ -13,15 +13,16 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.Robot;
+import frc.robot.utils.ReportingInterface;
 
 /**
  * Subsystem for getting and working with vision data
  * Data is sent from DS, where it is processed, via network tables
  */
-public class VisionSubsystem extends PIDSubsystem {
+public class VisionSubsystem extends PIDSubsystem implements ReportingInterface {
   
   private static NetworkTableInstance inst = NetworkTableInstance.getDefault();
-  private static NetworkTable table = inst.getTable("GRIP/contours");
+  private static NetworkTable contoursTable = inst.getTable("GRIP/contours");
   private double[] defaultValue = new double[0];
   private double[] centerX;
   private double offset;
@@ -32,8 +33,13 @@ public class VisionSubsystem extends PIDSubsystem {
   public VisionSubsystem() {
     super("Vision", Constants.visionKp, Constants.visionKi, Constants.visionKd);
     setAbsoluteTolerance(Constants.visionTolerance);
+<<<<<<< HEAD
+    setInputRange(-60, 60);
+    setOutputRange(-0.4, 0.4);
+=======
     setInputRange(-160, 160);
     setOutputRange(-0.25, 0.25);
+>>>>>>> origin/develop
     getPIDController().setContinuous(true);
   }
 
@@ -42,7 +48,7 @@ public class VisionSubsystem extends PIDSubsystem {
 	 * @return X-axis offset processed from camera
 	 */
 	protected double returnPIDInput() {
-		return offset;
+    return offset;
   }
   
   /**
@@ -68,7 +74,16 @@ public class VisionSubsystem extends PIDSubsystem {
 	 * In range of -1 to 1
 	 */
 	protected void usePIDOutput(double output) {
-		Robot.driveExecutor.setX(output * 0.5);
+    if(output > 0) {
+      if(output < 0.16 && output > 0.03) {
+        output = 0.17;
+      }
+    } else if(output < 0) {
+      if(output > -0.16 && output < -0.03) {
+        output = -0.17;
+      }
+    }
+		Robot.driveExecutor.setX(-output);
 	}
 
   /**
@@ -89,7 +104,7 @@ public class VisionSubsystem extends PIDSubsystem {
    * Method for getting vision data from network tables
    */
   private void setVars() {
-    centerX = table.getEntry("centerX").getDoubleArray(defaultValue);
+    centerX = contoursTable.getEntry("centerX").getDoubleArray(defaultValue);
   }
 
   /**
@@ -118,5 +133,11 @@ public class VisionSubsystem extends PIDSubsystem {
   private double getVisionOffset(double[] centerX) {
     double center = (centerX[0] + centerX[1]) / 2;
     return center - 160;
+  }
+
+  public void report() {
+    SmartDashboard.putNumber("Vision Offset", offset);
+    SmartDashboard.putNumber("Targets", getTargets());
+    SmartDashboard.putBoolean("Vision PID enabled", isEnabled());
   }
 }

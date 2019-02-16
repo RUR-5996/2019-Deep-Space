@@ -7,18 +7,26 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.InstantCommand;
+import frc.robot.Robot;
 
 /**
-   * Command group for dropping off hatch.
-   */
-public class HatchDropGroup extends CommandGroup {
+ * Add your docs here.
+ */
+public class StopDriveCommand extends InstantCommand {
   /**
-   * Constructor, sets commands and their order.
+   * Add your docs here.
    */
-  public HatchDropGroup() {
-    addSequential(new WallCommand());
-    addSequential(new CloseHatchCommand());
-    addSequential(new MoveBackCommand());
+  public StopDriveCommand() {
+    super();
+    requires(Robot.drive);
   }
+
+  // Called once when the command executes
+  @Override
+  protected void initialize() {
+    Robot.driveExecutor.setX(0);
+    Robot.driveExecutor.setY(0);
+  }
+
 }

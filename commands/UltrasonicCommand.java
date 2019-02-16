@@ -10,11 +10,12 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Constants;
 import frc.robot.Robot;
+import frc.robot.Robot.DrivingType;
 
 /**
  * Command for driving to a set distance via PID controller.
  */
-public class UltrasonicWallCommand extends Command {
+public class UltrasonicCommand extends Command {
 
   private double distance;
 
@@ -22,7 +23,7 @@ public class UltrasonicWallCommand extends Command {
    * Declares dependencies and local variables
    * @param distance - Distance to which we want the PID controller to move the robot.
    */
-  public UltrasonicWallCommand(double distance) {
+  public UltrasonicCommand(double distance) {
     requires(Robot.ultrasonic);
     this.distance = distance;
   }
@@ -35,6 +36,7 @@ public class UltrasonicWallCommand extends Command {
   protected void initialize() {
     Robot.ultrasonic.setSetpoint(distance);
     Robot.ultrasonic.enable();
+    Robot.drivingType = DrivingType.NORMAL;
   }
 
   /**
@@ -61,6 +63,7 @@ public class UltrasonicWallCommand extends Command {
   @Override
   protected void end() {
     Robot.ultrasonic.disable();
+    Robot.drivingType = DrivingType.FIELD_ORIENTED;
   }
 
   /**
@@ -70,5 +73,6 @@ public class UltrasonicWallCommand extends Command {
   @Override
   protected void interrupted() {
     Robot.ultrasonic.disable();
+    Robot.drivingType = DrivingType.FIELD_ORIENTED;
   }
 }

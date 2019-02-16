@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Constants;
 import frc.robot.Robot;
+import frc.robot.Robot.DrivingType;
 
 public class WallCommand extends Command {
   public WallCommand() {
@@ -19,6 +20,8 @@ public class WallCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.drivingType = DrivingType.NORMAL;
+    //Robot.vision.enable();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -45,6 +48,8 @@ public class WallCommand extends Command {
   @Override
   protected void end() {
     Robot.driveExecutor.setY(0);
+    Robot.drivingType = DrivingType.FIELD_ORIENTED;
+    //Robot.vision.disable();
   }
 
   // Called when another command which requires one or more of the same
@@ -52,5 +57,6 @@ public class WallCommand extends Command {
   @Override
   protected void interrupted() {
     Robot.driveExecutor.setY(0);
+    Robot.drivingType = DrivingType.FIELD_ORIENTED;
   }
 }

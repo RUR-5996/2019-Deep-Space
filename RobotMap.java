@@ -25,6 +25,14 @@ public class RobotMap {
 	public static WPI_VictorSPX shooter2 = new WPI_VictorSPX(Constants.shooter2);
 	public static WPI_VictorSPX shooter3 = new WPI_VictorSPX(Constants.shooter3);
 	public static WPI_VictorSPX shooter4 = new WPI_VictorSPX(Constants.shooter4);
+	public static WPI_VictorSPX tilter = new WPI_VictorSPX(Constants.tilter);
 
 	public static VictorSP hatchMotor = new VictorSP(Constants.boschMotor);
+
+	public void resetEncoders() {
+		leftFront.setSelectedSensorPosition(0);
+		leftBack.setSelectedSensorPosition(0);
+		rightFront.setSelectedSensorPosition(0);
+		rightBack.setSelectedSensorPosition(0);
+	}
 }

@@ -9,19 +9,36 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.CloseHatchCommand;
+<<<<<<< HEAD
+import frc.robot.commands.EncoderDriveCommand;
+=======
+>>>>>>> origin/develop
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.IntakePosCommand;
 import frc.robot.commands.LineupCommand;
 import frc.robot.commands.OpenHatchCommand;
 import frc.robot.commands.RotateCommand;
 import frc.robot.commands.ShootCommand;
+import frc.robot.commands.StartPosCommand;
 import frc.robot.commands.StopIntakeCommand;
-import frc.robot.commands.UltrasonicWallCommand;
+import frc.robot.commands.UltrasonicCommand;
 import frc.robot.commands.WallCommand;
+<<<<<<< HEAD
+import frc.robot.routines.*;
 import frc.robot.utils.HatchSelector;
+import frc.robot.utils.LineupSelector;
+import frc.robot.utils.ShootingSelector;
+=======
+import frc.robot.utils.HatchSelector;
+>>>>>>> origin/develop
 import frc.robot.utils.TriggerButton;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+<<<<<<< HEAD
+import edu.wpi.first.wpilibj.buttons.POVButton;
+=======
+>>>>>>> origin/develop
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -68,6 +85,10 @@ public class OI {
 	private final Button rStickBut = new JoystickButton(controller, rStickButton);
 	private final TriggerButton lTriggerButton = new TriggerButton(controller, leftTriggerButton);
 	private final TriggerButton rTriggerButton = new TriggerButton(controller, rightTriggerButton);
+	private final POVButton povUp = new POVButton(controller, 0);
+	private final POVButton povRight = new POVButton(controller, 90);
+	private final POVButton povDown = new POVButton(controller, 180);
+	private final POVButton povLeft = new POVButton(controller, 270);
 	//------------------------------------------------------------------------------------------------------
 	//methods for driving
 	/**
@@ -174,13 +195,25 @@ public class OI {
 		lTriggerButton.whenPressed(new RotateCommand(-2));
 		rTriggerButton.whenPressed(new RotateCommand(2));
 		//aBut.whenPressed(new LineupCommand());
-		yBut.whenPressed(new CloseHatchCommand());		
-		xBut.whenPressed(new OpenHatchCommand());
+		//yBut.whenPressed(new CloseHatchCommand());		
+		//xBut.whenPressed(new OpenHatchCommand());
 		//aBut.whenPressed(new UltrasonicWallCommand(30));
-		//aBut.whenPressed(new IntakeCommand());
-		//bBut.whenPressed(new ShootCommand());
+		//xBut.whenPressed(new IntakeCommand());
+		//
+		//yBut.whenPressed(new ShootCommand());
 		//xBut.whenPressed(new StopIntakeCommand());
+<<<<<<< HEAD
+		//aBut.whenPressed(new LineupSelector());
+		//bBut.whenPressed(new HatchSelector());
+		//xBut.whenPressed(new StartPosCommand());
+		//yBut.whenPressed(new IntakePosCommand());
+		//xBut.whenPressed(new UltrasonicCommand(80));
+		//bBut.whenPressed(new EncoderDriveCommand(100));
+		aBut.whenPressed(new HatchRoutine());
+		//xBut.whenPressed(new RotateCommand(0));
+=======
 		aBut.whenPressed(new LineupCommand());
 		//bBut.whenPressed(new HatchSelector());
+>>>>>>> origin/develop
 	}
 }

@@ -9,16 +9,18 @@ package frc.robot.subsystems;
 
 import frc.robot.Constants;
 import frc.robot.Robot;
+import frc.robot.utils.ReportingInterface;
 
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Class for gyro and PID for rotating
  */
-public class RotateSubsystem extends PIDSubsystem {
+public class RotateSubsystem extends PIDSubsystem implements ReportingInterface {
 
   public AHRS ahrs;
   private int[] position = {0, 1, 2, 3, 4, 5 , 6, 7};
@@ -31,7 +33,7 @@ public class RotateSubsystem extends PIDSubsystem {
     super("Gyroscope", Constants.gyroKp, Constants.gyroKi, Constants.gyroKd);
     setAbsoluteTolerance(Constants.gyroTolerance);
     setInputRange(-180.0f, 180.0f);
-    setOutputRange(-1, 1);
+    setOutputRange(-0.7, 0.7);
     getPIDController().setContinuous(true);
     ahrs = new AHRS(SPI.Port.kMXP);
   }
@@ -97,7 +99,16 @@ public class RotateSubsystem extends PIDSubsystem {
    */
   @Override
   protected void usePIDOutput(double output) {
-    Robot.driveExecutor.setZ(output * Constants.gyroScalingFactor);
+    if(output > 0) {
+      if(output < 0.13 && output > 0.04) {
+        output = 0.13;
+      }
+    } else if(output < 0) {
+      if(output > -0.13 && output < -0.04) {
+        output = -0.13;
+      }
+    }
+    Robot.driveExecutor.setZ(output);
   }
 
   /**
@@ -116,5 +127,38 @@ public class RotateSubsystem extends PIDSubsystem {
   @Override
   public void initDefaultCommand() {
     // setDefaultCommand(new MySpecialCommand());
+  }
+
+  public double getAngleDifference() {
+    double angle = 0;
+    double currentAngle = ahrs.getAngle() % 360;
+    double angleDifference;
+    switch(currentPosition) {
+      case 0: angle = 0;
+        break;
+      case 1: angle = 29;
+        break;
+      case 2: angle = 90;
+        break;
+      case 3: angle = 119;
+        break;
+      case 4: angle = 180;
+        break;
+      case 5: angle = -119;
+        break;
+      case 6: angle = -90;
+        break;
+      case 7: angle = -29;
+        break;
+    }
+    angleDifference = currentAngle - angle;
+    return angleDifference;
+  }
+
+  public void report() {
+    SmartDashboard.putBoolean("Gyro enabled", isEnabled());
+    SmartDashboard.putNumber("Angle", ahrs.getYaw());
+    SmartDashboard.putNumber("Current position", currentPosition);
+    SmartDashboard.putNumber("Gyro Setpoint", getSetpoint());
   }
 }
