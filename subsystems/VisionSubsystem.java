@@ -33,13 +33,8 @@ public class VisionSubsystem extends PIDSubsystem implements ReportingInterface 
   public VisionSubsystem() {
     super("Vision", Constants.visionKp, Constants.visionKi, Constants.visionKd);
     setAbsoluteTolerance(Constants.visionTolerance);
-<<<<<<< HEAD
     setInputRange(-60, 60);
     setOutputRange(-0.4, 0.4);
-=======
-    setInputRange(-160, 160);
-    setOutputRange(-0.25, 0.25);
->>>>>>> origin/develop
     getPIDController().setContinuous(true);
   }
 
@@ -75,12 +70,12 @@ public class VisionSubsystem extends PIDSubsystem implements ReportingInterface 
 	 */
 	protected void usePIDOutput(double output) {
     if(output > 0) {
-      if(output < 0.16 && output > 0.03) {
-        output = 0.17;
+      if(output < 0.155 && output > 0.03) {
+        output = 0.16;
       }
     } else if(output < 0) {
-      if(output > -0.16 && output < -0.03) {
-        output = -0.17;
+      if(output > -0.155 && output < -0.03) {
+        output = -0.16;
       }
     }
 		Robot.driveExecutor.setX(-output);

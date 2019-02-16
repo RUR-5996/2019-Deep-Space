@@ -16,6 +16,7 @@ public class Constants {
     public static final double wheelCircumference = wheelDiameter * Math.PI;
     public static final double pulsesPerRevolution = 1437; // ONLY BACK ENCODERS
     public static final double pulsesPerCm = pulsesPerRevolution / wheelCircumference;
+
     //TalonSRX CAN ports
     public static final int frontLeftMotor = 2;
     public static final int backLeftMotor = 3;
@@ -66,9 +67,15 @@ public class Constants {
 
     //Ultrasonic PID constants
     public static final double ultrasonicKp = 0.03;
-    public static final double ultrasonicKi = 0.00;
+    public static final double ultrasonicKi = 0;
     public static final double ultrasonicKd = 0.0;
-    public static final int ultrasonicTolerance = 2;
+    public static final int ultrasonicTolerance = 3;
+    public static final double ultrasonicRange = 700;
+    public static final double ultrasonicSpeed = 0.3;
+
+    public static final int ultrasonicPort1 = 0;
+    public static final int ultrasonicPort2 = 1;
+
     public static final double hatchToWallDistance = 15;
 
     //Gyro PID constants
@@ -81,9 +88,9 @@ public class Constants {
     public static final double visionKp = 0.00462;//0.00372;//0.0041;
     public static final double visionKi = 0;
     public static final double visionKd = 0.035;//0.018;//0.03;
-    public static final double visionTolerance = 6.5;
+    public static final double visionTolerance = 5;
 
     //Move back
-    public static final double moveBackTime = 0.5;
+    public static final double moveBackTime = 0.7;
     public static final double moveBackSpeed = 0.3;
 }

@@ -7,38 +7,15 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.CloseHatchCommand;
-<<<<<<< HEAD
-import frc.robot.commands.EncoderDriveCommand;
-=======
->>>>>>> origin/develop
-import frc.robot.commands.IntakeCommand;
-import frc.robot.commands.IntakePosCommand;
-import frc.robot.commands.LineupCommand;
-import frc.robot.commands.OpenHatchCommand;
-import frc.robot.commands.RotateCommand;
-import frc.robot.commands.ShootCommand;
-import frc.robot.commands.StartPosCommand;
-import frc.robot.commands.StopIntakeCommand;
-import frc.robot.commands.UltrasonicCommand;
-import frc.robot.commands.WallCommand;
-<<<<<<< HEAD
+import frc.robot.commands.*;
 import frc.robot.routines.*;
-import frc.robot.utils.HatchSelector;
-import frc.robot.utils.LineupSelector;
-import frc.robot.utils.ShootingSelector;
-=======
-import frc.robot.utils.HatchSelector;
->>>>>>> origin/develop
+
+import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.utils.TriggerButton;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-<<<<<<< HEAD
 import edu.wpi.first.wpilibj.buttons.POVButton;
-=======
->>>>>>> origin/develop
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -202,18 +179,15 @@ public class OI {
 		//
 		//yBut.whenPressed(new ShootCommand());
 		//xBut.whenPressed(new StopIntakeCommand());
-<<<<<<< HEAD
 		//aBut.whenPressed(new LineupSelector());
 		//bBut.whenPressed(new HatchSelector());
 		//xBut.whenPressed(new StartPosCommand());
 		//yBut.whenPressed(new IntakePosCommand());
+		//yBut.whenPressed(new UltrasonicCommand(160));
 		//xBut.whenPressed(new UltrasonicCommand(80));
 		//bBut.whenPressed(new EncoderDriveCommand(100));
 		aBut.whenPressed(new HatchRoutine());
+		bBut.whenPressed(new LeftTwoHatchAuto());
 		//xBut.whenPressed(new RotateCommand(0));
-=======
-		aBut.whenPressed(new LineupCommand());
-		//bBut.whenPressed(new HatchSelector());
->>>>>>> origin/develop
 	}
 }

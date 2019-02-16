@@ -170,7 +170,6 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_chooser.getSelected();
-
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
      * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -211,26 +210,18 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     driveExecutor.execute();
-<<<<<<< HEAD
     periodicHatch();
-    //System.out.println(Robot.ultrasonic.isEnabled() + " Distance: " + ultrasonic.getDistanceCM());
+    System.out.println(Robot.ultrasonic.isEnabled() + " Setpoint: " + ultrasonic.getSetpoint() + " Distance: " + ultrasonic.getDistanceCM());
     vision.visionLogic(); 
     System.out.println("Is enabled: " + vision.isEnabled() + " Offset: " + vision.getOffset());
     //System.out.println(rotate.isEnabled() + " Position: " + rotate.getPosition() + " Setpoint: " + rotate.getSetpoint());
-    System.out.println("Rotate: " + rotate.isEnabled() + " Vision: " + vision.isEnabled() + " Driving Type: " + drivingType);
+    //System.out.println("Rotate: " + rotate.isEnabled() + " Vision: " + vision.isEnabled() + " Driving Type: " + drivingType);
 
-=======
-    //System.out.println(Robot.ultrasonic.isEnabled() + "Distance: " + ultrasonic.getDistanceCM());
-    vision.visionLogic();
-    //System.out.println("Is enabled: " + vision.isEnabled() + " Offset: " + vision.getOffset());
-    //System.out.println(rotate.isEnabled() + " Position: " + rotate.getPosition() + " Setpoint: " + rotate.getSetpoint());
-    //System.out.println(rotate.currentPosition);
->>>>>>> origin/develop
+    //System.out.println(tilt.getPot());
     SmartDashboard.putNumber("Current angle", rotate.ahrs.getYaw());
     SmartDashboard.putNumber("Current position", rotate.getPosition());
     SmartDashboard.putNumber("Gyro setpoint", rotate.getSetpoint());
     SmartDashboard.putBoolean("Gyro enabled", rotate.isEnabled());
-<<<<<<< HEAD
 
     int frontLeftEnc = RobotMap.leftFront.getSelectedSensorPosition();
     int backLeftEnc = RobotMap.leftBack.getSelectedSensorPosition();
@@ -248,9 +239,6 @@ public class Robot extends TimedRobot {
     if(hatch.getHatchSwitch()) {
       hatch.closeHatch();
     }
-=======
-    System.out.println(Robot.hatch.getHatchSwitch());
->>>>>>> origin/develop
   }
 
   /**
