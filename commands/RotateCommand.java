@@ -43,11 +43,11 @@ public class RotateCommand extends Command {
 				break;
 			case 2: Robot.rotate.setSetpoint(90f);
 				break;
-			case 3: Robot.rotate.setSetpoint(119f);
+			case 3: Robot.rotate.setSetpoint(151f);
 				break;
 			case 4: Robot.rotate.setSetpoint(180f);
 				break;
-			case 5: Robot.rotate.setSetpoint(-119f);
+			case 5: Robot.rotate.setSetpoint(-151f);
 				break;
 			case 6: Robot.rotate.setSetpoint(-90f);
 				break;

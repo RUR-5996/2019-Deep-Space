@@ -34,7 +34,7 @@ public class LineupCommand extends Command {
   protected void initialize() {
     Robot.vision.setSetpoint(0);
     Robot.vision.enable();
-    Robot.drivingType = DrivingType.FIELD_ORIENTED;
+    Robot.drivingType = DrivingType.NORMAL;
   }
 
   /**

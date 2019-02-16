@@ -140,11 +140,11 @@ public class RotateSubsystem extends PIDSubsystem implements ReportingInterface 
         break;
       case 2: angle = 90;
         break;
-      case 3: angle = 119;
+      case 3: angle = 151;
         break;
       case 4: angle = 180;
         break;
-      case 5: angle = -119;
+      case 5: angle = -151;
         break;
       case 6: angle = -90;
         break;

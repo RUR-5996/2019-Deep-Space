@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class UltrasonicSubsystem extends PIDSubsystem implements ReportingInterface {
 
-	private Ultrasonic ultrasonic = new Ultrasonic(0, 1);
+	private Ultrasonic ultrasonic = new Ultrasonic(Constants.ultrasonicPort1, Constants.ultrasonicPort2);
 
 	/**
    	 * Constructor, creates the PID controller, sets properties
@@ -27,8 +27,8 @@ public class UltrasonicSubsystem extends PIDSubsystem implements ReportingInterf
 	public UltrasonicSubsystem() {
 		super("Ultrasonic", Constants.ultrasonicKp, Constants.ultrasonicKi, Constants.ultrasonicKp);
 		setAbsoluteTolerance(Constants.ultrasonicTolerance);
-		setInputRange(0, 700);
-		setOutputRange(-0.3, 0.3);
+		setInputRange(0, Constants.ultrasonicRange);
+		setOutputRange(-Constants.ultrasonicSpeed, Constants.ultrasonicSpeed);
 		getPIDController().setContinuous(true);
 		ultrasonic.setAutomaticMode(true);
 	}

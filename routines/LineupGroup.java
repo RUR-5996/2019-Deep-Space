@@ -18,7 +18,7 @@ public class LineupGroup extends CommandGroup {
    */
   public LineupGroup() {
     addSequential(new LineupCommand());
-    addSequential(new DoNothingCommand(0.25));
+    addSequential(new DoNothingCommand(0.35));
     addSequential(new HatchSelector());
   }
 }

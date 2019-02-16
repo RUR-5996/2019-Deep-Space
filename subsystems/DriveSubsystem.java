@@ -24,10 +24,10 @@ public class DriveSubsystem extends PIDSubsystem implements ReportingInterface {
 	private double encoderPulses;
 
 	public DriveSubsystem() {
-		super("Drive", 0.0013, 0, 0.003);
+		super("Drive", 0.003, 0, 0.03);
 		setAbsoluteTolerance(250);
 		setInputRange(-32000, 32000);
-		setOutputRange(-0.3, 0.3);
+		setOutputRange(-0.4, 0.4);
 		getPIDController().setContinuous(true);
 	}
 	/**
@@ -69,7 +69,7 @@ public class DriveSubsystem extends PIDSubsystem implements ReportingInterface {
 	}
 
 	public double getEncoderValue() {
-		return -RobotMap.leftBack.getSelectedSensorPosition();
+		return RobotMap.rightBack.getSelectedSensorPosition();
 	}
 
 	public double getEndocerPulses() {
