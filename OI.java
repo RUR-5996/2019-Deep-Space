@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+
 import frc.robot.autonomous.*;
 import frc.robot.commands.*;
 import frc.robot.routines.*;
@@ -172,11 +173,13 @@ public class OI {
 
 
 		xBut.whenPressed(new ShootingSelector());
+
 		//xBut.whenPressed(new StartPosCommand());
 		//yBut.whenPressed(new IntakePosCommand());
 		//yBut.whenPressed(new UltrasonicCommand(160));
 		//xBut.whenPressed(new UltrasonicCommand(80));
 		//bBut.whenPressed(new EncoderDriveCommand(100));
+
 		bBut.whenPressed(new LeftTwoHatchAuto());
 		//xBut.whenPressed(new RotateCommand(0));
 	}
