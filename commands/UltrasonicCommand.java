@@ -10,7 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Constants;
 import frc.robot.Robot;
-import frc.robot.Robot.DrivingType;
+import frc.robot.enumeration.DrivingType;
 
 /**
  * Command for driving to a set distance via PID controller.

@@ -24,11 +24,12 @@ public class Constants {
     public static final int backRightMotor = 0;
 
     //VictorSPX CAN ports
-    public static final int tilter = 4;
     public static final int shooter1 = 6;
     public static final int shooter2 = 7;
     public static final int shooter3 = 8;
     public static final int shooter4 = 9;
+    public static final int shooterBoschMotor = 4;
+    public static final int winchMotor = 5;
 
     //Talon and Victor PWM ports
     public static final int boschMotor = 4;
@@ -82,12 +83,12 @@ public class Constants {
     public static final double gyroKp = 0.0235;//0;//0.0301;//0.1;
     public static final double gyroKi = 0.00;
     public static final double gyroKd = 0.046;//0.13;//0.05;//0.15
-    public static final double gyroTolerance = 2.5;
+    public static final double gyroTolerance = 3;
 
     //Vision PID constants
-    public static final double visionKp = 0.00462;//0.00372;//0.0041;
+    public static final double visionKp = 0.00374;//0.00454;//0.00462;
     public static final double visionKi = 0;
-    public static final double visionKd = 0.035;//0.018;//0.03;
+    public static final double visionKd = 0.007;//0.011;//0.035;
     public static final double visionTolerance = 5;
 
     //Move back

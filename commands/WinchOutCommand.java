@@ -10,45 +10,45 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class EncoderDriveCommand extends Command {
-
-  private double distance; 
-
-  public EncoderDriveCommand(double distance) {
-    requires(Robot.drive);
-    this.distance = distance;
+public class WinchOutCommand extends Command {
+  public WinchOutCommand() {
+    requires(Robot.winch);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.drive.setSetpoint(Robot.drive.getEncoderPosition(distance));
-    Robot.drive.enable();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    if (Robot.winch.getEncoder() < 435) {
+      Robot.winch.moveOut();
+    }
+    else if (Robot.winch.getEncoder() > 435){
+      Robot.winch.moveStop();
+    }
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.drive.isEncoderTargetReached();
+    //return (Robot.winch.getEncoder() >= 380); // If we want the winch to auto-correct to desired position, put this away
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.drive.disable();
-    Robot.robotMap.resetEncoders();
+    Robot.winch.moveStop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.drive.disable();
-    Robot.robotMap.resetEncoders();
+    Robot.winch.moveStop();
   }
 }

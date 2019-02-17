@@ -8,12 +8,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Constants;
 import frc.robot.Robot;
 
-public class IntakePosCommand extends Command {
-  public IntakePosCommand() {
-    requires(Robot.tilt);
+public class WinchInCommand extends Command {
+  public WinchInCommand() {
+    requires(Robot.winch);
   }
 
   // Called just before this Command runs the first time
@@ -24,25 +23,28 @@ public class IntakePosCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.tilt.intake();
+    if(Robot.winch.getEncoder() > 50){
+      Robot.winch.moveIn();
+    }
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.tilt.getPot() <= Constants.intakePos;
+    return (Robot.winch.getEncoder() <= 50);  // If we want the winch to auto-correct to desired position, put this away
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.tilt.stop();
+    Robot.winch.moveStop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.tilt.stop();
+    Robot.winch.moveStop();
   }
 }

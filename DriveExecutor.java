@@ -8,7 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import frc.robot.Robot.DrivingType;
+import frc.robot.enumeration.DrivingType;
 
 public class DriveExecutor {
 	private double x;

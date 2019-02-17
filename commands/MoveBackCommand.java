@@ -10,7 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Constants;
 import frc.robot.Robot;
-import frc.robot.Robot.DrivingType;
+import frc.robot.enumeration.DrivingType;
 
 /**
  * Command for moving back. Used when dropping off / loading hatch

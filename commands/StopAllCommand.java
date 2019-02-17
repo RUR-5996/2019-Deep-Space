@@ -7,46 +7,33 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.TimedCommand;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 import frc.robot.enumeration.DrivingType;
 
 /**
  * Add your docs here.
  */
-public class MoveLeftCommand extends TimedCommand {
+public class StopAllCommand extends InstantCommand {
   /**
    * Add your docs here.
    */
-  public MoveLeftCommand(double timeout) {
-    super(timeout);
+  public StopAllCommand() {
+    super();
     requires(Robot.drive);
+    requires(Robot.hatch);
+    requires(Robot.rotate);
+    requires(Robot.shooter);
+    requires(Robot.shooterRotate);
+    requires(Robot.ultrasonic);
+    requires(Robot.vision);
+    requires(Robot.winch);
   }
 
-  // Called just before this Command runs the first time
+  // Called once when the command executes
   @Override
   protected void initialize() {
-    Robot.drivingType = DrivingType.NORMAL;
-  }
-
-  // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() {
-    Robot.driveExecutor.setX(-0.5);
-  }
-
-  // Called once after timeout
-  @Override
-  protected void end() {
-    Robot.driveExecutor.setX(0);
     Robot.drivingType = DrivingType.FIELD_ORIENTED;
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-    Robot.driveExecutor.setX(0);
-    Robot.drivingType = DrivingType.FIELD_ORIENTED;
-  }
 }
