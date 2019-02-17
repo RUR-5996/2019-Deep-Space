@@ -21,6 +21,7 @@ public class WallCommand extends Command {
   @Override
   protected void initialize() {
     Robot.drivingType = DrivingType.NORMAL;
+    Robot.rotate.enable();
     //Robot.vision.enable();
   }
 
@@ -49,6 +50,7 @@ public class WallCommand extends Command {
   protected void end() {
     Robot.driveExecutor.setY(0);
     Robot.drivingType = DrivingType.FIELD_ORIENTED;
+    Robot.rotate.disable();
     //Robot.vision.disable();
   }
 
@@ -57,6 +59,7 @@ public class WallCommand extends Command {
   @Override
   protected void interrupted() {
     Robot.driveExecutor.setY(0);
+    Robot.rotate.disable();
     Robot.drivingType = DrivingType.FIELD_ORIENTED;
   }
 }

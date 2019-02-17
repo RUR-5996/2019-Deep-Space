@@ -24,7 +24,7 @@ public class VisionSubsystem extends PIDSubsystem implements ReportingInterface 
   private static NetworkTableInstance inst = NetworkTableInstance.getDefault();
   private static NetworkTable contoursTable = inst.getTable("GRIP/contours");
   private double[] defaultValue = new double[0];
-  private double[] centerX;
+  private double[] centerX = {0};
   private double offset;
 
   /**
@@ -33,7 +33,7 @@ public class VisionSubsystem extends PIDSubsystem implements ReportingInterface 
   public VisionSubsystem() {
     super("Vision", Constants.visionKp, Constants.visionKi, Constants.visionKd);
     setAbsoluteTolerance(Constants.visionTolerance);
-    setInputRange(-60, 60);
+    setInputRange(-70, 70);
     setOutputRange(-0.4, 0.4);
     getPIDController().setContinuous(true);
   }

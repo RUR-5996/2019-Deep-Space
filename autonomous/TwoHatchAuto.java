@@ -13,6 +13,7 @@ import frc.robot.commands.MoveLeftCommand;
 import frc.robot.commands.MoveRightCommand;
 import frc.robot.commands.OpenHatchCommand;
 import frc.robot.enumeration.StartingPosition;
+import frc.robot.routines.HatchRoutine;
 
 public class TwoHatchAuto extends CommandGroup {
   /**
@@ -24,26 +25,26 @@ public class TwoHatchAuto extends CommandGroup {
 
     switch(startingPosition) {
       case LEFT:
-        addSequential(new AutonomousHatch());
+        addSequential(new HatchRoutine());
         addSequential(new DoNothingCommand(0.25));
         addSequential(new MoveLeftCommand(0.75));
         addSequential(new DoNothingCommand(0.25));
-        addSequential(new AutonomousHatch());
+        addSequential(new HatchRoutine());
         addSequential(new DoNothingCommand(0.25));
         addSequential(new MoveLeftCommand(0.75));
         addSequential(new DoNothingCommand(0.25));
-        addSequential(new AutonomousHatch());
+        addSequential(new HatchRoutine());
         break;
       case RIGHT:
-        addSequential(new AutonomousHatch());
+        addSequential(new HatchRoutine());
         addSequential(new DoNothingCommand(0.25));
         addSequential(new MoveRightCommand(0.75));
         addSequential(new DoNothingCommand(0.25));
-        addSequential(new AutonomousHatch());
+        addSequential(new HatchRoutine());
         addSequential(new DoNothingCommand(0.25));
         addSequential(new MoveRightCommand(0.75));
         addSequential(new DoNothingCommand(0.25));
-        addSequential(new AutonomousHatch());
+        addSequential(new HatchRoutine());
         break;
       case CENTER:
         break;

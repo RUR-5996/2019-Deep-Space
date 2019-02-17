@@ -65,6 +65,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    rotate.resetGyro();
 
     drivingType = DrivingType.FIELD_ORIENTED;
     //drivingType = DrivingType.NORMAL;
@@ -211,10 +212,10 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     driveExecutor.execute();
     periodicHatch();
-    System.out.println(Robot.ultrasonic.isEnabled() + " Setpoint: " + ultrasonic.getSetpoint() + " Distance: " + ultrasonic.getDistanceCM());
+    //System.out.println(Robot.ultrasonic.isEnabled() + " Setpoint: " + ultrasonic.getSetpoint() + " Distance: " + ultrasonic.getDistanceCM());
     vision.visionLogic(); 
     System.out.println("Is enabled: " + vision.isEnabled() + " Offset: " + vision.getOffset());
-    //System.out.println(rotate.isEnabled() + " Position: " + rotate.getPosition() + " Setpoint: " + rotate.getSetpoint());
+    System.out.println(rotate.isEnabled() + " Position: " + rotate.getPosition() + " Setpoint: " + rotate.getSetpoint());
     //System.out.println("Rotate: " + rotate.isEnabled() + " Vision: " + vision.isEnabled() + " Driving Type: " + drivingType);
 
     //System.out.println(tilt.getPot());

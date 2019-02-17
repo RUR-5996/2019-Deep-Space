@@ -34,6 +34,7 @@ public class LineupCommand extends Command {
   protected void initialize() {
     Robot.vision.setSetpoint(0);
     Robot.vision.enable();
+    Robot.rotate.enable();
     Robot.drivingType = DrivingType.NORMAL;
   }
 
@@ -69,6 +70,7 @@ public class LineupCommand extends Command {
   protected void end() {
     Robot.driveExecutor.setX(0);
     Robot.vision.disable();
+    Robot.rotate.disable();
     Robot.drivingType = DrivingType.FIELD_ORIENTED;
   }
 
@@ -80,6 +82,7 @@ public class LineupCommand extends Command {
   protected void interrupted() {
     Robot.driveExecutor.setX(0);
     Robot.vision.disable();
+    Robot.rotate.enable();
     Robot.drivingType = DrivingType.FIELD_ORIENTED;
   }
 }
