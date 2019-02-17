@@ -24,11 +24,12 @@ public class Constants {
     public static final int backRightMotor = 0;
 
     //VictorSPX CAN ports
-    public static final int tilter = 4;
     public static final int shooter1 = 6;
     public static final int shooter2 = 7;
     public static final int shooter3 = 8;
     public static final int shooter4 = 9;
+    public static final int shooterBoschMotor = 4;
+    public static final int winchMotor = 5;
 
     //Talon and Victor PWM ports
     public static final int boschMotor = 4;
