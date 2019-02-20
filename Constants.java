@@ -41,14 +41,9 @@ public class Constants {
     public static final int shooterSwitch = 2;
 
     //shooter
-    public static final double shootingSpeed = 0.85;
+    public static final double shootingSpeed = 0.95;
     public static final double intakeSpeed = 0.3;
     public static final double shootingTime = 0.25;
-
-    //Tilter
-    public static final double tilterSpeed = 0.25;
-    public static final double intakePos = -131;
-    public static final double startingPos = -105;
 
     //Camera settings
     public static final int imageWidth = 320;
@@ -94,4 +89,12 @@ public class Constants {
     //Move back
     public static final double moveBackTime = 0.7;
     public static final double moveBackSpeed = 0.3;
+
+    public static final int cargoPos = 40000; //45 - 65cm
+    public static final int middlePos = 40000; //24cm
+    public static final int lowPos = 100000; //bumper distance
+    public static final int intakePos = 138000;
+
+    public static final double lowRocketSpeed = 0.25;
+    public static final double lowRocketTime = 1.2;
 }

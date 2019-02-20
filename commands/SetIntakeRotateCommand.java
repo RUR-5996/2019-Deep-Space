@@ -7,14 +7,27 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.InstantCommand;
+import frc.robot.Robot;
+import frc.robot.enumeration.ShooterPosition;
 
-public class ShooterReturnGroup extends CommandGroup {
+/**
+ * Add your docs here.
+ */
+public class SetIntakeRotateCommand extends InstantCommand {
   /**
    * Add your docs here.
    */
-  public ShooterReturnGroup() {
-    addSequential(new RotateDownCommand());
-    addSequential(new WinchInCommand());
+  public SetIntakeRotateCommand() {
+    super();
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
   }
+
+  // Called once when the command executes
+  @Override
+  protected void initialize() {
+    Robot.shooterRotate.shooterPosition = ShooterPosition.INTAKE;
+  }
+
 }

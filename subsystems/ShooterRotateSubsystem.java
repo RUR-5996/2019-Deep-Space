@@ -7,10 +7,12 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.Counter;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.interfaces.Potentiometer;
+import frc.robot.Constants;
 import frc.robot.RobotMap;
+import frc.robot.enumeration.ShooterPosition;
 
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
@@ -18,27 +20,66 @@ import frc.robot.RobotMap;
 public class ShooterRotateSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+  public ShooterPosition shooterPosition;
+  private Counter count = new Counter(8);
+  private DigitalInput limitSwitch = new DigitalInput(9);
 
-  Potentiometer pot = new AnalogPotentiometer(0, 270, 0); // second parameter should be 270
+  public double getCounter() {
+    return count.get();
+  }
 
-  public double getPotentiometer(){
-    return pot.get();
+  public boolean getSwitch() {
+    return limitSwitch.get();
+  }
+
+  public void resetCounter() {
+    count.reset();
   }
 
   public void rotateDown(){
-    RobotMap.shooterBoschMotor.set(-0.4);
-    //System.out.println("Rotating down");
+    RobotMap.shooterBoschMotor.set(0.75);
   }
 
   public void rotateUp(){
-    RobotMap.shooterBoschMotor.set(0.4);
-    //System.out.println("Rotating up");
+    RobotMap.shooterBoschMotor.set(-0.75);
   }
 
   public void stopRotate(){
     RobotMap.shooterBoschMotor.set(0);
   }
 
+  public void rotateShooter(ShooterPosition pos) {
+    switch(pos) {
+      case CARGO:
+        if(getCounter() < Constants.cargoPos) {
+          rotateUp();
+        } else {
+          stopRotate();
+        }
+        break;
+      case MIDDLE_ROCKET:
+        if(getCounter() < Constants.middlePos) {
+          rotateUp();
+        } else {
+          stopRotate();
+        }
+        break;
+      case LOW_ROCKET:
+        if(getCounter() < Constants.lowPos) {
+          rotateUp();
+        } else {
+          stopRotate();
+        }
+        break;
+      case INTAKE:
+        if(getCounter() < Constants.intakePos) {
+          rotateUp();
+        } else {
+          stopRotate();
+        }
+        break;
+    }
+  }
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

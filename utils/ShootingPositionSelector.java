@@ -5,49 +5,45 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.utils;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.enumeration.ShooterPosition;
 
-public class WinchOutCommand extends Command {
-  public WinchOutCommand() {
-    requires(Robot.winch);
+public class ShootingPositionSelector extends Command {
+  private ShooterPosition pos;
+
+  public ShootingPositionSelector(ShooterPosition pos) {
+    this.pos = pos;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.shooterRotate.shooterPosition = pos;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (Robot.winch.getEncoder() < 1020) {
-      Robot.winch.moveOut();
-    }
-    else if (Robot.winch.getEncoder() > 1020){
-      Robot.winch.moveStop();
-    }
-
+    Robot.shooterRotate.shooterPosition = pos;
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.winch.getEncoder() > 1020;
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.winch.moveStop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.winch.moveStop();
   }
 }

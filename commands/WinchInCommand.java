@@ -23,7 +23,7 @@ public class WinchInCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.winch.getEncoder() > 50){
+    if(Robot.winch.getEncoder() > 20){
       Robot.winch.moveIn();
     }
 
@@ -32,7 +32,7 @@ public class WinchInCommand extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return (Robot.winch.getEncoder() <= 50);  // If we want the winch to auto-correct to desired position, put this away
+    return (Robot.winch.getEncoder() <= 20);  // If we want the winch to auto-correct to desired position, put this away
   }
 
   // Called once after isFinished returns true

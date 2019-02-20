@@ -14,7 +14,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 //imports needed for camera
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 //required dependencies
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -24,7 +25,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //Constants and subsystems
 import frc.robot.subsystems.*;
 import frc.robot.Constants;
+import frc.robot.commands.RotateUpCommand;
 import frc.robot.enumeration.DrivingType;
+import frc.robot.enumeration.ShooterPosition;
 import frc.robot.enumeration.StartingPosition;
 
 /**
@@ -212,10 +215,14 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     driveExecutor.execute();
     periodicHatch();
+    //System.out.println(shooterRotate.getCounter());
     //System.out.println(Robot.ultrasonic.isEnabled() + " Setpoint: " + ultrasonic.getSetpoint() + " Distance: " + ultrasonic.getDistanceCM());
-    vision.visionLogic(); 
-    System.out.println("Is enabled: " + vision.isEnabled() + " Offset: " + vision.getOffset());
-    System.out.println(rotate.isEnabled() + " Position: " + rotate.getPosition() + " Setpoint: " + rotate.getSetpoint());
+    vision.visionLogic();
+    if(Robot.shooterRotate.shooterPosition != null) {
+      System.out.println(Robot.shooterRotate.shooterPosition.toString() + shooterRotate.getCounter());
+    }
+    //System.out.println("Is enabled: " + vision.isEnabled() + " Offset: " + vision.getOffset());
+    //System.out.println(rotate.isEnabled() + " Position: " + rotate.getPosition() + " Setpoint: " + rotate.getSetpoint());
     //System.out.println("Rotate: " + rotate.isEnabled() + " Vision: " + vision.isEnabled() + " Driving Type: " + drivingType);
 
     //System.out.println(tilt.getPot());

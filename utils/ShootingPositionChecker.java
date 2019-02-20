@@ -5,16 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.utils;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.ConditionalCommand;
+import frc.robot.Robot;
+import frc.robot.enumeration.ShooterPosition;
+import frc.robot.routines.LowRocketGroup;
 
-public class ShooterReturnGroup extends CommandGroup {
-  /**
-   * Add your docs here.
-   */
-  public ShooterReturnGroup() {
-    addSequential(new RotateDownCommand());
-    addSequential(new WinchInCommand());
+public class ShootingPositionChecker extends ConditionalCommand {
+  public ShootingPositionChecker() {
+    super(new LowRocketGroup(), new ShootingRotationChecker());
+  }
+
+  
+  public boolean condition() {
+    return Robot.shooterRotate.shooterPosition == ShooterPosition.LOW_ROCKET;
   }
 }

@@ -29,7 +29,7 @@ public class WinchSubsystem extends Subsystem {
   }
 
   public void moveIn(){
-    RobotMap.winchMotor.set(-0.2);
+    RobotMap.winchMotor.set(-0.45);
   }
 
   public void moveOut(){

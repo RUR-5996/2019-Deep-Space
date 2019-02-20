@@ -5,16 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.routines;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.DoNothingCommand;
+import frc.robot.commands.LineupCommand;
+import frc.robot.commands.RotateDownCommand;
+import frc.robot.commands.RotateUpCommand;
+import frc.robot.commands.ShootCommand;
 
-public class ShooterReturnGroup extends CommandGroup {
+public class ShootingGroup extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public ShooterReturnGroup() {
+  public ShootingGroup() {
+    addSequential(new LineupCommand());
+    addSequential(new RotateUpCommand());
+    addSequential(new DoNothingCommand(0.15));
+    addSequential(new ShootCommand());
+    addSequential(new DoNothingCommand(0.1));
     addSequential(new RotateDownCommand());
-    addSequential(new WinchInCommand());
   }
 }
