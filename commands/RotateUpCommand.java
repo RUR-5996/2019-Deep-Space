@@ -8,39 +8,57 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Constants;
 import frc.robot.Robot;
+import frc.robot.enumeration.ShooterPosition;
 
-/**
+/*
  * Command which rotates the shooter upwards
  */
 public class RotateUpCommand extends Command {
+
   public RotateUpCommand() {
-    // Use requires() here to declare subsystem dependencies
     requires(Robot.shooterRotate);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    System.out.println("Rotating up");
+    Robot.shooterRotate.resetCounter();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.shooterRotate.getPotentiometer() < 25){
-      Robot.shooterRotate.rotateUp();
+    if(!(Robot.shooterRotate.shooterPosition == null)) {
+      Robot.shooterRotate.rotateShooter(Robot.shooterRotate.shooterPosition);
     }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
-    return (Robot.shooterRotate.getPotentiometer() >= 9); //Upper threshold should be 24
-    /*     Values for shooting:
-        9.6/9.22 Good for shooting cargo when alligned with cargo hatch
-        3.94 Good for shooting lower rocket from one meter
-    */
+  public boolean isFinished() {
+    if(Robot.shooterRotate.shooterPosition == ShooterPosition.CARGO) {
+      if(Robot.shooterRotate.getCounter() >= Constants.cargoPos) {
+        return true;
+      }
+
+    } else if(Robot.shooterRotate.shooterPosition == ShooterPosition.MIDDLE_ROCKET) {
+      if(Robot.shooterRotate.getCounter() >= Constants.middlePos) {
+        return true;
+      }
+    } else if(Robot.shooterRotate.shooterPosition == ShooterPosition.LOW_ROCKET) {
+      if(Robot.shooterRotate.getCounter() >= Constants.lowPos) {
+        return true;
+      }
+    } else if(Robot.shooterRotate.shooterPosition == ShooterPosition.INTAKE) {
+      if(Robot.shooterRotate.getCounter() >= Constants.intakePos) {
+        return true;
+      }
+    } else {
+      return true;
+    }
+    return false;
   }
 
   // Called once after isFinished returns true

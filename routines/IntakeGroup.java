@@ -5,16 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.routines;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.BallIntakeGroup;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.ShooterReturnGroup;
 
-public class ShooterReturnGroup extends CommandGroup {
+public class IntakeGroup extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public ShooterReturnGroup() {
-    addSequential(new RotateDownCommand());
-    addSequential(new WinchInCommand());
+  public IntakeGroup() {
+    addSequential(new BallIntakeGroup());
+    addSequential(new IntakeCommand());
+    addSequential(new ShooterReturnGroup());
   }
 }

@@ -14,7 +14,8 @@ public class BallIntakeGroup extends CommandGroup {
    * Add your docs here.
    */
   public BallIntakeGroup() {
+    addSequential(new SetIntakeRotateCommand());
+    addSequential(new RotateUpCommand());
     addSequential(new WinchOutCommand());
-    addSequential(new RotateDownCommand());
   }
 }

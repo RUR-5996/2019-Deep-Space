@@ -22,22 +22,18 @@ public class RotateDownCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    System.out.println("Rotating down");
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.shooterRotate.getPotentiometer() > 3.73
-    ){ //Bottom treshold
-      Robot.shooterRotate.rotateDown();
-    }
+    Robot.shooterRotate.rotateDown();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return (Robot.shooterRotate.getPotentiometer() <= 3.8);
+    return !Robot.shooterRotate.getSwitch();
   }
 
   // Called once after isFinished returns true

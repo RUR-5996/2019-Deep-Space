@@ -5,16 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.utils;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.ConditionalCommand;
+import frc.robot.Robot;
+import frc.robot.routines.ShootingGroup;
 
-public class ShooterReturnGroup extends CommandGroup {
+public class ShootingLineupChecker extends ConditionalCommand {
   /**
    * Add your docs here.
    */
-  public ShooterReturnGroup() {
-    addSequential(new RotateDownCommand());
-    addSequential(new WinchInCommand());
+  public ShootingLineupChecker() {
+    super(new ShootingGroup());
+  }
+
+  public boolean condition() {
+    return Robot.vision.getTargets() == 2;
   }
 }

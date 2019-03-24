@@ -5,16 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.utils;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.Constants;
 
-public class ShooterReturnGroup extends CommandGroup {
+import edu.wpi.first.wpilibj.command.ConditionalCommand;
+import frc.robot.Robot;
+import frc.robot.routines.ShooterCorrectPositionGroup;
+
+public class ShootingRotationChecker extends ConditionalCommand {
   /**
    * Add your docs here.
    */
-  public ShooterReturnGroup() {
-    addSequential(new RotateDownCommand());
-    addSequential(new WinchInCommand());
+  public ShootingRotationChecker() {
+    super(new ShootingDistanceChecker(), new ShooterCorrectPositionGroup());
+  }
+
+  public boolean condition() {
+    return Math.abs(Math.abs(Robot.rotate.getPosition()) - Robot.rotate.getSetpoint()) < Constants.gyroTolerance;
   }
 }
