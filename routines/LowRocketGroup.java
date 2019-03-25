@@ -15,7 +15,7 @@ import frc.robot.commands.RotateUpCommand;
 
 public class LowRocketGroup extends CommandGroup {
   /**
-   * Add your docs here.
+   * Command group for firing balls into low rocket.
    */
   public LowRocketGroup() {
     addSequential(new RotateUpCommand());

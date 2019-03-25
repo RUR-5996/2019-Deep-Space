@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class BallIntakeGroup extends CommandGroup {
   /**
-   * Add your docs here.
+   * Group for extending the Shooter into intake position.
    */
   public BallIntakeGroup() {
     addSequential(new SetIntakeRotateCommand());

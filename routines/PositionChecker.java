@@ -12,6 +12,11 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 
 public class PositionChecker extends ConditionalCommand {
+
+  /**
+   * Conditional Command for checking whether robot is within tolerance of pre-set angle.
+   * Calls distance checker if true, otherwise calls CorrectPositionGroup.
+   */
   public PositionChecker() {
     super(new DistanceChecker(), new CorrectPositionGroup());
   }

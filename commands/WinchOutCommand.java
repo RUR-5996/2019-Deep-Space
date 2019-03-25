@@ -10,17 +10,31 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
+/**
+ * Command for pulling the winch out.
+ */
 public class WinchOutCommand extends Command {
+
+  /**
+   * Command for pulling the winch out.
+   * Dependent on winch subsystem.
+   */
   public WinchOutCommand() {
     requires(Robot.winch);
   }
 
-  // Called just before this Command runs the first time
+  /**
+   * Method which is run once when the command is initialized.
+   */
   @Override
   protected void initialize() {
   }
 
-  // Called repeatedly when this Command is scheduled to run
+  /**
+   * Called repeatedly until isFinished returns true.
+   * Moves winch in while encoder ticks are bellow 1020.
+   * Else if statement should be redundant, but placed in for safety.
+   */
   @Override
   protected void execute() {
     if (Robot.winch.getEncoder() < 1020) {
@@ -32,20 +46,28 @@ public class WinchOutCommand extends Command {
 
   }
 
-  // Make this return true when this Command no longer needs to run execute()
+  /**
+   * Checks whether end condition is satisfied, terminates command.
+   * Checks whether encoder value is above 1020.
+   */
   @Override
   protected boolean isFinished() {
     return Robot.winch.getEncoder() > 1020;
   }
 
-  // Called once after isFinished returns true
+  /**
+   * Method which is called when isFinished returns true.
+   * Stops the movement of the winch.
+   */
   @Override
   protected void end() {
     Robot.winch.moveStop();
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
+  /**
+   * Method which is called if command is interrupted by another command.
+   * Stops the movement of the winch.
+   */
   @Override
   protected void interrupted() {
     Robot.winch.moveStop();

@@ -13,7 +13,8 @@ import frc.robot.commands.StopDriveCommand;
 
 public class HatchRoutine extends CommandGroup {
   /**
-   * Add your docs here.
+   * First command in the chain for dropping / picking up hatches.
+   * Calls PositionChecker.
    */
   public HatchRoutine() {
     addSequential(new StopDriveCommand());
