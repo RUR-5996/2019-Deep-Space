@@ -14,38 +14,55 @@ public class EncoderDriveCommand extends Command {
 
   private double distance; 
 
+  /**
+   * Method for driving with encoders
+   * @param distance that the robot should drive in cm
+   */
   public EncoderDriveCommand(double distance) {
     requires(Robot.drive);
     this.distance = distance;
   }
 
-  // Called just before this Command runs the first time
+  /**
+   * Method which turns on the PID controller and sets the setpoint.
+   */
   @Override
   protected void initialize() {
     Robot.drive.setSetpoint(Robot.drive.getEncoderPosition(distance));
     Robot.drive.enable();
   }
 
-  // Called repeatedly when this Command is scheduled to run
+  /**
+   * Method which runs periodically.
+   * Not used, PID takes care of everything.
+   */
   @Override
   protected void execute() {
   }
 
-  // Make this return true when this Command no longer needs to run execute()
+  /**
+   * Method for checking whether the command is finished.
+   * @return is robot beyond the set target
+   */
   @Override
   protected boolean isFinished() {
     return Robot.drive.isEncoderTargetReached();
   }
 
-  // Called once after isFinished returns true
+  /**
+   * Called after the end condition is reached.
+   * Disables the PID controller and resets encoders.
+   */
   @Override
   protected void end() {
     Robot.drive.disable();
     Robot.robotMap.resetEncoders();
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
+  /**
+   * Called when interupted by another command that used the same
+   * subsystem.
+   */
   @Override
   protected void interrupted() {
     Robot.drive.disable();

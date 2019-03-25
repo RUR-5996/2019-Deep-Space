@@ -14,12 +14,13 @@ import frc.robot.enumeration.DrivingType;
 
 /**
  * Command for lining up with the vision targets.
+ * No local variables are used, since we always want to be
+ * lined up with the vision targets at the same position.
  */
 public class LineupCommand extends Command {
   /**
-   * Constructor, declares dependencies.
-   * No local variables are used, since we always want to be
-   * lined up with the vision targets at the same position.
+   * Command for lining up with the vision targets.
+   * Dependent on vision subsystem.
    */
   public LineupCommand() {
     requires(Robot.vision);

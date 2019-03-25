@@ -15,7 +15,7 @@ import frc.robot.routines.HatchRoutine;
 
 public class LeftTwoHatchAuto extends CommandGroup {
   /**
-   * Add your docs here.
+   * Group for 2 Hatch auto for left side.
    */
   public LeftTwoHatchAuto() {
     addSequential(new OpenHatchCommand());

@@ -16,7 +16,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveCommand extends Command {
 
 	/**
-	 * Constructor, declares dependencies on subsystems.
+	 * Command for driving.
+	 * Dependent on drive subsystem.
 	 */
 	public DriveCommand() {
 		requires(Robot.drive);
