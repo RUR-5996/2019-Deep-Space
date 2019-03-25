@@ -20,8 +20,9 @@ public class RotateCommand extends Command {
 	private int rotate;
 
 	/**
-	 * Declares dependencies and local variables
+	 * Command for rotating via gyroscope.
 	 * @param angle - angle to which we want to turn
+	 * Dependent on rotate subsystem.
 	 */
 	public RotateCommand(int rotate) {
 		requires(Robot.rotate);

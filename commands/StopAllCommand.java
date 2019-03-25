@@ -16,7 +16,7 @@ import frc.robot.enumeration.DrivingType;
  */
 public class StopAllCommand extends InstantCommand {
   /**
-   * Add your docs here.
+   * If something goes wrong use this pls.
    */
   public StopAllCommand() {
     super();

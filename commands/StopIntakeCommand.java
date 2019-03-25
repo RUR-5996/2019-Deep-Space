@@ -11,6 +11,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class StopIntakeCommand extends Command {
+  /**
+   * Command for stopping the intake in the shooter.
+   * Dependent on shooter subsystem.
+   */
   public StopIntakeCommand() {
     requires(Robot.shooter);
   }

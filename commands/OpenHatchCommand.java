@@ -15,7 +15,8 @@ import frc.robot.Robot;
 public class OpenHatchCommand extends Command {
 
   /**
-   * Constructor, declares dependecy on subsystem
+   * Command for opening the hatch manipulator.
+   * Dependent on hatch subsystem.
    */
   public OpenHatchCommand() {
     requires(Robot.hatch);

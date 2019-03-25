@@ -16,7 +16,10 @@ import frc.robot.Robot;
  */
 public class ShootCommand extends TimedCommand {
   /**
-   * Constructor. Declares dependencies and sets timeout.
+   * Command for shooting from the shooter.
+   * Dependent on shooter subsystem.
+   * Will shoot at speed defined in constants, range: 0 - 1
+   * Will be active for time defined in constants in seconds.
    */
   public ShootCommand() {
     super(Constants.shootingTime);

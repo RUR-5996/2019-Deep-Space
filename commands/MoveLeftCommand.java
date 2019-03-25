@@ -16,34 +16,48 @@ import frc.robot.enumeration.DrivingType;
  */
 public class MoveLeftCommand extends TimedCommand {
   /**
-   * Add your docs here.
+   * Command for moving left autonomously.
+   * @param timeout of the command
+   * Dependent on drive subsystem.
    */
   public MoveLeftCommand(double timeout) {
     super(timeout);
     requires(Robot.drive);
   }
 
-  // Called just before this Command runs the first time
+  /**
+   * Called when command is initialized.
+   * Sets the driving type from Field Oriented to Normal.
+   * IMPORTANT!
+   */
   @Override
   protected void initialize() {
     Robot.drivingType = DrivingType.NORMAL;
   }
 
-  // Called repeatedly when this Command is scheduled to run
+  /**
+   * Called repeatedly when command is running.
+   * Sets speed.
+   */
   @Override
   protected void execute() {
     Robot.driveExecutor.setX(-0.5);
   }
 
-  // Called once after timeout
+  /**
+   * Called when command is ended.
+   * Sets driving type back to Field Oriented and stops movement.
+   */
   @Override
   protected void end() {
     Robot.driveExecutor.setX(0);
     Robot.drivingType = DrivingType.FIELD_ORIENTED;
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
+  /**
+   * Called when command is interrupted.
+   * Sets driving type back to Field Oriented and stops movement.
+   */
   @Override
   protected void interrupted() {
     Robot.driveExecutor.setX(0);

@@ -20,7 +20,7 @@ public class MoveBackCommand extends TimedCommand {
   /**
    * Command for moving back. Used when dropping off / loading hatch
    * for driver convenience.
-   * Requires drive subsystem.
+   * Dependent on drive subsystem.
    * Move back time in seconds in Constants.
    */
   public MoveBackCommand() {
@@ -40,6 +40,7 @@ public class MoveBackCommand extends TimedCommand {
 
   /**
    * Called repeatedly when command is running.
+   * Sets speed.
    */
   @Override
   protected void execute() {

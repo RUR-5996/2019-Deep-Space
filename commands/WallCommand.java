@@ -12,20 +12,38 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.enumeration.DrivingType;
 
+/**
+   * Command for moving to a wall for hatch pickup / dropoff.
+   */
 public class WallCommand extends Command {
+
+  /**
+   * Command for moving to a wall for hatch pickup / dropoff.
+   * Uses ultrasonic sensor.
+   * Dependent on ultrasonic subsystem.
+   */
   public WallCommand() {
     requires(Robot.ultrasonic);
   }
 
-  // Called just before this Command runs the first time
+  /**
+   * Called when command is initialized.
+   * Sets the driving type from Field Oriented to Normal.
+   * IMPORTANT!
+   * Enables the PID controller for gyroscope in order to correct for
+   * movement to the sides.
+   * Do not use Vision PID, goes fubar if it stops seeing targets.
+   */
   @Override
   protected void initialize() {
     Robot.drivingType = DrivingType.NORMAL;
     Robot.rotate.enable();
-    //Robot.vision.enable();
   }
 
-  // Called repeatedly when this Command is scheduled to run
+  /**
+   * Called repeatedly when command is running.
+   * Sets speed based upon the distance from wall.
+   */
   @Override
   protected void execute() {
     if(Robot.ultrasonic.getDistanceCM() > 70) {
@@ -39,23 +57,33 @@ public class WallCommand extends Command {
     }
   }
 
-  // Make this return true when this Command no longer needs to run execute()
+  /**
+   * Checks whether end condition if met.
+   * Checks whether distance from ultrasonic is lower than predefined distance
+   * needed to place hatch panel. (in Constants)
+   */
   @Override
   protected boolean isFinished() {
     return Robot.ultrasonic.getDistanceCM() < Constants.hatchToWallDistance;
   }
 
-  // Called once after isFinished returns true
+  /**
+   * Called when command is ended.
+   * Sets driving type back to Field Oriented and stops movement.
+   * Disables PID controller.
+   */
   @Override
   protected void end() {
     Robot.driveExecutor.setY(0);
     Robot.drivingType = DrivingType.FIELD_ORIENTED;
     Robot.rotate.disable();
-    //Robot.vision.disable();
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
+  /**
+   * Called if command is interrupted.
+   * Sets driving type back to Field Oriented and stops movement.
+   * Disables PID controller.
+   */
   @Override
   protected void interrupted() {
     Robot.driveExecutor.setY(0);

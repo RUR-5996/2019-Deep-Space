@@ -20,7 +20,7 @@ public class UltrasonicCommand extends Command {
   private double distance;
 
   /**
-   * Declares dependencies and local variables
+   * Command for driving to a set distance via PID controller and ultrasonic sensor.
    * @param distance - Distance to which we want the PID controller to move the robot.
    */
   public UltrasonicCommand(double distance) {
