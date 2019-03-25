@@ -201,7 +201,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Current position", rotate.getPosition());
     SmartDashboard.putNumber("Gyro setpoint", rotate.getSetpoint());
     SmartDashboard.putBoolean("Gyro enabled", rotate.isEnabled());
-
   }
 
   @Override
