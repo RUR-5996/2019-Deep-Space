@@ -18,7 +18,7 @@ import frc.robot.routines.*;
  */
 public class HatchSelector extends ConditionalCommand {
   /**
-   * Constructor, defined which command to call if condition is true or false.
+   * Checks whether hatch is loaded or not. (inverted)
    * Calls first command if true, calls second if false.
    */
   public HatchSelector() {

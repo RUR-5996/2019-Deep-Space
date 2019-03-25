@@ -50,6 +50,9 @@ public class ShooterSubsystem extends Subsystem implements ReportingInterface {
     return ballLimitSwitch.get();
   }
 
+  /**
+   * Default required command by the subsystem. Unused.
+   */
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     //setDefaultCommand(new ShootCommand());
