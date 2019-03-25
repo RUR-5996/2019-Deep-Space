@@ -181,17 +181,11 @@ public class OI {
 		aBut.whenPressed(new HatchRoutine());
 		bBut.whenPressed(new IntakeGroup());
 		yBut.whenPressed(new ShootingNullChecker());
+		xBut.whenPressed(new RotateCommand(0));
 
 		povLeft.whenPressed(new ShootingPositionSelector(ShooterPosition.CARGO));
 		povDown.whenPressed(new ShootingPositionSelector(ShooterPosition.LOW_ROCKET));
 		povUp.whenPressed(new ShootingPositionSelector(ShooterPosition.MIDDLE_ROCKET));
-		//xBut.whenPressed(new ShootingSelector());
-		//xBut.whenPressed(new StartPosCommand());
-		//yBut.whenPressed(new IntakePosCommand());
-		//yBut.whenPressed(new UltrasonicCommand(160));
-		//xBut.whenPressed(new UltrasonicCommand(80));
-		//bBut.whenPressed(new EncoderDriveCommand(100));
-		//bBut.whenPressed(new TwoHatchAuto(StartingPosition.LEFT));
-		//xBut.whenPressed(new RotateCommand(0));
+		
 	}
 }

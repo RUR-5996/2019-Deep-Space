@@ -18,8 +18,7 @@ import frc.robot.enumeration.ShooterPosition;
  * An example subsystem.  You can replace me with your own Subsystem.
  */
 public class ShooterRotateSubsystem extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+
   public ShooterPosition shooterPosition;
   private Counter count = new Counter(8);
   private DigitalInput limitSwitch = new DigitalInput(9);
