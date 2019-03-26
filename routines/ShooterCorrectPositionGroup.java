@@ -14,7 +14,7 @@ import frc.robot.utils.ShootingDistanceChecker;
 
 public class ShooterCorrectPositionGroup extends CommandGroup {
   /**
-   * Add your docs here.
+   * 
    */
   public ShooterCorrectPositionGroup() {
     addSequential(new RotateCommand(0));
