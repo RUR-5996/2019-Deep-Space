@@ -12,10 +12,12 @@ package frc.robot;
  */
 public class Constants {
 
+    /*
     private static final double wheelDiameter = 14.7;
     public static final double wheelCircumference = wheelDiameter * Math.PI;
     public static final double pulsesPerRevolution = 1437; // ONLY BACK ENCODERS
     public static final double pulsesPerCm = pulsesPerRevolution / wheelCircumference;
+    */
 
     //TalonSRX CAN ports
     public static final int frontLeftMotor = 2;

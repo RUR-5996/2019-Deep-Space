@@ -30,10 +30,11 @@ public class RobotMap {
 
 	public static VictorSP hatchMotor = new VictorSP(Constants.boschMotor);
 
+	/*
 	public void resetEncoders() {
 		leftFront.setSelectedSensorPosition(0);
 		leftBack.setSelectedSensorPosition(0);
 		rightFront.setSelectedSensorPosition(0);
 		rightBack.setSelectedSensorPosition(0);
-	}
+	}*/
 }

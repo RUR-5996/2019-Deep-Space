@@ -14,21 +14,23 @@ import frc.robot.RobotMap;
 import frc.robot.commands.DriveCommand;
 import frc.robot.utils.ReportingInterface;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Subsystem for driving - NEEDS MAINTENANCE
  */
-public class DriveSubsystem extends PIDSubsystem implements ReportingInterface {
+public class DriveSubsystem extends /*PID*/Subsystem implements ReportingInterface {
 
-	private double encoderPulses;
+	//private double encoderPulses;
 
 	public DriveSubsystem() {
+		/*
 		super("Drive", 0.003, 0, 0.03);
 		setAbsoluteTolerance(250);
 		setInputRange(-32000, 32000);
 		setOutputRange(-0.4, 0.4);
-		getPIDController().setContinuous(true);
+		getPIDController().setContinuous(true);*/
 	}
 	/**
 	 * Sets default command for the subsystem - required.
@@ -62,6 +64,7 @@ public class DriveSubsystem extends PIDSubsystem implements ReportingInterface {
 		}*/
 	}
 
+	/*
 	public double getEncoderPosition(double distance) {
 		Robot.robotMap.resetEncoders();
 		this.encoderPulses = Constants.pulsesPerCm * distance;
@@ -92,9 +95,9 @@ public class DriveSubsystem extends PIDSubsystem implements ReportingInterface {
 	protected void usePIDOutput(double output) {
 		Robot.driveExecutor.setY(-output);
 	}
-
+*/
 	public void report() {
-		SmartDashboard.putNumber("Encoder ticks", getEncoderValue());
+		//SmartDashboard.putNumber("Encoder ticks", getEncoderValue());
 	}
 
 }

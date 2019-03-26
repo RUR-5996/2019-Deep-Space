@@ -105,7 +105,7 @@ public class Robot extends TimedRobot {
     configureVictor(RobotMap.shooter3);
     configureVictor(RobotMap.shooter4);
 
-    robotMap.resetEncoders();
+    //robotMap.resetEncoders();
   }
 
   private void configureTalon(WPI_TalonSRX talon) {
