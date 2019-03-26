@@ -54,6 +54,8 @@ public class Robot extends TimedRobot {
   public static StartingPosition startingPosition;
 
   private UsbCamera camera;
+  private UsbCamera camera2;
+
   public double[] centerX, centerY, size, height, width;
   public int contours;
 
@@ -77,12 +79,19 @@ public class Robot extends TimedRobot {
     // chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);
     new Thread( () -> {
-      camera = CameraServer.getInstance().startAutomaticCapture();
+      camera = CameraServer.getInstance().startAutomaticCapture(0);
       camera.setResolution(Constants.imageWidth, Constants.imageHeight);
       camera.setFPS(Constants.imageFPS);
       camera.setExposureManual(0);
       camera.setBrightness(0);
+
+      camera2 = CameraServer.getInstance().startAutomaticCapture(1);
+      camera.setResolution(Constants.imageWidth, Constants.imageHeight);
+      camera.setFPS(Constants.imageFPS);
+      camera.setExposureAuto();
+      camera.setWhiteBalanceAuto();
     }).start();
+
     shooter.shooterInit();
     rotate.resetGyro();
 
