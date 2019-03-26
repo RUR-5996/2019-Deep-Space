@@ -12,7 +12,7 @@ import frc.robot.Robot;
 
 public class EncoderDriveCommand extends Command {
 
-  private double distance; 
+  //private double distance; 
 
   /**
    * Method for driving with encoders
@@ -20,7 +20,7 @@ public class EncoderDriveCommand extends Command {
    */
   public EncoderDriveCommand(double distance) {
     requires(Robot.drive);
-    this.distance = distance;
+    //this.distance = distance;
   }
 
   /**
@@ -28,8 +28,8 @@ public class EncoderDriveCommand extends Command {
    */
   @Override
   protected void initialize() {
-    Robot.drive.setSetpoint(Robot.drive.getEncoderPosition(distance));
-    Robot.drive.enable();
+    /*Robot.drive.setSetpoint(Robot.drive.getEncoderPosition(distance));
+    Robot.drive.enable();*/
   }
 
   /**
@@ -46,7 +46,8 @@ public class EncoderDriveCommand extends Command {
    */
   @Override
   protected boolean isFinished() {
-    return Robot.drive.isEncoderTargetReached();
+    return true;
+    //return Robot.drive.isEncoderTargetReached();
   }
 
   /**
@@ -54,9 +55,9 @@ public class EncoderDriveCommand extends Command {
    * Disables the PID controller and resets encoders.
    */
   @Override
-  protected void end() {
+  protected void end() {/*
     Robot.drive.disable();
-    Robot.robotMap.resetEncoders();
+    Robot.robotMap.resetEncoders();*/
   }
 
   /**
@@ -65,7 +66,7 @@ public class EncoderDriveCommand extends Command {
    */
   @Override
   protected void interrupted() {
-    Robot.drive.disable();
-    Robot.robotMap.resetEncoders();
+    /*Robot.drive.disable();
+    Robot.robotMap.resetEncoders();*/
   }
 }
