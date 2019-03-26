@@ -129,6 +129,11 @@ public class RotateSubsystem extends PIDSubsystem implements ReportingInterface 
     // setDefaultCommand(new MySpecialCommand());
   }
 
+  /**
+   * Method for getting the difference between current angle and the
+   * desired angle setpoint.
+   * @return (double) angle difference between current angle and setpoint (a < 0 = left, a > 0 = right)
+   */
   public double getAngleDifference() {
     double angle = 0;
     double currentAngle = ahrs.getAngle() % 360;

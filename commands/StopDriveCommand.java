@@ -15,14 +15,18 @@ import frc.robot.Robot;
  */
 public class StopDriveCommand extends InstantCommand {
   /**
-   * Add your docs here.
+   * Command for stopping robot drive.
+   * Is instantly terminated after initialization code runs.
+   * Dependent on drive subsystem.
    */
   public StopDriveCommand() {
     super();
     requires(Robot.drive);
   }
 
-  // Called once when the command executes
+  /**
+   * Initialization code, runs when command is called.
+   */
   @Override
   protected void initialize() {
     Robot.driveExecutor.setX(0);

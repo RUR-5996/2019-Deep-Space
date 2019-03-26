@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class ShooterReturnGroup extends CommandGroup {
   /**
-   * Add your docs here.
+   * Command group to put the shooter back into starting position.
    */
   public ShooterReturnGroup() {
     addSequential(new RotateDownCommand());

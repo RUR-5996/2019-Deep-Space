@@ -16,7 +16,8 @@ import frc.robot.Robot;
 public class IntakeCommand extends Command {
 
   /**
-   * Constructor, declares dependencies.
+   * Command for picking up balls into the shooter.
+   * Dependent on shooter subsystem.
    */
   public IntakeCommand() {
     requires(Robot.shooter);

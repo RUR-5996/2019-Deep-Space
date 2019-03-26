@@ -14,7 +14,8 @@ import frc.robot.utils.HatchSelector;
 
 public class LineupGroup extends CommandGroup {
   /**
-   * Add your docs here.
+   * Command group for lining up for hatch pick up / drop off.
+   * Calls HatchSelector.
    */
   public LineupGroup() {
     addSequential(new LineupCommand());

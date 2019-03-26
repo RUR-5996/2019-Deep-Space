@@ -16,7 +16,9 @@ import frc.robot.Robot;
  */
 public class LowRocketShootCommand extends TimedCommand {
   /**
-   * Add your docs here.
+   * Command for shooting for low rocket.
+   * Requires shooter subsystem.
+   * Shooting time and speed in Constants.
    */
   public LowRocketShootCommand() {
     super(Constants.lowRocketTime);

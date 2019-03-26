@@ -14,7 +14,8 @@ import frc.robot.commands.ShooterReturnGroup;
 
 public class IntakeGroup extends CommandGroup {
   /**
-   * Add your docs here.
+   * Command grouip for intaking balls.
+   * Calls ShooterReturnGroup.
    */
   public IntakeGroup() {
     addSequential(new BallIntakeGroup());

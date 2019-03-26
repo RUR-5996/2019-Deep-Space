@@ -16,7 +16,8 @@ import frc.robot.Robot;
 public class CloseHatchCommand extends Command {
 
   /**
-   * Constructor, declares dependecy on subsystem
+   * Command for closing the hatch manipulator.
+   * Dependent on hatch subsystem.
    */
   public CloseHatchCommand() {
     requires(Robot.hatch);

@@ -10,35 +10,30 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.TimedCommand;
 
 /**
- * Add your docs here.
+ * Disregard literally everything here.
  */
 public class DoNothingCommand extends TimedCommand {
   /**
-   * Add your docs here.
+   * Method for doing literally nothing, used as timer.
+   * @param timeout in seconds.
    */
   public DoNothingCommand(double timeout) {
     super(timeout);
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
   }
 
-  // Called just before this Command runs the first time
+  //Disregard everything bellow. Not used but required.
   @Override
   protected void initialize() {
   }
 
-  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
   }
 
-  // Called once after timeout
   @Override
   protected void end() {
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
   @Override
   protected void interrupted() {
   }

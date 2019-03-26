@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
    */
 public class HatchPickupGroup extends CommandGroup {
   /**
-   * Constructor, sets commands and their order.
+   * Command group for picking up hatches.
    */
   public HatchPickupGroup() {
     addSequential(new WallCommand());

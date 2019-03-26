@@ -12,35 +12,51 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
- * An example subsystem.  You can replace me with your own Subsystem.
+ * Subsystem for the winch - lower part of the shooter movement.
  */
 public class WinchSubsystem extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
 
   Encoder encoder = new Encoder(3, 4, false, Encoder.EncodingType.k4X);
 
+  /**
+   * Method for getting encoder.
+   * @return current encoder ticks.
+   */
   public int getEncoder() {
     return encoder.get();
   }
 
+  /**
+   * Method for reseting the encoder.
+   */
   public void resetEncoder(){
     encoder.reset();
   }
 
+  /**
+   * Method for setting the witch motor to move inwards at a pre-set speed.
+   */
   public void moveIn(){
     RobotMap.winchMotor.set(-0.45);
   }
 
+  /**
+   * Method for setting the winch motor to move outwards at a pre-set speed.
+   */
   public void moveOut(){
     RobotMap.winchMotor.set(0.8);
-    System.out.println("Hejbu se");
   }
 
+  /**
+   * Method for stopping the winch motor.
+   */
   public void moveStop(){
     RobotMap.winchMotor.set(0);
   }
 
+  /**
+   * Default method required by the subsystem. Unused.
+   */
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+//imports for TalonSRX and SPX and encoders
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -14,20 +15,18 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 //imports needed for camera
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.DigitalInput;
+
 //required dependencies
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 //Constants and subsystems
 import frc.robot.subsystems.*;
 import frc.robot.Constants;
-import frc.robot.commands.RotateUpCommand;
 import frc.robot.enumeration.DrivingType;
-import frc.robot.enumeration.ShooterPosition;
 import frc.robot.enumeration.StartingPosition;
 
 /**
@@ -194,6 +193,13 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
     driveExecutor.execute();
+    vision.visionLogic();
+    periodicHatch();
+
+    SmartDashboard.putNumber("Current angle", rotate.ahrs.getYaw());
+    SmartDashboard.putNumber("Current position", rotate.getPosition());
+    SmartDashboard.putNumber("Gyro setpoint", rotate.getSetpoint());
+    SmartDashboard.putBoolean("Gyro enabled", rotate.isEnabled());
   }
 
   @Override
@@ -217,28 +223,23 @@ public class Robot extends TimedRobot {
     periodicHatch();
     //System.out.println(shooterRotate.getCounter());
     //System.out.println(Robot.ultrasonic.isEnabled() + " Setpoint: " + ultrasonic.getSetpoint() + " Distance: " + ultrasonic.getDistanceCM());
-    vision.visionLogic();
+    vision.visionLogic(); /*
     if(Robot.shooterRotate.shooterPosition != null) {
       System.out.println(Robot.shooterRotate.shooterPosition.toString() + shooterRotate.getCounter());
-    }
+    }*/
     //System.out.println("Is enabled: " + vision.isEnabled() + " Offset: " + vision.getOffset());
     //System.out.println(rotate.isEnabled() + " Position: " + rotate.getPosition() + " Setpoint: " + rotate.getSetpoint());
     //System.out.println("Rotate: " + rotate.isEnabled() + " Vision: " + vision.isEnabled() + " Driving Type: " + drivingType);
 
-    //System.out.println(tilt.getPot());
     SmartDashboard.putNumber("Current angle", rotate.ahrs.getYaw());
     SmartDashboard.putNumber("Current position", rotate.getPosition());
     SmartDashboard.putNumber("Gyro setpoint", rotate.getSetpoint());
     SmartDashboard.putBoolean("Gyro enabled", rotate.isEnabled());
-
+    /*
     int frontLeftEnc = RobotMap.leftFront.getSelectedSensorPosition();
     int backLeftEnc = RobotMap.leftBack.getSelectedSensorPosition();
     int rightBackEnc = RobotMap.rightBack.getSelectedSensorPosition();
-    int rightFrontEnc = RobotMap.rightFront.getSelectedSensorPosition();
-
-    //System.out.println(Robot.tilt.getPot());
-    //-131.4 intake
-    //-105.5 start
+    int rightFrontEnc = RobotMap.rightFront.getSelectedSensorPosition();*/
 
     //System.out.println(Robot.drive.getPIDController().isEnabled() + " BL: " + backLeftEnc + " RB: " + rightBackEnc + " Enc ticks: " + Robot.drive.getEndocerPulses() + " Setpoint: " + Robot.drive.getSetpoint() + " Current: " + Robot.drive.getPosition());
   }

@@ -10,16 +10,11 @@ package frc.robot;
 import frc.robot.autonomous.*;
 import frc.robot.commands.*;
 import frc.robot.enumeration.ShooterPosition;
-import frc.robot.enumeration.StartingPosition;
 import frc.robot.routines.HatchRoutine;
 import frc.robot.routines.IntakeGroup;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.utils.ShootingChecker;
-import frc.robot.utils.ShootingDistanceChecker;
 import frc.robot.utils.ShootingNullChecker;
-import frc.robot.utils.ShootingPositionChecker;
 import frc.robot.utils.ShootingPositionSelector;
-import frc.robot.utils.ShootingSelector;
 import frc.robot.utils.TriggerButton;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -181,17 +176,11 @@ public class OI {
 		aBut.whenPressed(new HatchRoutine());
 		bBut.whenPressed(new IntakeGroup());
 		yBut.whenPressed(new ShootingNullChecker());
+		xBut.whenPressed(new RotateCommand(0));
 
 		povLeft.whenPressed(new ShootingPositionSelector(ShooterPosition.CARGO));
 		povDown.whenPressed(new ShootingPositionSelector(ShooterPosition.LOW_ROCKET));
 		povUp.whenPressed(new ShootingPositionSelector(ShooterPosition.MIDDLE_ROCKET));
-		//xBut.whenPressed(new ShootingSelector());
-		//xBut.whenPressed(new StartPosCommand());
-		//yBut.whenPressed(new IntakePosCommand());
-		//yBut.whenPressed(new UltrasonicCommand(160));
-		//xBut.whenPressed(new UltrasonicCommand(80));
-		//bBut.whenPressed(new EncoderDriveCommand(100));
-		//bBut.whenPressed(new TwoHatchAuto(StartingPosition.LEFT));
-		//xBut.whenPressed(new RotateCommand(0));
+		
 	}
 }

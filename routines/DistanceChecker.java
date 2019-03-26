@@ -12,10 +12,13 @@ import frc.robot.Robot;
 import frc.robot.commands.UltrasonicCommand;
 import frc.robot.utils.LineupSelector;
 
-/**
- * Add your docs here.
- */
 public class DistanceChecker extends ConditionalCommand {
+
+    /**
+     * Conditional Command for checking whether robot is in distance of vision target and
+     * whether only 2 vision targets are visible.
+     * Calls LineupSelector if true, otherwise calls ultrasonic command for 80cm.
+     */
     public DistanceChecker() {
         super(new LineupSelector(), new UltrasonicCommand(80));
     }

@@ -13,7 +13,8 @@ import frc.robot.commands.RotateCommand;
 
 public class CorrectPositionGroup extends CommandGroup {
   /**
-   * Add your docs here.
+   * Group for checking whether robot is within angle tolerance of gyro setpoint.
+   * Calls DistanceChecker.
    */
   public CorrectPositionGroup() {
     addSequential(new RotateCommand(0));
