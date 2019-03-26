@@ -21,7 +21,7 @@ public class ShooterRotateSubsystem extends Subsystem {
 
   public ShooterPosition shooterPosition;
   private Counter count = new Counter(8);
-  private DigitalInput limitSwitch = new DigitalInput(9);
+  private DigitalInput limitSwitch = new DigitalInput(Constants.shooterRotateSwitch);
 
   /**
    * Method for getting current counter ticks.
