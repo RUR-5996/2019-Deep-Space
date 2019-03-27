@@ -43,6 +43,7 @@ public class Constants {
     public static final int hatchSwitch = 7;
     public static final int shooterSwitch = 2;
     public static final int shooterRotateSwitch = 9;
+    public static final int rampLimitSwitch = 10;
 
     //Encoders
     public static final int shooterEncoderA = 3;
