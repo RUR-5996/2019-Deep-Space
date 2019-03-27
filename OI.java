@@ -13,6 +13,7 @@ import frc.robot.enumeration.ShooterPosition;
 import frc.robot.routines.HatchRoutine;
 import frc.robot.routines.IntakeGroup;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.utils.HatchSelector;
 import frc.robot.utils.ShootingNullChecker;
 import frc.robot.utils.ShootingPositionSelector;
 import frc.robot.utils.TriggerButton;
