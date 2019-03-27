@@ -32,6 +32,7 @@ public class Constants {
     public static final int shooter4 = 9;
     public static final int shooterBoschMotor = 4;
     public static final int winchMotor = 5;
+    public static final int rampWinchMotor = 10;
 
     //Talon and Victor PWM ports
     public static final int boschMotor = 4;
@@ -43,6 +44,12 @@ public class Constants {
     public static final int hatchSwitch = 7;
     public static final int shooterSwitch = 2;
     public static final int shooterRotateSwitch = 9;
+
+    //Encoders
+    public static final int shooterEncoderA = 3;
+    public static final int shooterEncoderB = 4;
+    public static final int rampEncoderA = 10;
+    public static final int rampEncoderB = 11;
 
     //shooter
     public static final double shootingSpeed = 0.95;

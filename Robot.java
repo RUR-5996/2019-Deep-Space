@@ -47,6 +47,7 @@ public class Robot extends TimedRobot {
   public static ShooterSubsystem shooter = new ShooterSubsystem();
   public static ShooterRotateSubsystem shooterRotate = new ShooterRotateSubsystem();
   public static WinchSubsystem winch = new WinchSubsystem();
+  public static RampSubsystem rampWinch = new RampSubsystem();
   public static RobotMap robotMap = new RobotMap();
   public static OI m_oi;
 
