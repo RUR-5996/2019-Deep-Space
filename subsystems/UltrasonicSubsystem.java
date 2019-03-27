@@ -20,7 +20,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class UltrasonicSubsystem extends PIDSubsystem implements ReportingInterface {
 
 	private Ultrasonic ultrasonic = new Ultrasonic(Constants.ultrasonicPort1, Constants.ultrasonicPort2);
-
 	/**
    	 * Constructor, creates the PID controller, sets properties
    	 */

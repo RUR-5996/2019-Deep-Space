@@ -100,4 +100,6 @@ public class Constants {
 
     public static final double lowRocketSpeed = 0.25;
     public static final double lowRocketTime = 1.2;
+
+    public static final int shooterRotateCounter = 8;
 }
