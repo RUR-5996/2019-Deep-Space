@@ -41,6 +41,7 @@ public class Constants {
     public static final int closeHatchSwitch = 5;
     public static final int hatchSwitch = 7;
     public static final int shooterSwitch = 2;
+    public static final int shooterRotateSwitch = 9;
 
     //shooter
     public static final double shootingSpeed = 0.95;
@@ -99,4 +100,6 @@ public class Constants {
 
     public static final double lowRocketSpeed = 0.25;
     public static final double lowRocketTime = 1.2;
+
+    public static final int shooterRotateCounter = 8;
 }
