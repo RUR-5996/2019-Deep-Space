@@ -9,13 +9,14 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Constants;
 import frc.robot.RobotMap;
 /**
  * Subsystem for the winch - lower part of the shooter movement.
  */
 public class WinchSubsystem extends Subsystem {
 
-  Encoder shooterWinchEncoder = new Encoder(3, 4, false, Encoder.EncodingType.k4X);
+  private Encoder shooterWinchEncoder = new Encoder(Constants.shooterEncoderA, Constants.shooterEncoderB, false, Encoder.EncodingType.k4X);
 
   /**
    * Method for getting encoder.

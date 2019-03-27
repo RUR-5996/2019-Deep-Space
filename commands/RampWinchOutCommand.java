@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * Command for pulling the winch out.
+ * Command for pulling the ramp out.
  */
 public class RampWinchOutCommand extends Command {
 
   /**
-   * Command for pulling the winch out.
+   * Command for pulling the ramp out.
    * Dependent on winch subsystem.
    */
   public RampWinchOutCommand() {
