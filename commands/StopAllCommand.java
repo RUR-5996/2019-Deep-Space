@@ -33,6 +33,9 @@ public class StopAllCommand extends InstantCommand {
   // Called once when the command executes
   @Override
   protected void initialize() {
+    Robot.vision.disable();
+    Robot.rotate.disable();
+    Robot.ultrasonic.disable();
     Robot.drivingType = DrivingType.FIELD_ORIENTED;
   }
 
