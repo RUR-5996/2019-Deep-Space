@@ -35,6 +35,7 @@ public class Constants {
 
     //Talon and Victor PWM ports
     public static final int boschMotor = 4;
+    public static final int hatchServo = 3;
 
     //Limit switches
     public static final int openHatchSwitch = 6;

@@ -10,7 +10,9 @@ package frc.robot.subsystems;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.utils.ReportingInterface;
+
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -28,6 +30,8 @@ public class HatchSubsystem extends Subsystem implements ReportingInterface {
   private DigitalInput closedLimitSwitch = new DigitalInput(Constants.closeHatchSwitch);
 
   private DigitalInput hatchSwitch = new DigitalInput(Constants.hatchSwitch);
+
+  private Servo hatchServo = new Servo(Constants.hatchServo);
 
   @Override
   public void initDefaultCommand() {
@@ -89,10 +93,33 @@ public class HatchSubsystem extends Subsystem implements ReportingInterface {
     RobotMap.hatchMotor.set(0);
   }
 
+  /**
+   * Method for opening the hatch servo.
+   */
+  public void openServo() {
+    hatchServo.set(0);
+  }
+
+  /**
+   * Method for closing the hatch servo.
+   */
+  public void closeServo() {
+    hatchServo.set(1);
+  }
+
+  /**
+   * Method for getting whether the servo is in open position or not.
+   * @return boolean is servo open.
+   */
+  public boolean isServoOpen() {
+    return hatchServo.get() == 0;
+  }
+
   public void report() {
     SmartDashboard.putBoolean("Opened Hatch Switch", getOpenedSwitchValue());
     SmartDashboard.putBoolean("Closed Hatch Switch", getClosedSwitchValue());
     SmartDashboard.putBoolean("Hatch Loaded Switch", getHatchSwitch());
+    SmartDashboard.putBoolean("Servo opened",isServoOpen());
   }
 
 }

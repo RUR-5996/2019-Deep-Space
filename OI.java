@@ -13,6 +13,7 @@ import frc.robot.enumeration.ShooterPosition;
 import frc.robot.routines.HatchRoutine;
 import frc.robot.routines.IntakeGroup;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.utils.HatchSelector;
 import frc.robot.utils.ShootingNullChecker;
 import frc.robot.utils.ShootingPositionSelector;
 import frc.robot.utils.TriggerButton;
@@ -170,7 +171,6 @@ public class OI {
 		rightBum.whenPressed(new RotateCommand(1));
 		lTriggerButton.whenPressed(new RotateCommand(-2));
 		rTriggerButton.whenPressed(new RotateCommand(2));
-
 
 		startBut.whenPressed(new StopAllCommand());
 		aBut.whenPressed(new HatchRoutine());
