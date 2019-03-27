@@ -7,10 +7,13 @@
 
 package frc.robot;
 
+import frc.robot.autonomous.LeftTwoHatchAuto;
+import frc.robot.autonomous.RightTwoHatchAuto;
 import frc.robot.commands.*;
 import frc.robot.enumeration.ShooterPosition;
 import frc.robot.routines.HatchRoutine;
 import frc.robot.routines.IntakeGroup;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.utils.ShootingNullChecker;
 import frc.robot.utils.ShootingPositionSelector;
@@ -27,6 +30,9 @@ import edu.wpi.first.wpilibj.buttons.POVButton;
 public class OI {
 	
 	public XboxController controller = new XboxController(0); //creates a new controller object for XboXController and assigns its port value to 0
+	public XboxController controller2 = new XboxController(1);
+	public Joystick rampButton = new Joystick(2);
+
 	//-----------------------------------------------------------------------------------------------
 	//					XBOX
 	//values for controller buttons
@@ -69,6 +75,14 @@ public class OI {
 	private final POVButton povRight = new POVButton(controller, 90);
 	private final POVButton povDown = new POVButton(controller, 180);
 	private final POVButton povLeft = new POVButton(controller, 270);
+
+	private final Button cont2ABut = new JoystickButton(controller2, aButton);
+	private final Button cont2BBut = new JoystickButton(controller2, bButton);
+	private final Button cont2XBut = new JoystickButton(controller2, xButton);
+	private final Button cont2YBut = new JoystickButton(controller2, yButton);
+	private final Button cont2StartBut = new JoystickButton(controller2, startButton);
+	private final TriggerButton cont2LTriggerButton = new TriggerButton(controller2, leftTriggerButton);
+	private final TriggerButton cont2RTriggerButton = new TriggerButton(controller2, rightTriggerButton);
 	//------------------------------------------------------------------------------------------------------
 	//methods for driving
 	/**
@@ -175,6 +189,15 @@ public class OI {
 		bBut.whenPressed(new IntakeGroup());
 		yBut.whenPressed(new ShootingNullChecker());
 		xBut.whenPressed(new RotateCommand(0));
+
+		cont2ABut.whenPressed(new OpenHatchCommand());
+		cont2BBut.whenPressed(new CloseHatchCommand());
+		cont2XBut.whenPressed(new RampWinchOutCommand());
+		cont2YBut.whenPressed(new RampWinchInCommand());
+		cont2StartBut.whenPressed(new StopAllCommand());
+		cont2LTriggerButton.whenPressed(new LeftTwoHatchAuto());
+		cont2RTriggerButton.whenPressed(new RightTwoHatchAuto());
+
 
 		povLeft.whenPressed(new ShootingPositionSelector(ShooterPosition.CARGO));
 		povDown.whenPressed(new ShootingPositionSelector(ShooterPosition.LOW_ROCKET));

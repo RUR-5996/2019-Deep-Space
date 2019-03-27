@@ -204,7 +204,7 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     driveExecutor.execute();
     vision.visionLogic();
-    periodicHatch();
+    //periodicHatch();
 
     SmartDashboard.putNumber("Current angle", rotate.ahrs.getYaw());
     SmartDashboard.putNumber("Current position", rotate.getPosition());
@@ -230,7 +230,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     driveExecutor.execute();
-    periodicHatch();
+    //periodicHatch();
     //System.out.println(shooterRotate.getCounter());
     //System.out.println(Robot.ultrasonic.isEnabled() + " Setpoint: " + ultrasonic.getSetpoint() + " Distance: " + ultrasonic.getDistanceCM());
     vision.visionLogic(); /*
