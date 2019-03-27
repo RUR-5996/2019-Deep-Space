@@ -172,7 +172,6 @@ public class OI {
 		lTriggerButton.whenPressed(new RotateCommand(-2));
 		rTriggerButton.whenPressed(new RotateCommand(2));
 
-
 		startBut.whenPressed(new StopAllCommand());
 		aBut.whenPressed(new HatchRoutine());
 		bBut.whenPressed(new IntakeGroup());
