@@ -52,12 +52,6 @@ public class Constants {
     public static final int rampEncoderA = 10;
     public static final int rampEncoderB = 11;
 
-    //Encoders
-    public static final int shooterEncoderA = 3;
-    public static final int shooterEncoderB = 4;
-    public static final int rampEncoderA = 10;
-    public static final int rampEncoderB = 11;
-
     //shooter
     public static final double shootingSpeed = 0.95;
     public static final double intakeSpeed = 0.3;
