@@ -58,7 +58,6 @@ public class RampWinchInCommand extends Command {
   @Override
   protected void end() {
     Robot.rampWinch.moveStop();
-    
     if (Robot.rampWinch.getRampLimitSwitchValue()) {
       Robot.rampWinch.resetEncoder();
     }

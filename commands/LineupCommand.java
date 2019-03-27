@@ -83,7 +83,7 @@ public class LineupCommand extends Command {
   protected void interrupted() {
     Robot.driveExecutor.setX(0);
     Robot.vision.disable();
-    Robot.rotate.enable();
+    Robot.rotate.disable();
     Robot.drivingType = DrivingType.FIELD_ORIENTED;
   }
 }
