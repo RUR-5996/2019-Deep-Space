@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.RampSubsystem;
 
 /**
  * Command for pulling the winch of the ramp in.
@@ -47,7 +48,7 @@ public class RampWinchInCommand extends Command {
    */
   @Override
   protected boolean isFinished() {
-    return (Robot.rampWinch.getEncoder() <= 20);  // If we want the winch to auto-correct to desired position, put this away
+    return (Robot.rampWinch.getEncoder() <= 20) || Robot.rampWinch.getRampLimitSwitchValue();  // If we want the winch to auto-correct to desired position, put this away
   }
 
   /**
@@ -57,6 +58,9 @@ public class RampWinchInCommand extends Command {
   @Override
   protected void end() {
     Robot.rampWinch.moveStop();
+    if (Robot.rampWinch.getRampLimitSwitchValue()) {
+      Robot.rampWinch.resetEncoder();
+    }
   }
 
   /**

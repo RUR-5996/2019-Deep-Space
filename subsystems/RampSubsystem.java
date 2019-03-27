@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
@@ -17,7 +18,12 @@ import frc.robot.RobotMap;
 public class RampSubsystem extends Subsystem {
 
   private Encoder rampWinchEncoder = new Encoder(Constants.rampEncoderA, Constants.rampEncoderB, false, Encoder.EncodingType.k4X);
+  private DigitalInput rampLimitSwitch = new DigitalInput(Constants.rampLimitSwitch);
 
+  public boolean getRampLimitSwitchValue() {
+    return rampLimitSwitch.get();
+  }
+  
   /**
    * Method for getting encoder.
    * @return current encoder ticks.
