@@ -12,46 +12,46 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 /**
- * Subsystem for the winch - lower part of the shooter movement.
+ * Subsystem for the ramp winch.
  */
-public class WinchSubsystem extends Subsystem {
+public class RampSubsystem extends Subsystem {
 
-  private Encoder shooterWinchEncoder = new Encoder(Constants.shooterEncoderA, Constants.shooterEncoderB, false, Encoder.EncodingType.k4X);
+  private Encoder rampWinchEncoder = new Encoder(Constants.rampEncoderA, Constants.rampEncoderB, false, Encoder.EncodingType.k4X);
 
   /**
    * Method for getting encoder.
    * @return current encoder ticks.
    */
   public int getEncoder() {
-    return shooterWinchEncoder.get();
+    return rampWinchEncoder.get();
   }
 
   /**
    * Method for reseting the encoder.
    */
   public void resetEncoder(){
-    shooterWinchEncoder.reset();
+    rampWinchEncoder.reset();
   }
 
   /**
    * Method for setting the witch motor to move inwards at a pre-set speed.
    */
   public void moveIn(){
-    RobotMap.winchMotor.set(-0.45);
+    RobotMap.rampWinchMotor.set(-0.5);
   }
 
   /**
    * Method for setting the winch motor to move outwards at a pre-set speed.
    */
   public void moveOut(){
-    RobotMap.winchMotor.set(0.8);
+    RobotMap.rampWinchMotor.set(0.5);
   }
 
   /**
    * Method for stopping the winch motor.
    */
   public void moveStop(){
-    RobotMap.winchMotor.set(0);
+    RobotMap.rampWinchMotor.set(0);
   }
 
   /**
