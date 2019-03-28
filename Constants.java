@@ -44,7 +44,7 @@ public class Constants {
     public static final int hatchSwitch = 7;
     public static final int shooterSwitch = 2;
     public static final int shooterRotateSwitch = 9;
-    public static final int rampLimitSwitch = 10;
+    public static final int rampLimitSwitch = 13;
 
     //Encoders
     public static final int shooterEncoderA = 3;
@@ -102,10 +102,10 @@ public class Constants {
     public static final double moveBackTime = 0.7;
     public static final double moveBackSpeed = 0.3;
 
-    public static final int cargoPos = 40000; //45 - 65cm
-    public static final int middlePos = 40000; //24cm
-    public static final int lowPos = 100000; //bumper distance
-    public static final int intakePos = 138000;
+    public static final int cargoPos = 37000; //45 - 65cm
+    public static final int middlePos = 37000; //24cm
+    public static final int lowPos = 120000; //bumper distance
+    public static final int intakePos = 125000;
 
     public static final double lowRocketSpeed = 0.25;
     public static final double lowRocketTime = 1.2;

@@ -101,11 +101,11 @@ public class RotateSubsystem extends PIDSubsystem implements ReportingInterface 
   protected void usePIDOutput(double output) {
     if(output > 0) {
       if(output < 0.13 && output > 0.04) {
-        output = 0.13;
+        output = 0.135;
       }
     } else if(output < 0) {
       if(output > -0.13 && output < -0.04) {
-        output = -0.13;
+        output = -0.135;
       }
     }
     Robot.driveExecutor.setZ(output);

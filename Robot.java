@@ -71,6 +71,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     rotate.resetGyro();
+    hatch.openServo();
 
     drivingType = DrivingType.FIELD_ORIENTED;
     //drivingType = DrivingType.NORMAL;
@@ -85,12 +86,13 @@ public class Robot extends TimedRobot {
       camera.setFPS(Constants.imageFPS);
       camera.setExposureManual(0);
       camera.setBrightness(0);
+      camera.setWhiteBalanceManual(0);
 
       camera2 = CameraServer.getInstance().startAutomaticCapture(1);
-      camera.setResolution(Constants.imageWidth, Constants.imageHeight);
-      camera.setFPS(Constants.imageFPS);
-      camera.setExposureAuto();
-      camera.setWhiteBalanceAuto();
+      camera2.setResolution(Constants.imageWidth, Constants.imageHeight);
+      camera2.setFPS(Constants.imageFPS);
+      camera2.setExposureAuto();
+      camera2.setWhiteBalanceAuto();
     }).start();
 
     shooter.shooterInit();
@@ -194,6 +196,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();
     }
+    hatch.openHatch();
   }
 
   /**
@@ -232,11 +235,11 @@ public class Robot extends TimedRobot {
     driveExecutor.execute();
     //periodicHatch();
     //System.out.println(shooterRotate.getCounter());
-    //System.out.println(Robot.ultrasonic.isEnabled() + " Setpoint: " + ultrasonic.getSetpoint() + " Distance: " + ultrasonic.getDistanceCM());
-    vision.visionLogic(); /*
+    System.out.println(Robot.ultrasonic.isEnabled() + " Setpoint: " + ultrasonic.getSetpoint() + " Distance: " + ultrasonic.getDistanceCM());
+    vision.visionLogic(); 
     if(Robot.shooterRotate.shooterPosition != null) {
       System.out.println(Robot.shooterRotate.shooterPosition.toString() + shooterRotate.getCounter());
-    }*/
+    }
     //System.out.println("Is enabled: " + vision.isEnabled() + " Offset: " + vision.getOffset());
     //System.out.println(rotate.isEnabled() + " Position: " + rotate.getPosition() + " Setpoint: " + rotate.getSetpoint());
     //System.out.println("Rotate: " + rotate.isEnabled() + " Vision: " + vision.isEnabled() + " Driving Type: " + drivingType);

@@ -83,6 +83,8 @@ public class OI {
 	private final Button cont2StartBut = new JoystickButton(controller2, startButton);
 	private final TriggerButton cont2LTriggerButton = new TriggerButton(controller2, leftTriggerButton);
 	private final TriggerButton cont2RTriggerButton = new TriggerButton(controller2, rightTriggerButton);
+	private final Button cont2leftBum = new JoystickButton(controller2, leftBumper);
+	private final Button cont2rightBum = new JoystickButton(controller2, rightBumper);
 	//------------------------------------------------------------------------------------------------------
 	//methods for driving
 	/**
@@ -190,14 +192,15 @@ public class OI {
 		yBut.whenPressed(new ShootingNullChecker());
 		xBut.whenPressed(new RotateCommand(0));
 
+		//cont2ABut.whenPressed(new OpenHatchCommand());
 		cont2ABut.whenPressed(new OpenHatchCommand());
 		cont2BBut.whenPressed(new CloseHatchCommand());
 		cont2XBut.whenPressed(new RampWinchOutCommand());
 		cont2YBut.whenPressed(new RampWinchInCommand());
 		cont2StartBut.whenPressed(new StopAllCommand());
-		cont2LTriggerButton.whenPressed(new LeftTwoHatchAuto());
-		cont2RTriggerButton.whenPressed(new RightTwoHatchAuto());
-
+		cont2LTriggerButton.whenPressed(new ShooterReturnGroup());
+		cont2leftBum.whenPressed(new OpenServoCommand());
+		cont2rightBum.whenPressed(new CloseServoCommand());
 
 		povLeft.whenPressed(new ShootingPositionSelector(ShooterPosition.CARGO));
 		povDown.whenPressed(new ShootingPositionSelector(ShooterPosition.LOW_ROCKET));

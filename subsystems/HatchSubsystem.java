@@ -97,14 +97,14 @@ public class HatchSubsystem extends Subsystem implements ReportingInterface {
    * Method for opening the hatch servo.
    */
   public void openServo() {
-    hatchServo.set(0);
+    hatchServo.set(0.05);
   }
 
   /**
    * Method for closing the hatch servo.
    */
   public void closeServo() {
-    hatchServo.set(1);
+    hatchServo.set(0.6);
   }
 
   /**
