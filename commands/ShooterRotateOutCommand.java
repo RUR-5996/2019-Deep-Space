@@ -8,32 +8,57 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Constants;
 import frc.robot.Robot;
+import frc.robot.enumeration.ShooterPosition;
 
-/**
- * An example command.  You can replace me with your own command.
+/*
+ * Command which rotates the shooter upwards
  */
-public class RotateDownCommand extends Command {
-  public RotateDownCommand() {
-    // Use requires() here to declare subsystem dependencies
+public class ShooterRotateOutCommand extends Command {
+
+  public ShooterRotateOutCommand() {
     requires(Robot.shooterRotate);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.shooterRotate.resetCounter();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.shooterRotate.rotateDown();
+    if(!(Robot.shooterRotate.shooterPosition == null)) {
+      Robot.shooterRotate.rotateShooter(Robot.shooterRotate.shooterPosition);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
-    return !Robot.shooterRotate.getSwitch();
+  public boolean isFinished() {
+    if(Robot.shooterRotate.shooterPosition == ShooterPosition.CARGO) {
+      if(Robot.shooterRotate.getCounter() >= Constants.cargoPos) {
+        return true;
+      }
+
+    } else if(Robot.shooterRotate.shooterPosition == ShooterPosition.MIDDLE_ROCKET) {
+      if(Robot.shooterRotate.getCounter() >= Constants.middlePos) {
+        return true;
+      }
+    } else if(Robot.shooterRotate.shooterPosition == ShooterPosition.LOW_ROCKET) {
+      if(Robot.shooterRotate.getCounter() >= Constants.lowPos) {
+        return true;
+      }
+    } else if(Robot.shooterRotate.shooterPosition == ShooterPosition.INTAKE) {
+      if(Robot.shooterRotate.getCounter() >= Constants.intakePos) {
+        return true;
+      }
+    } else {
+      return true;
+    }
+    return false;
   }
 
   // Called once after isFinished returns true

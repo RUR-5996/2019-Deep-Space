@@ -167,7 +167,7 @@ public class OI {
 	 */
 	public OI() {
 		//Final bindings
-		leftBum.whenPressed(new RotateCommand(-1));
+		/*leftBum.whenPressed(new RotateCommand(-1));
 		rightBum.whenPressed(new RotateCommand(1));
 		lTriggerButton.whenPressed(new RotateCommand(-2));
 		rTriggerButton.whenPressed(new RotateCommand(2));
@@ -181,6 +181,25 @@ public class OI {
 		povLeft.whenPressed(new ShootingPositionSelector(ShooterPosition.CARGO));
 		povDown.whenPressed(new ShootingPositionSelector(ShooterPosition.LOW_ROCKET));
 		povUp.whenPressed(new ShootingPositionSelector(ShooterPosition.MIDDLE_ROCKET));
-		
+		*/
+
+		//Basic shooter testing
+		aBut.whenPressed(new WinchInCommand());
+		bBut.whenPressed(new WinchOutCommand());
+		xBut.whenPressed(new RotateDown());
+		yBut.whenPressed(new RotateUp());
+
+		/*
+		//Shooter position testing
+		aBut.whenPressed(new BallIntakeGroup());
+		bBut.whenPressed(new WinchOutCommand());
+		xBut.whenPressed(new RotateDown());
+		yBut.whenPressed(new ShootCommand());
+		povLeft.whenPressed(new ShootingPositionSelector(ShooterPosition.CARGO));
+		povDown.whenPressed(new ShootingPositionSelector(ShooterPosition.LOW_ROCKET));
+		povUp.whenPressed(new ShootingPositionSelector(ShooterPosition.MIDDLE_ROCKET));
+		*/
+
+
 	}
 }
