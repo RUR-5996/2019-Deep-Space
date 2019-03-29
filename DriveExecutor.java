@@ -55,4 +55,8 @@ public class DriveExecutor {
 			robotDrive.driveCartesian(x, -y, z, -Robot.rotate.ahrs.getYaw());
 		}
 	}
+
+	public double getX(){
+		return x;
+	}
 }

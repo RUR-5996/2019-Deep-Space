@@ -237,12 +237,10 @@ public class Robot extends TimedRobot {
     //System.out.println(shooterRotate.getCounter());
     System.out.println(Robot.ultrasonic.isEnabled() + " Setpoint: " + ultrasonic.getSetpoint() + " Distance: " + ultrasonic.getDistanceCM());
     vision.visionLogic(); 
-    if(Robot.shooterRotate.shooterPosition != null) {
+    /*if(Robot.shooterRotate.shooterPosition != null) {
       System.out.println(Robot.shooterRotate.shooterPosition.toString() + shooterRotate.getCounter());
-    }
-    //System.out.println("Is enabled: " + vision.isEnabled() + " Offset: " + vision.getOffset());
-    //System.out.println(rotate.isEnabled() + " Position: " + rotate.getPosition() + " Setpoint: " + rotate.getSetpoint());
-    //System.out.println("Rotate: " + rotate.isEnabled() + " Vision: " + vision.isEnabled() + " Driving Type: " + drivingType);
+    }*/
+    System.out.println("Vision is enabled: " + vision.isEnabled() + " Offset: " + vision.getOffset() + " Vision output: " + driveExecutor.getX());
 
     SmartDashboard.putNumber("Current angle", rotate.ahrs.getYaw());
     SmartDashboard.putNumber("Current position", rotate.getPosition());

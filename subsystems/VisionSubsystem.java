@@ -70,12 +70,12 @@ public class VisionSubsystem extends PIDSubsystem implements ReportingInterface 
 	 */
 	protected void usePIDOutput(double output) {
     if(output > 0) {
-      if(output < 0.155 && output > 0.03) {
-        output = 0.16;
+      if(output < 0.175 && output > 0.03) {
+        output = 0.18;
       }
     } else if(output < 0) {
-      if(output > -0.155 && output < -0.03) {
-        output = -0.16;
+      if(output > -0.175 && output < -0.03) {
+        output = -0.18;
       }
     }
 		Robot.driveExecutor.setX(-output);
